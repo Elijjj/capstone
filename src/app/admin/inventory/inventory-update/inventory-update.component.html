@@ -1,0 +1,176 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar Column Starts here -->
+    <div class="col-lg-3" style="background-color: #c05938">
+      <div class="d-flex sidenavv align-items-center">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <img
+              src="/assets/logo4.png"
+              alt=""
+              style="width: 60%"
+              class="my-3"
+            />
+            <button
+              id="menuButton"
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="h3">Welcome, Admin!</li>
+                <li class="separator"></li>
+                <li class="nav-item lead">
+                  <a class="nav-link" routerLink="/admin/dashboard">
+                    <i class="bi bi-house"></i> Dashboard
+                  </a>
+                </li>
+                <li class="nav-item lead">
+                  <a class="nav-link" routerLink="/admin/accounts"
+                    ><i class="bi bi-person"></i> Accounts</a
+                  >
+                </li>
+                <li class="nav-item lead">
+                  <a
+                    class="nav-link active"
+                    aria-current="page"
+                    style="font-weight: bold"
+                    routerLink="/admin/inventory"
+                    ><i class="bi bi-card-checklist"></i> Inventory</a
+                  >
+                </li>
+                <li class="nav-item lead">
+                  <a class="nav-link" routerLink="/admin/products"
+                    ><i class="material-symbols-outlined">cake</i> Products</a
+                  >
+                </li>
+                <li class="nav-item lead">
+                  <a class="nav-link" routerLink="/admin/orders"
+                    ><i class="bi bi-bag-check"></i> Orders</a
+                  >
+                </li>
+                <li class="nav-item lead">
+                  <a class="nav-link" routerLink="/admin/reports"
+                    ><i class="material-symbols-outlined">monitoring</i>
+                    Reports</a
+                  >
+                </li>
+                <li class="nav-item lead">
+                  <button (click)="onLogout()" class="btn">
+                    <a class="nav-link"
+                      ><i class="bi bi-box-arrow-right"></i> Logout</a
+                    >
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <!-- Sidebar ends here-->
+    <div class="col-lg-9 m-auto">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2><i class="bi bi-card-checklist"></i> Inventory</h2>
+
+        <img
+          id="fediciLogo"
+          src="./assets/logo3.png"
+          alt="Your Logo"
+          class="logo"
+        />
+      </div>
+
+      <p class="separator-black"></p>
+
+      <div class="d-flex align-items-center">
+        <h4 style="font-style: italic" class="me-4 mb-3">Update Inventory</h4>
+        <a routerLink="/admin/inventory">
+          <button type="button" class="btn btn-colour-top mb-3">Return to Inventory Menu</button></a>
+      </div>
+
+      <div class="row">
+        <div class="row cols-cols-1">
+          <div class="table-responsive">
+            <form [formGroup]="form" (submit)="onSaveItem()" *ngIf="!isLoading">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <td width="auto">
+                      <label
+                        for="inventoryItem"
+                        style="font-weight: bold; color: #181818; font-size: 16px"
+                        >Inventory Item:</label
+                      >
+                      <input
+                        style="margin-top: 10px"
+                        type="text"
+                        class="form-control"
+                        id="inventoryItem"
+                        formControlName="item"
+                        name="item"
+                        placeholder="e.g. Sugar"
+                      />
+                      <mat-error *ngIf="form.get('item').invalid">Enter item name!</mat-error>
+                    </td>
+                    <td width="auto">
+                      <label
+                        for="quantity"
+                        style="font-weight: bold; color: #181818; font-size: 16px"
+                        >Quantity:</label
+                      >
+                      <input
+                        style="margin-top: 10px"
+                        type="number"
+                        class="form-control"
+                        id="quantity"
+                        formControlName="quantity"
+                        name="quantity"
+                        placeholder="e.g. 10"
+                      />
+                      <mat-error *ngIf="form.get('quantity').invalid">Enter item quantity!</mat-error>
+                    </td>
+
+                    <td width="auto">
+                      <label
+                        for="productDescription"
+                        style="font-weight: bold; color: #181818; font-size: 16px"
+                        >Product Description:</label
+                      >
+                      <input
+                        style="margin-top: 10px"
+                        class="form-control"
+                        id="productDescription"
+                        rows="3"
+                        formControlName="description"
+                        name="description"
+                        placeholder="e.g. Sugar from Canada"  
+                      /><!--change this to textarea to adjust height-->
+                      <mat-error *ngIf="form.get('description').invalid">Enter item description!</mat-error>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td><button class="btn btn-colour-1 my-2" style="width: 100%;" type="submit">
+                      Save&nbsp;<i class="bi bi-file-earmark-plus"></i>
+                    </button></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+hr{
+    border-color: #c05938;
+    margin-right: 2%;
+}
+
+h1{
+    font-size: 44px;
+    color:#c05938;
+    margin: 8%;
+}
+
+h2{
+    font-size: 64px;
+    color: #92683D;
+}
+
+.aboutusText1{
+    font-size: 32px;
+    color: #DD9057;
+}
+
+.aboutusText2{
+    font-size: 36px;
+    color: #DD9057;
+    text-align: right;
+}
+
+.aboutusText3{
+    font-size: 36px;
+    color: #DD9057;
+}
+
+.aboutusHeading1{
+    text-align: right;
+}
+
+.visionText{
+    margin-top: 15%;
+}
+
+div{
+    overflow: hidden;
+}

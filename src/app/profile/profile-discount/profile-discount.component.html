@@ -1,0 +1,82 @@
+<div class="min-vh-100">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-10">
+          <div class="flex-grow-1 hrr">
+            <hr class="border border-danger border-2 opacity-75" />
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <h1 style="text-align: right; color: #c05938; margin: 10%;">
+            Discount
+          </h1>
+        </div>
+      </div>
+      
+      <div class="row">
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <div class="col-lg-12" *ngIf="authData">
+            <div class="d-flex align-items-center">
+                <h1>Hi, {{authData.firstname}} {{authData.lastname}}!   </h1>
+          <a routerLink="/profile">
+            <button class="btn btn-colour-2 p-2 mx-5" type="button"><b>Return to Profile Page</b></button>
+          </a>
+            </div>
+    
+          <br>
+          <form [formGroup]="form" (submit)="onUploadDiscount()" *ngIf="!isLoading">
+          <div class="row">
+            <div class="col-lg-6">
+                <label for="discountType">Discount Type:</label>
+                <select
+                class="form-select mb-3"
+                id="discountType"
+                formControlName="discountType"
+                name="discountType"
+                required
+              >
+                <option value="Senior Citizen">Senior Citizen</option>
+                <option value="PWD">PWD</option>
+              </select>
+              <label for="birthday">Birthdate:</label>
+              <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="birthday" formControlName="birthday" name="birthday" required>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="birthday"></mat-datepicker-toggle>
+                <mat-datepicker #birthday></mat-datepicker>
+              </mat-form-field>
+              <br>
+              <button type="submit" class="btn btn-colour-1 my-3">Submit Application</button>
+            </div>
+            <div class="col-lg-6 ">
+                <h3>Photo of Senior Citizen/PWD ID Card:</h3>
+                <button
+                class="btn btn-colour-1"
+                type="button"
+                (click)="filePicker.click()"
+              >
+                Pick Image &nbsp;<i class="bi bi-image"></i>
+              </button>
+              <input type="file" #filePicker (change)="onImagePicked($event)" />
+              <div
+                class="image-preview"
+                *ngIf="
+                  imagePreview !== '' && imagePreview && form.get('image').valid
+                "
+              >
+                <img [src]="imagePreview" [alt]="form.value.title" class="img-fluid"/>
+              </div></div>
+          </div>
+        </form>
+        </div>
+    
+    </div>
+    <div class="row">
+      <div class="col-lg-12 d-flex justify-content-center my-4">
+        
+    </div>
+    </div>
+    </div>
+</div>
+    

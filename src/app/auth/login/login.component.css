@@ -1,0 +1,81 @@
+input[type=email]{
+    margin: 0 2rem 1rem 2rem;
+    width:70%;
+    font-size: 18px;
+}
+
+input[type=password]{
+    margin: 0 2rem 1rem 2rem;
+    width:70%;
+    font-size: 18px;
+}
+
+
+mat-spinner{
+    display: flex;
+    margin: auto;
+}
+
+mat-card{
+    height:100%;
+}
+
+button{
+    margin: 1rem;
+    width: 70%;
+    font-size: 20px;
+}
+
+h1{
+    text-align: center;
+    margin: 15%;
+    color: #c05938;
+    letter-spacing: 2px;
+    font-size: 56px;
+    font-style: bold;
+}
+
+.imagee{
+    background-image: url("/assets/login1.png");
+    background-size:142%;
+}
+
+.loginForms{
+    background-color: #f8f7f2;
+}
+
+.inputLabels{
+    color:#c05938;
+    font-size: 18px;
+}
+
+.btn-colour-1 {
+    color: #fff;
+    background-color: #c05938;
+    border-color: #c05938;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    border-radius: 4;
+  }
+  
+  .btn-colour-1:hover,
+  .btn-colour-1:active,
+  .btn-colour-1:focus,
+  .btn-colour-1.active {
+    /* let's darken #004E64 a bit for hover effect */
+    background: #aa5032;
+    color: #ffffff;
+    border-color: #aa5032;
+  }
+
+  a{
+    color:#c05938;
+    text-decoration: underline;
+  }
+
+  .registerLabel{
+    font-size: 18px;
+    color: #c05938;
+    margin-bottom: 24%;
+  }
+  

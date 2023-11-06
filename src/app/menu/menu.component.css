@@ -1,0 +1,59 @@
+h1{
+    font-size: 40px;
+    color:#c05938;
+    margin: 10%;
+    text-align: center;
+}
+
+hr{
+    border-color: #c05938;
+}
+
+h2{
+    margin-bottom: 2rem;
+    color: #c05938;
+    font-weight: bold;
+}
+
+/* .btn-colour-1 {
+    color: #ffffff;
+    background-color: #D67AB1;
+    border-color: #D67AB1;
+    font-weight: 400;
+    border-radius: 4;
+  }
+  
+  .btn-colour-1:hover,
+  .btn-colour-1:active,
+  .btn-colour-1:focus,
+  .btn-colour-1.active {
+    background: #bd6c9c;
+    color: #ffffff;
+    border-color: #bd6c9c;
+  } */
+
+  .btn-colour-1 {
+    color: #fff;
+    background-color: #c05938;
+    border-color: #c05938;
+    letter-spacing: 0.05em;
+    border-radius: 4;
+  }
+  
+  .btn-colour-1:hover,
+  .btn-colour-1:active,
+  .btn-colour-1:focus,
+  .btn-colour-1.active {
+    /* let's darken #004E64 a bit for hover effect */
+    background: #aa5032;
+    color: #ffffff;
+    border-color: #aa5032;
+  }
+
+  mat-spinner{
+    margin: auto;
+  }
+
+  input[type=checkbox]{
+    margin-left: 1rem;
+}

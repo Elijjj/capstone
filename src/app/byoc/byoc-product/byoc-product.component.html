@@ -1,0 +1,85 @@
+<div class="min-vh-100">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4">
+            <h1 class="prodDetails">BUILD-YOUR-OWN-CAKE</h1>
+        </div>
+        <div class="col-lg-8">
+            <div class="flex-grow-1 hrr">
+                <hr class="border border-danger border-2 opacity-75" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12" *ngIf="products">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a [routerLink]="['/byoc']" class="backToMenu ms-3"><i class="bi bi-arrow-left"></i> Back</a>
+                        <div class="d-flex justify-content-center">
+                            <img [src]="products.imagePath" [alt]="products.productName" class="prodImage mt-4">
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="col-lg-12 my-4">
+                            <h1 class="prodName">{{ products.productName }}</h1>
+                        </div>
+                        <div class="flex-grow-1 productDescriptionn">
+                            <h5>{{ products.productDescription }}</h5>
+                        </div>
+                        <div class="flex-grow-1 mb-2 hrrr">
+                            <hr class="border border-danger border-1 opacity-75" />
+                        </div>
+                        <div class="flex-grow-1 my-3">
+                            <p><b>Size:</b> 
+                            <input class="form-check-input" type="radio" id="size" name="size" [(ngModel)]="size" value="6 inches">
+                            <label for="size">&nbsp;6 Inches</label>
+                            <input class="form-check-input" type="radio" id="size2" name="size" [(ngModel)]="size" value="8 inches">
+                            <label for="size2">&nbsp;8 Inches</label>
+                            <input class="form-check-input" type="radio" id="size3" name="size" [(ngModel)]="size" value="10 inches">
+                            <label for="size3">&nbsp;10 Inches</label>
+                            </p>
+                        </div>
+                        <div class="flex-grow-1 my-3">
+                            <p><b>Toppings:</b> 
+                            <input class="form-check-input" type="radio" id="toppings" name="toppings" [(ngModel)]="toppings" value="Mixed Berries">
+                            <label for="toppings">&nbsp;Mixed Berries</label>
+                            <input class="form-check-input" type="radio" id="toppings2" name="toppings" [(ngModel)]="toppings" value="Mango">
+                            <label for="toppings2">&nbsp;Mango</label>
+                            <input class="form-check-input" type="radio" id="toppings3" name="toppings" [(ngModel)]="toppings" value="Blueberry">
+                            <label for="toppings3">&nbsp;Blueberry</label>
+                            <input class="form-check-input" type="radio" id="toppings4" name="toppings" [(ngModel)]="toppings" value="Full Strawberry">
+                            <label for="toppings4">&nbsp;Full Strawberry</label>
+                            <input class="form-check-input" type="radio" id="toppings5" name="toppings" [(ngModel)]="toppings" value="Creme Brulee">
+                            <label for="toppings5">&nbsp;Creme Brulee</label>
+                            </p>
+                        </div>
+                        <div class="flex-grow-1 my-3">
+                            <p><b>Crust:</b> 
+                            <input class="form-check-input" type="radio" id="crust" name="crust" [(ngModel)]="crust" value="Regular Crust">
+                            <label for="crust">&nbsp;Regular Crust</label>
+                            <input class="form-check-input" type="radio" id="crust2" name="crust" [(ngModel)]="crust" value="Vanilla Crust">
+                            <label for="crust2">&nbsp;Vanilla Crust</label>
+                            </p>
+                        </div>
+                        <div class="flex-grow-1 my-3">
+                            <p><b>Flowers:</b> 
+                            <input class="form-check-input" type="radio" id="flowers" name="flowers" [(ngModel)]="flowers" value="Yes">
+                            <label for="flowers">&nbsp;Yes</label>
+                            <input class="form-check-input" type="radio" id="flowers2" name="flowers" [(ngModel)]="flowers" value="No">
+                            <label for="flowers2">&nbsp;No</label>
+                            </p>
+                        </div>
+                        <a [routerLink]="['/cart']">
+                        <button class="btn btn-colour-1" type="button" *ngIf="!isLoading" (click)="onAddToCart()">
+                            Add to Cart
+                          </button>
+                          </a>
+                    </div>
+                </div>
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
+        </div>
+    </div>
+</div>
+</div>

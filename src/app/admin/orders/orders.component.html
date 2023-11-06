@@ -1,0 +1,216 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar Column Starts here -->
+    <div class="col-lg-3" style="background-color: #c05938">
+      <div class="d-flex sidenavv align-items-center">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <img
+              src="/assets/logo4.png"
+              alt=""
+              style="width: 60%"
+              class="my-3"
+            />
+            <button
+              id="menuButton"
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="h3">Welcome, Admin!</li>
+                <li class="separator"></li>
+                <li class="nav-item lead">
+                  <a class="nav-link" routerLink="/admin/dashboard">
+                    <i class="bi bi-house"></i> Dashboard
+                  </a>
+                </li>
+                <li class="nav-item lead">
+                  <a class="nav-link" routerLink="/admin/accounts"
+                    ><i class="bi bi-person"></i> Accounts</a
+                  >
+                </li>
+                <li class="nav-item lead">
+                  <a class="nav-link" routerLink="/admin/inventory"
+                    ><i class="bi bi-card-checklist"></i> Inventory</a
+                  >
+                </li>
+                <li class="nav-item lead">
+                  <a class="nav-link" routerLink="/admin/products"
+                    ><i class="material-symbols-outlined">cake</i> Products</a
+                  >
+                </li>
+                <li class="nav-item lead">
+                  <a
+                    class="nav-link active"
+                    aria-current="page"
+                    style="font-weight: bold"
+                    routerLink="/admin/orders"
+                    ><i class="bi bi-bag-check"></i> Orders</a
+                  >
+                </li>
+                <li class="nav-item lead">
+                  <a class="nav-link" routerLink="/admin/reports"
+                    ><i class="material-symbols-outlined">monitoring</i>
+                    Reports</a
+                  >
+                </li>
+                <li class="nav-item lead">
+                  <button (click)="onLogout()" class="btn">
+                    <a class="nav-link"
+                      ><i class="bi bi-box-arrow-right"></i> Logout</a
+                    >
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <!-- Sidebar ends here-->
+    <div class="col-lg-9">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2><i class="bi bi-bag-check"></i> Orders</h2>
+
+        <img id="fediciLogo" src="logo.jpg" alt="Your Logo" class="logo" />
+      </div>
+
+      <p class="separator-black"></p>
+
+      <!-- Centered buttons with desired colors and extra space -->
+
+      <div class="table-container">
+        <!-- Left Curve -->
+        <div class="left-curve"></div>
+        <div class="row cols-cols-1">
+          <div class="table-responsive">
+            <!-- Table -->
+            <table id="example" class="table table-hover" style="width: 100%">
+              <thead>
+                <tr>
+                  <th id="theader1" style="color: white">Account No.</th>
+                  <th id="theader" style="color: white">Customer Name</th>
+                  <th id="theader" style="color: white">Orders</th>
+                  <th id="theader" style="color:white;">Payment Method</th>
+                  <th id="theader" style="color:white;">
+                    Date of Pick-up/Delivery
+                  </th>
+                  <th id="theader" style="color:white;">Type</th>
+                  <th id="theader" style="color:white;">Status</th>
+                  <th id="theader8" style="color:white;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>100001</td>
+                  <td>Juan Dela Cruz</td>
+                  <td>White Chocolate Cheesecake</td>
+                  <td>BPI</td>
+                  <td>05/16/23</td>
+                  <td>Pick-up</td>
+                  <td style="color: red">Pending</td>
+                  <td>
+                    <div class="square-button">
+                      <div class="square-button check-button">
+                        <div class="check">✓</div>
+                      </div>
+                      <div class="square-button cross-button">
+                        <div class="cross">×</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>100001</td>
+                  <td>Juan Dela Cruz</td>
+                  <td>White Chocolate Cheesecake</td>
+                  <td>BPI</td>
+                  <td>05/16/23</td>
+                  <td>Pick-up</td>
+                  <td style="color: red">Pending</td>
+                  <td>
+                    <div class="square-button">
+                      <div class="square-button check-button">
+                        <div class="check">✓</div>
+                      </div>
+                      <div class="square-button cross-button">
+                        <div class="cross">×</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>100001</td>
+                  <td>Juan Dela Cruz</td>
+                  <td>White Chocolate Cheesecake</td>
+                  <td>BPI</td>
+                  <td>05/16/23</td>
+                  <td>Pick-up</td>
+                  <td style="color: red">Pending</td>
+                  <td>
+                    <div class="square-button">
+                      <div class="square-button check-button">
+                        <div class="check">✓</div>
+                      </div>
+                      <div class="square-button cross-button">
+                        <div class="cross">×</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>100001</td>
+                  <td>Juan Dela Cruz</td>
+                  <td>White Chocolate Cheesecake</td>
+                  <td>BPI</td>
+                  <td>05/16/23</td>
+                  <td>Pick-up</td>
+                  <td style="color: red">Pending</td>
+                  <td>
+                    <div class="square-button">
+                      <div class="square-button check-button">
+                        <div class="check">✓</div>
+                      </div>
+                      <div class="square-button cross-button">
+                        <div class="cross">×</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>100001</td>
+                  <td>Juan Dela Cruz</td>
+                  <td>White Chocolate Cheesecake</td>
+                  <td>BPI</td>
+                  <td>05/16/23</td>
+                  <td>Pick-up</td>
+                  <td style="color: red">Pending</td>
+                  <td>
+                    <div class="square-button">
+                      <div class="square-button check-button">
+                        <div class="check">✓</div>
+                      </div>
+                      <div class="square-button cross-button">
+                        <div class="cross">×</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

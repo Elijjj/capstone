@@ -1,0 +1,239 @@
+/*#1: css para sa full screen lang to. basically, pag di ginawa ung kasunod nito, yung navbar lang ang may style. nawawala pag lumiliit screen size */
+@media screen and (min-width:992px) {
+    .navbar .container-fluid, .navbar-expand-lg .navbar-collapse, .navbar-expand-lg .navbar-nav {
+    flex-direction: column;    
+    background-color: #C05938;
+    height: 100%;
+  }
+  
+
+  .navbar, .navbar-expand-lg .navbar-collapse, .navbar-expand-lg .navbar-nav {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar {
+    height: 100vh;
+    width: 100%;
+    color: #181818;
+  }
+
+  .sidenavv{
+    height: 100vh;
+  }
+  
+  .navbar .navbar-nav .nav-link, .h3{
+    color:#F8F7F2;
+  
+  }
+  
+  .bi-stack-overflow{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 48px; 
+  }
+  
+  .separator {
+    border-top: 1px solid #F8F7F2; 
+    max-width: 100%;
+  }
+  
+  .separator-black {
+    border-top: 1px solid #181818;    
+    max-width: 100%;
+  }
+  
+  #logout {
+    margin-top: 50%;
+  }
+  
+  .col-lg-9{
+    
+    color:#C05938;
+    margin-top: 8%;
+    padding-left: 20px;
+  }  
+  
+  .bg-custom-color-padding {
+    background-color: #F8F7F2;
+    color: #181818;
+    padding: 50px;
+    border-radius: 6%;
+    
+  }
+  
+  .pinkText{
+    
+    color: #d67ab1;
+  
+  }
+  
+  #picSize {
+    font-size: 56px; 
+    color: #d67ab1;
+  }
+  #fediciLogo{
+    max-height: 60px; /* Adjust the height as needed */
+    margin-right: 3%;
+  }
+  
+  
+  #picSizeInventory {
+  font-size: 100px; 
+  color: #d67ab1;
+  margin-top: 30px;
+  }
+  
+  #gridInventoryText{
+      font-size: 25px;
+      min-height: 350px;
+    
+  }
+  
+  #gridInventory{
+    padding-top: 60%;
+  }
+  
+  #gridReport {
+    min-height: 300px;
+    padding-top: 25%;
+   }
+  
+   #picSizeReport {
+    font-size: 56px; 
+    color: #d67ab1;
+  }
+  
+  a {
+    text-decoration: none; /* Remove underlines */
+    color: inherit; /* Use the parent element's text color */
+    font-size: 20px;
+  }
+  
+  
+  
+  }
+  
+  /*#2. Ito yung style for the main content. Without this, magiging plain black lang yung content ng dashboard pag lumiliit screen size.*/
+  
+  @media screen and (max-width:992px) {
+  
+  .col-lg-9{
+    
+  color:#C05938;
+  margin-top: 8%;
+  padding-left: 40px;
+  padding-right: 40px;
+  }
+  
+  #fediciLogo{
+    /*To hide Fedici Logo on mobile view*/
+    font-size: 0%;
+    max-width: 0;
+  }
+  
+  .pinkText{
+  color: #d67ab1;
+  }
+  
+  #picSize {
+  font-size: 56px; 
+  color: #d67ab1;
+  }
+  
+  .col {
+  color: #181818;
+  }
+  
+  .bg-custom-color-padding {
+  background-color: #F8F7F2;
+  color: #181818;
+  padding: 50px;
+  border-radius: 6%;
+  
+  }
+  
+  .navbar .container-fluid, .navbar-expand-lg .navbar-collapse, .navbar-expand-lg .navbar-nav{
+  flex-direction: column;
+    background-color: #C05938;
+    height: 100%;
+    align-items: flex-start;
+    
+  }
+  
+  
+  /* Style for the left curve */
+  .left-curve {
+    position: absolute;
+    top: 0;
+    left: -10px; /* Adjust this value to control the curve's position */
+    width: 20px; /* Adjust this value to control the curve's width */
+    height: 100%;
+    background-color: white; /* Set the background color of the curve */
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+  }
+  
+  /* Style for the right curve */
+  .right-curve {
+    position: absolute;
+    top: 0;
+    right: -10px; /* Adjust this value to control the curve's position */
+    width: 20px; /* Adjust this value to control the curve's width */
+    height: 100%;
+    background-color: white; /* Set the background color of the curve */
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+  }
+  
+  .bi-stack-overflow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #gridInventory {
+    min-height: 500px;
+    
+   }
+   #picSizeInventory {
+    font-size: 100px; 
+    color: #d67ab1;
+    margin-top: 30px;
+    }
+    
+    #gridInventoryText{
+        font-size: 25px;
+        min-height: 350px;
+      
+    }
+    
+    #gridInventory{
+      padding-top: 60%;
+    }
+    
+    #gridReport {
+      min-height: 300px;
+      padding-top: 25%;
+     }
+    
+     #picSizeReport {
+      font-size: 56px; 
+      color: #d67ab1;
+    }
+    
+    a {
+      text-decoration: none; /* Remove underlines */
+      color: inherit; /* Use the parent element's text color */
+    }
+    
+    
+  }
+  
+  
+  

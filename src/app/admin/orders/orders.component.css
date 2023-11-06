@@ -1,0 +1,28 @@
+#theader1, #theader,#theader, #theader,#theader,#theader,#theader, #theader8 {
+    text-align: center;
+    background-color: #d67ab1;
+}
+
+#theader1 {
+    border-top-left-radius: 10px;    
+}
+
+#theader8 {
+    border-top-right-radius: 10px;    
+}
+
+table {
+    text-align: center;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    text-align: center;
+}
+
+table tr:first-child {
+    background-color: #d67ab1;
+}
+
+.square-button{
+    margin: 3%;
+}

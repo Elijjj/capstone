@@ -1,0 +1,24 @@
+.col-lg-9{
+    
+    color:#181818;
+    margin-top: 8%;
+    padding-left: 20px;
+  }  
+
+  .btn-colour-1 {
+    color: #fff;
+    background-color: #D67AB1;
+    border-color: #D67AB1;
+    letter-spacing: 0.05em;
+    border-radius: 4;
+  }
+  
+  .btn-colour-1:hover,
+  .btn-colour-1:active,
+  .btn-colour-1:focus,
+  .btn-colour-1.active {
+    /* let's darken #004E64 a bit for hover effect */
+    background: #f391cc;
+    color: #000;
+    border-color: #f391cc;
+  }

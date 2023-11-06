@@ -1,0 +1,84 @@
+input[type=text].addressTxtBox{
+    width:95%;
+    font-size: 16px;
+}
+
+
+.profileText{
+    font-size: 16px;
+}
+
+.addressLabel{
+    font-weight: bold;
+}
+
+mat-spinner{
+    margin: auto;
+}
+
+.btn-colour-1 {
+    color: #fff;
+    background-color: #D67AB1;
+    border-color: #D67AB1;
+    letter-spacing: 0.05em;
+    border-radius: 4;
+  }
+  
+  .btn-colour-1:hover,
+  .btn-colour-1:active,
+  .btn-colour-1:focus,
+  .btn-colour-1.active {
+    /* let's darken #004E64 a bit for hover effect */
+    background: #f391cc;
+    color: #000;
+    border-color: #f391cc;
+  }
+
+  .btn-colour-2 {
+    color: #fff;
+    background-color: #c05938;
+    border-color: #c05938;
+    letter-spacing: 0.05em;
+    border-radius: 4;
+  }
+  
+  .btn-colour-2:hover,
+  .btn-colour-2:active,
+  .btn-colour-2:focus,
+  .btn-colour-2.active {
+    /* let's darken #004E64 a bit for hover effect */
+    background: #da6b46;
+    color: #000;
+    border-color: #da6b46;
+  }
+
+  .btn-colour-3 {
+    color: #fff;
+    background-color: #c05938;
+    border-color: #c05938;
+    letter-spacing: 0.05em;
+    border-radius: 4;
+  }
+  
+  .btn-colour-3:hover,
+  .btn-colour-3:active,
+  .btn-colour-3:focus,
+  .btn-colour-3.active {
+    /* let's darken #004E64 a bit for hover effect */
+    background: #da6b46;
+    color: #000;
+    border-color: #da6b46;
+  }
+
+  input[type="file"]{
+    visibility: hidden;
+}
+
+.discountContainer{
+    border-color: #000;
+    border-radius: 4;
+}
+
+.logoBottom{
+    max-width: 5%;
+}

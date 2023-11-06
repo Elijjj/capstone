@@ -1,0 +1,71 @@
+<div class="min-vh-100">
+
+
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-card>
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+    <div class="container-fluid" style="overflow: hidden">
+      <div class="row">
+        <div class="d-flex imagee col-lg-7">
+          <div class="grow-1" style="height: 100vh"></div>
+        </div>
+        <div class="loginForms col-lg-5">
+          <h1>LOGIN</h1>
+          <div class="d-flex justify-content-center">
+            <label for="formControlEmail" class="inputLabels form-label"
+              ><b>Email Address:</b></label
+            >
+          </div>
+          <div class="d-flex justify-content-center">
+            <input
+              type="email"
+              name="email"
+              ngModel
+              placeholder="juandelacruz@gmail.com"
+              #emailInput="ngModel"
+              required
+              email
+              class="form-control"
+              id="formControlEmail"
+            />
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <label for="formControlEmail" class="inputLabels form-label"
+              ><b>Password:</b></label
+            >
+          </div>
+          <div class="d-flex justify-content-center">
+            <input
+              type="password"
+              name="password"
+              ngModel
+              placeholder="Password"
+              #passwordInput="ngModel"
+              class="form-control"
+              id="formControlPassword"
+              required
+            />
+          </div>
+          <div class="d-flex justify-content-center">
+            <p class="inputLabels">
+              <a href="#"><b>Forgot Password?</b></a>
+            </p>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-colour-1" type="submit" *ngIf="!isLoading">
+              Log-In
+            </button>
+          </div>
+          <div class="d-flex justify-content-center">
+            <p class="registerLabel">
+              Don't Have an Account?
+              <a routerLink="/auth/signup">Register Here!</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>
+</div>

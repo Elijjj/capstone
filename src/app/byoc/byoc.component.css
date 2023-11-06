@@ -1,0 +1,18 @@
+hr{
+    border-color: #c05938;
+    margin-right: 2%;
+}
+
+h1{
+    font-size: 38px;
+    color:#c05938;
+    margin: 5%;
+}
+
+p{
+    font-size: 20px;
+}
+
+.containerr{
+    min-height: 100%;
+}

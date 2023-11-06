@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #c05938">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand mx-5" routerLink=""
+        ><img src="/assets/logo.png" class="headerImage" alt="dsadsa"
+      /></a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
+        <li class="nav-item me-5">
+          <a class="nav-link" routerLink="">Home</a>
+        </li>
+        <li class="nav-item me-5">
+          <a class="nav-link" routerLink="/menu">Menu</a>
+        </li>
+        <li class="nav-item me-5">
+          <a class="nav-link" routerLink="/byoc">Build Your Own Cake</a>
+        </li>
+        <li class="nav-item me-5">
+          <a class="nav-link" routerLink="/aboutus">About Us</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item me-4">
+            <a class="nav-link" routerLink="/cart">
+              <i class="bi bi-cart2"></i>
+              Cart
+            </a>
+          </li>
+          <li class="nav-item me-4" *ngIf="!userIsAuthenticated">
+            <a class="nav-link" routerLink="/auth/signup">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-person-circle"
+                viewBox="0 0 16 16"
+              >
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                <path
+                  fill-rule="evenodd"
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                />
+              </svg>
+              Signup</a
+            >
+          </li>
+          <li class="nav-item me-4" *ngIf="!userIsAuthenticated">
+            <a class="nav-link" routerLink="/auth/login">
+              <i class="bi bi-person-circle"></i>
+              Log-In</a
+            >
+          </li>
+          <!-- <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Hi, Placeholder!
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark" *ngIf="userIsAuthenticated">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul> -->
+          <li class="nav-item me-4" *ngIf="userIsAuthenticated">
+            <button (click)="onLogout()" class="btn nav-link">Logout</button>
+          </li>
+          <li class="nav-item me-4" *ngIf="userIsAuthenticated">
+            <a class="nav-link" routerLink="/profile"><b>Profile</b></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

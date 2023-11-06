@@ -1,0 +1,125 @@
+input[type=email]{
+    margin-left: 1rem;
+    width:90%;
+    font-size: 16px;
+}
+
+input[type=password]{
+    margin-left: 1rem;
+    width:90%;
+    font-size: 16px;
+}
+
+input[type=text]{
+    margin-left: 1rem;
+    width:90%;
+    font-size: 16px;
+}
+
+input[type=number]{
+    margin-left: 1rem;
+    width:90%;
+    font-size: 16px;
+}
+
+input[type=text].blsTxt{
+    margin-left: 1rem;
+    width:95%;
+    font-size: 16px;
+}
+
+input[type=text].subdivTxt{
+    margin-left: 1rem;
+    width:95%;
+    font-size: 16px;
+}
+
+input[type=number].postalTxt{
+    margin-left: 1rem;
+    width:95%;
+    font-size: 16px;
+}
+
+mat-spinner{
+    margin: auto;
+}
+
+mat-card{
+    height:100%;
+}
+
+button{
+    margin: 1rem;
+    width: 70%;
+    font-size: 20px;
+}
+
+h1{
+    text-align: center;
+    margin: 7%;
+    color: #c05938;
+    letter-spacing: 2px;
+    font-size: 48px;
+}
+
+h4{
+    text-align: center;
+    margin: 1rem;
+    color: #181818;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.imagee{
+    background-image: url("/assets/login1.png");
+    background-size:142%;
+}
+
+.signupForms{
+    background-color: #f8f7f2;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+.inputLabels{
+    color:#181818;
+    font-size: 16px;
+    margin: 1rem;
+}
+
+.btn-colour-1 {
+    color: #fff;
+    background-color: #c05938;
+    border-color: #c05938;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    border-radius: 4;
+    margin-bottom: 10%;
+  }
+  
+  .btn-colour-1:hover,
+  .btn-colour-1:active,
+  .btn-colour-1:focus,
+  .btn-colour-1.active {
+    /* let's darken #004E64 a bit for hover effect */
+    background: #aa5032;
+    color: #ffffff;
+    border-color: #aa5032;
+  }
+
+  a{
+    color:#c09853;
+    text-decoration: underline;
+  }
+
+  .registerLabel{
+    font-size: 16px;
+    color: #181818;
+    margin-bottom: 24%;
+  }
+  
+.addressPart{
+    overflow-y: scroll;
+}
+

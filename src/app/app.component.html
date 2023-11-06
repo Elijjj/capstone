@@ -1,0 +1,11 @@
+<ng-container *ngIf="!isAdminAccount()">
+  <app-header></app-header>
+</ng-container>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<ng-container *ngIf="!isAdminAccount()">
+  <app-footer></app-footer>
+</ng-container>

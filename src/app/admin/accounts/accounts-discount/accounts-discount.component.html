@@ -1,0 +1,136 @@
+<div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar Column Starts here -->
+      <div class="col-lg-3" style="background-color: #c05938">
+        <div class="d-flex sidenavv align-items-center">
+          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <img
+                src="/assets/logo4.png"
+                alt=""
+                style="width: 60%"
+                class="my-3"
+              />
+              <button
+                id="menuButton"
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+  
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="h3">Welcome, Admin!</li>
+                  <li class="separator"></li>
+                  <li class="nav-item lead">
+                    <a class="nav-link" routerLink="/admin/dashboard">
+                      <i class="bi bi-house"></i> Dashboard
+                    </a>
+                  </li>
+                  <li class="nav-item lead">
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      style="font-weight: bold"
+                      routerLink="/admin/accounts"
+                      ><i class="bi bi-person"></i> Accounts</a
+                    >
+                  </li>
+                  <li class="nav-item lead">
+                    <a class="nav-link" routerLink="/admin/inventory"
+                      ><i class="bi bi-card-checklist"></i> Inventory</a
+                    >
+                  </li>
+                  <li class="nav-item lead">
+                    <a class="nav-link" routerLink="/admin/products"
+                      ><i class="material-symbols-outlined">cake</i> Products</a
+                    >
+                  </li>
+                  <li class="nav-item lead">
+                    <a class="nav-link" routerLink="/admin/orders"
+                      ><i class="bi bi-bag-check"></i> Orders</a
+                    >
+                  </li>
+                  <li class="nav-item lead">
+                    <a class="nav-link" routerLink="/admin/reports"
+                      ><i class="material-symbols-outlined">monitoring</i>
+                      Reports</a
+                    >
+                  </li>
+                  <li class="nav-item lead">
+                    <button (click)="onLogout()" class="btn">
+                      <a class="nav-link"
+                        ><i class="bi bi-box-arrow-right"></i> Logout</a
+                      >
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <div class="col-lg-9 m-auto">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2><i class="bi bi-tag"></i>Discount Status</h2>
+  
+          <img id="fediciLogo" src="/assets/logo3.png" alt="Your Logo" class="logo" />
+        </div>
+  
+        <p class="separator-black"></p>
+    <form [formGroup]="form" (submit)="onUploadDiscount()" *ngIf="!isLoading">
+      <div class="row" *ngIf="accounts">
+        <div class="col-lg-6 m-auto">
+            <h1></h1>
+            <div class="my-1">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" value="{{accounts.email}}" readonly name="email">
+            </div>
+            <div class="my-1">
+                <label for="firstname">First Name</label>
+                <input type="text" class="form-control" value="{{accounts.firstname}}" readonly name="firstname">
+            </div>
+            <div class="my-1">
+                <label for="lastname">Last Name</label>
+                <input type="text" class="form-control" value="{{accounts.lastname}}" readonly name="lastname">
+            </div>
+            <div class="my-1">
+                <label for="contactnumber">Contact Number</label>
+                <input type="text" class="form-control" value="{{accounts.contactnumber}}" readonly name="contactnumber">
+            </div>
+            <div class="my-1">
+                <label for="fulladdress">Address</label>
+                <input type="textarea" class="form-control" value="{{accounts.bls}} {{accounts.subdivision}} {{accounts.city}}, {{accounts.province}} {{accounts.postalcode}}" readonly name="fulladdress">
+            </div>
+            <div class="my-1">
+                <label for="birthday">Birthday</label>
+                <input type="text" class="form-control" value="{{accounts.birthday | date:'shortDate'}}" readonly name="birthday">
+            </div>
+            <div class="my-1">
+                <label for="discountStatus">Discount Status</label>
+                <input type="text" class="form-control" value="{{accounts.discountStatus}}" formControlName="discountStatus" name="discountStatus" readonly>
+            </div>
+            <div class="my-1">
+                <label for="discountType">Discount Type</label>
+                <input type="text" class="form-control" value="{{accounts.discountType}}" formControlName="discountType" name="discountType" readonly>
+            </div>  
+        </div>
+        <div class="col-lg-6 m-auto">
+            <img [src]="accounts.imagePath" alt="" class="img-fluid"> <br>
+            <div class="d-flex justify-content-center m-2 align-self-center">
+                <button type="button" class="btn btn-success m-2" (click)="onAccept()">Accept</button>
+            <button type="button" class="btn btn-danger m-2" (click)="onReject()">Reject</button>
+            <button type="submit" class="btn btn-colour-1 m-2">PUTANGINAMO GUMANA KA</button>
+            </div>
+        </div>            
+      </div>
+    </form>
+    </div>
+</div>
