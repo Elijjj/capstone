@@ -41,21 +41,6 @@ exports.addToCart = (req, res, next) => {
             res.status(500).json({ error: error });
         });
 };
-
-// exports.getCart = (req, res, next) => {
-//     const userId = req.userData.userId;
-
-//     CartItem.find({ userId: userId })
-//         .populate('productId') // Populate the product details
-//         .exec()
-//         .then(cartItems => {
-//             res.status(200).json({ cart: cartItems });
-//         })
-//         .catch(error => {
-//             res.status(500).json({ error: error });q
-//         });
-// };
-
 exports.getCart = (req, res, next) => {
     const userId = req.userData.userId;
 
@@ -75,31 +60,6 @@ exports.getCart = (req, res, next) => {
         });
     });
 }
-
-// exports.updateCart = (req, res, next) => {
-//     const cartItem = new CartItem ({
-//         userId: req.body.userId,
-//         productId: req.body.productId,
-//         productType: req.body.productType,
-//         productName: req.body.productName,
-//         productDescription: req.body.productDescription,
-//         imagePath: imagePath,
-//         price: req.body.price,
-//         quantity: req.body.quantity,
-//         size: req.body.size
-//     });
-//     CartItem.updateOne({productId: req.params.productId}, cartItem).then(result => {
-//         if(result.matchedCount > 0){
-//             res.status(200).json({message:"Update Successful!"});
-//         } else {
-//             res.status(401).json({message:"Not Authorized"});
-//         }
-//     }).catch(error => {
-//         res.status(500).json({
-//             message: "Couldn't update product!"
-//         });
-//     });
-// }
 
 exports.updateCart = (req, res, next) => {
     const productId = req.params.productId;

@@ -53,25 +53,6 @@ export class ProfileComponent implements OnInit, OnDestroy{
         this.isInputDisabled = !this.isInputDisabled;
     }
 
-    // onSubmitImage() {
-    //     if (!this.imagePreview) {
-    //       // Maybe show some alert that no image has been selected
-    //       return;
-    //     }
-      
-    //     // Assuming you have a FormData structure to send the file
-    //     const formData = new FormData();
-    //     formData.append('image', this.form.get('image').value);
-      
-    //     // Now make the API call. Here, I'm just giving a generic example with HttpClient
-    //     this.httpClient.post('YOUR_API_ENDPOINT_HERE', formData)
-    //       .subscribe(response => {
-    //         // Handle successful image upload here
-    //       }, error => {
-    //         // Handle error here
-    //       });
-    //   }
-      
 
     onUpdateAddressDetails() {
         this.userId = this.authService.getUserId();

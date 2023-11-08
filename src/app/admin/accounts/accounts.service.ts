@@ -83,6 +83,7 @@ export class AccountsService {
       discountStatus: string;
     }>(BACKEND_URL + id);
   }
+
   updateDiscount(id: string, discountType: string, discountStatus: string) {
     const discountData = {
         discountType: discountType,
@@ -95,26 +96,4 @@ export class AccountsService {
         });
 }
 }
-
-// updateProduct(id: string, productType: string, productName: string, productDescription: string, image: any, price: number, quantity: number, size: string){
-//   let productData: Products | FormData;
-//   if(typeof(image) === 'object'){
-//       productData = new FormData();
-//       productData.append("id", id);
-//       productData.append("productType", productType);
-//       productData.append("productName", productName);
-//       productData.append("productDescription", productDescription);
-//       productData.append("image", image, productName);
-//       productData.append("price", price.toString());
-//       productData.append("quantity", quantity.toString());
-//       productData.append("size", size);
-
-//   } else {
-//       productData = {id: id, productType: productType, productName: productName, productDescription: productDescription, imagePath: image, price: price, quantity: quantity, size: size};
-//   }
-//   this.httpClient.put(BACKEND_URL + id, productData)
-//   .subscribe(response => {
-//       this.router.navigate(["/admin/products"]);
-//   });
-// }
 

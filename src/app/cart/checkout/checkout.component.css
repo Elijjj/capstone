@@ -1,0 +1,81 @@
+hr{
+    border-color: #c05938;
+}
+
+h1{
+    font-size: 48px;
+    color:#c05938;
+    margin: 5%;
+}
+h4{
+    font-size: 24px;
+    color:#c05938;
+}
+
+.rectangleMoments{
+    border-radius: 15px;
+border: #a3a3a3;
+border-width: 1px;
+border-style: solid;
+padding: 0.5rem;
+}
+
+.rectangleMoments1{
+    border-radius: 15px;
+border: #a3a3a3;
+border-width: 1px;
+border-style: solid;
+padding: 0.5rem;
+}
+
+.rectangleMoments2{
+    border-radius: 15px;
+border: #a3a3a3;
+border-width: 1px;
+border-style: solid;
+padding: 0.5rem;
+}
+
+
+.rectangleMoments3{
+    border-radius: 15px;
+border: #a3a3a3;
+border-width: 1px;
+border-style: solid;
+padding: 0.5rem;
+}
+
+.rectangleMoments3 img{
+    max-width: 15%;
+}
+
+
+.rectangleMoments1 input[type=text]{
+    border: none;
+    background: none;
+    outline: none!important;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.rectangleMoments1 input[type=text].inputName{
+    font-size: 32px;
+    color: #c05938;
+    font-weight: 500;
+    max-width: 100%;
+}
+
+.rectangleMoments3 input[type=text]{
+    border: none;
+    background: none;
+    outline: none!important;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.rectangleMoments3 input[type=text].inputName{
+    font-size: 32px;
+    color: #c05938;
+    font-weight: 500;
+    max-width: 100%;
+}

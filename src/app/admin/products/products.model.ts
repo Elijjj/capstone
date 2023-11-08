@@ -7,10 +7,4 @@ export interface Products{
     price: number;
     quantity: number;
     size: string;
-    // sizesAndPrices?: SizePrice[];  // Add this line
 }
-
-// export interface SizePrice {
-//     size: string;
-//     price: number;
-// }

@@ -1,0 +1,96 @@
+<div class="container min-vh-100">
+    <div class="row align-items-center">
+        <div class="col-lg-10">
+            <hr class="border border-danger border-2 opacity-75" />
+        </div>
+        <div class="col-lg-2">
+            <h1>Checkout</h1>
+        </div>
+    </div>
+    <div class="row">
+        <!-- <div class="col-lg-6">
+            <h2>Personal Details and Address</h2>
+                <div *ngIf="authData" class="rectangleMoments1">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-lg-6">
+                            <input type="text" value="{{authData.firstname}}" readonly class="inputName">
+                            <input type="text" value="{{authData.lastname}}" readonly class="inputName">
+                        <input type="text" value="{{authData.contactnumber}}" readonly class="inputNumber">
+                        <input type="text" value="{{authData.email}}" readonly>
+
+                        </div>
+                        <div class="col-lg-6">
+                        <input type="text" value="{{authData.bls}}" readonly>
+                        <input type="text" value="{{authData.subdivision}}" readonly>
+                        <input type="text" value="{{authData.city}}" readonly>
+                        <input type="text" value="{{authData.province}}" readonly>
+                        <input type="text" value="{{authData.postalcode}}" readonly>
+                        </div>
+                    </div>
+                </div>
+        </div> -->
+        <div class="col-lg-6">
+            <h2>Order Summary</h2>
+            <div *ngIf="carts" class="rectangleMoments1">
+                <div class="mb-3" *ngFor="let item of carts">
+                    <h4>{{item.productName}}: <b>P {{item.price}}</b></h4>
+                </div>
+                <h5>Discount: <b>P <input type="text" value="{{getDiscounted()}}" readonly></b></h5>
+                <hr>
+                <h4>Computed Total: <b>P <input type="text" value="{{getComputedDiscount()}}" readonly></b></h4>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <h2>Order Details</h2>
+            <div class="row" class="rectangleMoments2">
+                <label for="orderType" class="form-label">Order Type:</label>
+            <select class="form-select" name="" id="">
+                <option value="Pick-Up">Pick-Up</option>
+                <option value="Delivery">Delivery</option>
+            </select>
+            <label for="datePickup" class="mt-2">Date:</label>
+            <br>
+            <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="datePickup" name="datePickup" required>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="datePickup"></mat-datepicker-toggle>
+                <mat-datepicker #datePickup></mat-datepicker>
+              </mat-form-field>
+            <br>
+              <label for="timePickup" class="mt-2">Time:</label>
+              <select class="form-select" name="" id="">
+                <option value="10:00 AM">10:00 AM</option>
+                <option value="11:00 AM">11:00 AM</option>
+                <option value="12:00 PM">12:00 PM</option>
+                <option value="1:00 PM">1:00 PM</option>
+                <option value="2:00 PM">2:00 PM</option>
+                <option value="3:00 PM">3:00 PM</option>
+                <option value="4:00 PM">4:00 PM</option>
+                <option value="5:00 PM">5:00 PM</option>
+                <option value="6:00 PM">6:00 PM</option>
+              </select>
+            </div>            
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-lg-6">
+            <h2>Payment Method</h2>
+            <div class="rectangleMoments3">
+                <div class="d-flex">
+                <input class="form-check-input" type="radio" id="toppings" name="toppings" value="BPI">
+                <label for="toppings"><img src="/assets/checkout/bpi.png" alt=""></label>
+                </div>
+                <div class="d-flex">
+                    <input class="form-check-input" type="radio" id="toppings2" name="toppings" value="Gcash">
+                <label for="toppings2">&nbsp;Gcash <img src="/assets/checkout/gcash.png" alt=""></label>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <button>Proceed to Payment</button>
+            <a routerLink="/cart"><button>Back to Cart</button></a>
+        </div>
+    </div>
+</div>

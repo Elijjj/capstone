@@ -24,6 +24,7 @@ import { MenuProductComponent } from './menu/menu-product/menu-product.component
 import { CartComponent } from './cart/cart.component';
 import { ByocProductComponent } from './byoc/byoc-product/byoc-product.component';
 import { ProfileDiscountComponent } from './profile/profile-discount/profile-discount.component';
+import { CheckoutComponent } from './cart/checkout/checkout.component';
 // import { CartService } from './cart/cart.service';
 // import { AdminHeaderComponent } from './header/admin-header.component';
 
@@ -43,6 +44,7 @@ import { ProfileDiscountComponent } from './profile/profile-discount/profile-dis
     MenuComponent,
     MenuProductComponent,
     CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     CommonModule,

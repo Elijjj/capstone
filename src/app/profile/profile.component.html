@@ -52,16 +52,30 @@
             </div>
         </div>
       </div>
-      </div>
-
+      </div> 
     </div>
 
 </div>
 <div class="row">
-  <div class="col-lg-12 d-flex justify-content-center my-4" *ngIf="authData">
-    <button (click)="toggleInputDisabled()" class="btn btn-colour-1 p-2 mx-2">Edit Profile</button>
-    <button (click)="onUpdateAddressDetails()" class="btn btn-colour-2 p-2 mx-2" [disabled]="isInputDisabled">Update User Information</button>
-    <a [routerLink]="['/profile/discount', authData.id]">
+<div class="row">
+  <div class="col-lg-12 mt-3" *ngIf="authData.discountStatus !== 'None' && authData.discountType !== 'N/A'">
+    <h2>Discount</h2>
+    <div class="d-flex justify-content-between">
+      <div class="col-lg-6 me-2">      
+          <label *ngIf="authData.discountStatus !== 'None'" for="discountStatus" class="m-2 addressLabel">Discount Status: </label>
+          <input *ngIf="authData.discountStatus !== 'None'" type="text" name="discountStatus" class="form-control" [disabled]="true" [(ngModel)]="authData.discountStatus">
+        </div>
+      <div class="col-lg-6">    
+          <label *ngIf="authData.discountStatus !== 'N/A'" for="discountType" class="m-2 addressLabel">Discount Type: </label>
+          <input *ngIf="authData.discountStatus !== 'N/A'" type="text" name="discountType" class="form-control" [disabled]="true" [(ngModel)]="authData.discountType">
+        </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 d-flex justify-content-center my-4" *ngIf="authData">
+  <button (click)="toggleInputDisabled()" class="btn btn-colour-1 p-2 mx-2">Edit Profile</button>
+  <button (click)="onUpdateAddressDetails()" class="btn btn-colour-2 p-2 mx-2" [disabled]="isInputDisabled">Update User Information</button>
+  <a [routerLink]="['/profile/discount', authData.id]" *ngIf="authData.discountStatus !== 'Accepted' && authData.discountStatus !== 'Rejected' && authData.discountStatus !== 'Pending'">
     <button class="btn btn-colour-1 p-2 mx-2"><b>Apply for Discount!</b></button>
   </a>
 </div>

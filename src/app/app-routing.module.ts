@@ -11,6 +11,7 @@ import { MenuProductComponent } from "./menu/menu-product/menu-product.component
 import { CartComponent } from "./cart/cart.component";
 import { ByocProductComponent } from "./byoc/byoc-product/byoc-product.component";
 import { ProfileDiscountComponent } from "./profile/profile-discount/profile-discount.component";
+import { CheckoutComponent } from "./cart/checkout/checkout.component";
 // import { AdminGuard } from "./admin/admin.guard";
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
     { path: "profile", component: ProfileComponent, canActivate: [AuthGuard]},
     { path: "profile/discount/:userId", component: ProfileDiscountComponent, canActivate: [AuthGuard]},
     { path: "cart", component: CartComponent, canActivate: [AuthGuard]},
+    { path: "cart/checkout/:userId", component: CheckoutComponent, canActivate: [AuthGuard]},
     { path: "admin", loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
     { path: 'inventory', loadChildren: () => import('./admin/inventory-products.module').then(m => m.InventoryProductsModule)},
     { path: 'products', loadChildren: () => import('./admin/inventory-products.module').then(m => m.InventoryProductsModule)},
