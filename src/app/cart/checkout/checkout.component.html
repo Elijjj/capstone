@@ -70,7 +70,7 @@
                 <option value="5:00 PM">5:00 PM</option>
                 <option value="6:00 PM">6:00 PM</option>
               </select>
-            </div>            
+            </div>
         </div>
     </div>
     <div class="row mt-4">
@@ -85,11 +85,11 @@
                     <input class="form-check-input" type="radio" id="toppings2" name="toppings" value="Gcash">
                 <label for="toppings2">&nbsp;Gcash <img src="/assets/checkout/gcash.png" alt=""></label>
                 </div>
-                
+
             </div>
         </div>
         <div class="col-lg-6">
-            <button>Proceed to Payment</button>
+            <button (click)="onProceedToPaymentClick()">Proceed to Payment</button>
             <a routerLink="/cart"><button>Back to Cart</button></a>
         </div>
     </div>
