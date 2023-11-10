@@ -2,31 +2,22 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar Column Starts here -->
-    <div class="col-lg-3" style="background-color: #c05938">
+    <div class="col-md-3" style="background-color: #c05938; margin:0; padding: 0;">
       <div class="d-flex sidenavv align-items-center">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-md bg-body-tertiary">
           <div class="container-fluid">
             <img
               src="/assets/logo4.png"
               alt=""
-              style="width: 60%"
-              class="my-3"
+              class="fediciImageSidebar"
             />
-            <button
-              id="menuButton"
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
+            <button class="navbar-toggler" type="button" (click)="toggleMenu()"
+            [attr.aria-expanded]="!isMenuCollapsed" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse" [class.show]="!isMenuCollapsed" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="h3">Welcome, Admin!</li>
                 <li class="separator"></li>
                 <li class="nav-item lead">
@@ -78,7 +69,7 @@
       </div>
     </div>
     <!-- Sidebar ends here-->
-    <div class="col-lg-9">
+    <div class="col-md-9">
       <div class="d-flex justify-content-between align-items-center">
         <h2><i class="material-symbols-outlined">monitoring</i> Reports</h2>
 
@@ -90,7 +81,7 @@
         <h4 style="font-style: italic; margin-right: 15px">
           Monthly Statistics
         </h4>
-        <select id="monthDropdown">
+        <select id="monthDropdown" class="">
           <option value="January">January</option>
           <option value="February">February</option>
           <option value="March">March</option>
@@ -104,18 +95,6 @@
           <option value="November">November</option>
           <option value="December">December</option>
         </select>
-        <button
-          class="btn btn-primary custom-btn"
-          style="
-            background-color: #c05938;
-            color: white;
-            border-color: #ff5733;
-            font-weight: bold;
-            margin-left: 15px;
-          "
-        >
-          Export Reports
-        </button>
       </div>
 
       <!--dashboard options -->

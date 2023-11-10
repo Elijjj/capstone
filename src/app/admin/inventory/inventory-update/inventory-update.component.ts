@@ -25,6 +25,7 @@ export class InventoryUpdateComponent implements OnInit, OnDestroy {
   inventory: Inventory;
   isLoading = false;
   form: FormGroup;
+  isMenuCollapsed = true; // Add this line
   constructor(
     public inventoryService: InventoryService,
     public route: ActivatedRoute,
@@ -94,6 +95,10 @@ export class InventoryUpdateComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.authService.logout();
+  }
+
+  toggleMenu() {
+    this.isMenuCollapsed = !this.isMenuCollapsed;
   }
 
   ngOnDestroy() {

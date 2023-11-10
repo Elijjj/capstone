@@ -1,3 +1,4 @@
+@media screen and (min-width:844px) {
 a {
     color: #f8f7f2;
     font-size: 16px;
@@ -21,3 +22,32 @@ a {
     /* let's darken #004E64 a bit for hover effect */
     color: #181818;
   }
+}
+
+@media screen and (max-width:844px) {
+  a {
+      color: #f8f7f2;
+      font-size: 16px;
+  }
+  
+  .headerImage {
+      max-width: 28px;
+  }
+  
+  .btn.nav-link {
+      border: none;
+      background: none;
+      padding: 1;
+      margin: 0;
+      color: #f8f7f2;
+  }
+  .btn.nav-link:hover,
+    .btn.nav-link:active,
+    .btn.nav-link:focus,
+    .btn.nav-link.active {
+      /* let's darken #004E64 a bit for hover effect */
+      color: #181818;
+    }
+  }
+
+  

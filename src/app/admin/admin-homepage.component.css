@@ -1,13 +1,13 @@
 /*#1: css para sa full screen lang to. basically, pag di ginawa ung kasunod nito, yung navbar lang ang may style. nawawala pag lumiliit screen size */
 @media screen and (min-width:992px) {
-    .navbar .container-fluid, .navbar-expand-lg .navbar-collapse, .navbar-expand-lg .navbar-nav {
+    .navbar .container-fluid, .navbar-expand-md .navbar-collapse, .navbar-expand-md .navbar-nav {
     flex-direction: column;    
     background-color: #C05938;
     height: 100%;
   }
   
 
-  .navbar, .navbar-expand-lg .navbar-collapse, .navbar-expand-lg .navbar-nav {
+  .navbar, .navbar-expand-md .navbar-collapse, .navbar-expand-md .navbar-nav {
     margin: 0;
     padding: 0;
   }
@@ -24,7 +24,6 @@
   
   .navbar .navbar-nav .nav-link, .h3{
     color:#F8F7F2;
-  
   }
   
   .bi-stack-overflow{
@@ -47,7 +46,7 @@
     margin-top: 50%;
   }
   
-  .col-lg-9{
+  .col-md-9{
     
     color:#C05938;
     margin-top: 8%;
@@ -109,16 +108,18 @@
     color: inherit; /* Use the parent element's text color */
     font-size: 20px;
   }
-  
-  
-  
+
+  .fediciImageSidebar{
+    width: 60%;
+    margin-top: 20%;
+  }
   }
   
   /*#2. Ito yung style for the main content. Without this, magiging plain black lang yung content ng dashboard pag lumiliit screen size.*/
   
   @media screen and (max-width:992px) {
   
-  .col-lg-9{
+  .col-md-9{
     
   color:#C05938;
   margin-top: 8%;
@@ -126,6 +127,10 @@
   padding-right: 40px;
   }
   
+  .navbar .navbar-nav .nav-link, .h3{
+    color:#F8F7F2;
+  }
+
   #fediciLogo{
     /*To hide Fedici Logo on mobile view*/
     font-size: 0%;
@@ -153,12 +158,11 @@
   
   }
   
-  .navbar .container-fluid, .navbar-expand-lg .navbar-collapse, .navbar-expand-lg .navbar-nav{
+  .navbar .container-fluid, .navbar-expand-md .navbar-collapse, .navbar-expand-md .navbar-nav{
   flex-direction: column;
     background-color: #C05938;
     height: 100%;
     align-items: flex-start;
-    
   }
   
   
@@ -181,7 +185,7 @@
     right: -10px; /* Adjust this value to control the curve's position */
     width: 20px; /* Adjust this value to control the curve's width */
     height: 100%;
-    background-color: white; /* Set the background color of the curve */
+    background-color: white;
     border-top-right-radius: 100%;
     border-bottom-right-radius: 100%;
   }
@@ -230,6 +234,10 @@
     a {
       text-decoration: none; /* Remove underlines */
       color: inherit; /* Use the parent element's text color */
+    }
+
+    .fediciImageSidebar{
+      width: 0%;
     }
     
     

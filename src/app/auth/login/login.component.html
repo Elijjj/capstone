@@ -1,15 +1,12 @@
 <div class="min-vh-100">
-
-
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-card>
   <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
     <div class="container-fluid" style="overflow: hidden">
       <div class="row">
-        <div class="d-flex imagee col-lg-7">
-          <div class="grow-1" style="height: 100vh"></div>
+        <div class="d-flex imagee col-md-7">
+          <div class="grow-1 innerLogin"></div>
         </div>
-        <div class="loginForms col-lg-5">
+        <div class="loginForms col-md-5 col-12">
           <h1>LOGIN</h1>
           <div class="d-flex justify-content-center">
             <label for="formControlEmail" class="inputLabels form-label"
@@ -67,5 +64,4 @@
       </div>
     </div>
   </form>
-</mat-card>
 </div>

@@ -1,3 +1,4 @@
+@media screen and (min-width:844px) {
 h1{
     font-size: 40px;
     color:#c05938;
@@ -9,13 +10,12 @@ h1{
 }
 
 .prodDetails{
-    margin-top: 7%;
+    margin: 7%;
     text-align: center;
 }
 
 .hrr{
     border-color: #c05938;
-    margin-top: 4%;
     margin-right: 1%;
 }
 
@@ -51,3 +51,74 @@ h1{
     border-color: #c46fa2;
     font-weight: bold;
   }
+}
+
+@media screen and (max-width:844px) {
+    h1{
+        font-size: 30px;
+        color:#c05938;
+        margin-bottom: 0%;
+    }
+    
+    .prodName{
+        font-size: 32px;
+        text-align: center;
+    }
+    
+    .prodDetails{
+        margin: 5%;
+        text-align: center;
+    }
+    
+    .hrr{
+        border-color: #c05938;
+        margin-right: 1%;
+    }
+    
+    .hrrr{
+        border-color: #c05938;
+    }
+    
+    .prodImage{
+        max-width: 70%;
+    }
+    
+    .backToMenu{
+        text-decoration: none;
+        color: #d67ab1;
+    }
+    
+    .btn-colour-1 {
+        color: #fff;
+        background-color: #d67ab1;
+        border-color: #d67ab1;
+        font-weight: 400;
+        letter-spacing: 0.05em;
+        border-radius: 4;
+        margin-left: 37%;
+      }
+      
+      .btn-colour-1:hover,
+      .btn-colour-1:active,
+      .btn-colour-1:focus,
+      .btn-colour-1.active {
+        /* let's darken #004E64 a bit for hover effect */
+        background: #c46fa2;
+        color: #fff;
+        border-color: #c46fa2;
+        font-weight: bold;
+      }
+
+      .productDescriptionn{
+        font-size: 18px;
+        text-align: center;
+      }
+      .productInfo{
+        font-size: 16px;
+        text-align: center;
+      }
+      select{
+        width: 20%;
+        font-size: 16px;
+      }
+}

@@ -2,7 +2,7 @@ const app = require("./app");
 const debug = require("debug")("node-angular");
 const http = require("http");
 
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const User = require("./models/user");
 
 const normalizePort = val => {

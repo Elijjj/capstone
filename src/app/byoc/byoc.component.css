@@ -1,3 +1,4 @@
+@media screen and (min-width:844px) {
 hr{
     border-color: #c05938;
     margin-right: 2%;
@@ -6,13 +7,45 @@ hr{
 h1{
     font-size: 38px;
     color:#c05938;
-    margin: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 5%;
 }
 
 p{
     font-size: 20px;
+    margin: 2%;
 }
 
 .containerr{
     min-height: 100%;
+}
+}
+
+@media screen and (max-width:844px) {
+hr{
+    border-color: #c05938;
+    margin-right: 2%;
+}
+
+h1{
+    font-size: 24px;
+    color:#c05938;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+h2{
+    font-size: 20px;
+}
+
+p{
+    font-size: 14px;
+    margin: 1%;
+    text-align: justify;
+}
+
+.containerr{
+    min-height: 100%;
+}
 }

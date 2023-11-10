@@ -1,29 +1,29 @@
 <div class="container-fluid">
   <div class="row align-items-center">
-      <div class="col-lg-2">
+      <div class="col-md-2 col-5">
           <h1>Menu</h1>
       </div>
-      <div class="col-lg-10">
+      <div class="col-md-10 col-7">
           <div class="flex-grow-1 hrr">
               <hr class="border border-danger border-2 opacity-75" />
           </div>
       </div>
   </div>
   <div class="row">
-    <div class="col-lg-2">
+    <div class="col-md-2 mb-4">
         <h3><i class="bi bi-funnel-fill"></i> Filter Here:</h3>
-        <div *ngFor="let cat of categories">
+        <div *ngFor="let cat of categories" class="d-flex">
             <input type="checkbox" [(ngModel)]="cat.selected" class="form-check-input" name="filter">
             <label for="filter">&nbsp;{{ cat.name }}</label>
         </div>
     </div>
-      <div class="col-lg-10" style="min-height: 100vh;">
+      <div class="col-md-10" style="min-height: 100vh;">
           <ng-container *ngFor="let category of categorizedProducts">
             <div *ngIf="isCategorySelected(category.category)">
-              <h2 class="mt-3">{{ category.category }}</h2>
+              <h2 class="mt-2">{{ category.category }}</h2>
               <div class="row">
-                  <div class="col-md-3" *ngFor="let product of category.products; let i = index">
-                      <div class="card my-3" style="width: 85%;">
+                  <div class="col-md-3 col-6" *ngFor="let product of category.products; let i = index">
+                      <div class="card my-3" style="width: 100%;">
                           <img [src]="product.imagePath" [alt]="product.productName" class="productImage card-img-top">
                           <div class="card-body">
                             <div *ngFor="let sizePrice of products.sizesAndPrices">

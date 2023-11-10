@@ -3,29 +3,32 @@ import { AuthService } from "../auth/auth.service";
 import { Subscription } from "rxjs";
 
 @Component({
-    selector:'app-header',
+    selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css']
 })
-
-export class HeaderComponent implements OnInit, OnDestroy{
+export class HeaderComponent implements OnInit, OnDestroy {
     userIsAuthenticated = false;
+    isMenuCollapsed = true; // Add this line
     private authListenerSubs: Subscription;
 
-    constructor(private authService: AuthService){}
+    constructor(private authService: AuthService) {}
 
-    ngOnInit(){
+    ngOnInit() {
         this.userIsAuthenticated = this.authService.getIsAuth();
-        this.authListenerSubs = this.authService.getAuthStatusListener().subscribe(isAuthenticated =>{
+        this.authListenerSubs = this.authService.getAuthStatusListener().subscribe(isAuthenticated => {
             this.userIsAuthenticated = isAuthenticated;
-        });   
+        });
     }
 
-    onLogout(){
+    onLogout() {
         this.authService.logout();
     }
+    toggleMenu() {
+        this.isMenuCollapsed = !this.isMenuCollapsed;
+      }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
         this.authListenerSubs.unsubscribe();
     }
 }

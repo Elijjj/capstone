@@ -1,3 +1,4 @@
+@media screen and (min-width:844px) {
 hr{
     border-color: #c05938;
     margin-right: 2%;
@@ -66,3 +67,85 @@ mat-spinner{
     color: #ffffff;
     border-color: #bd6c9c;
   }
+}
+
+@media screen and (max-width:844px) {
+    hr{
+        border-color: #c05938;
+        margin-right: 2%;
+    }
+    
+    h1{
+        font-size: 24px;
+        color:#c05938;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        margin-left: 5%;
+    }
+    
+    h4{
+        font-size: 16px;
+        color:#181818;
+    }
+    
+    h4 b{
+        font-size: 16px;
+        color: #d67ab1;
+    }
+    
+    h3{
+        font-size: 18px;
+        color: #c05938;
+    }
+    h5{
+        font-size: 14px;
+    }
+    
+    img{
+        max-width: 0%;
+    }
+    
+    .rectangleMoments{
+        border-radius: 15px;
+    border: #a3a3a3;
+    border-width: 1px;
+    border-style: solid;
+    padding: 0.5rem;
+    }
+    
+    input[type=number]{
+        max-width: 100%;
+    }
+
+    p{
+        display: none;
+    }
+    
+    mat-spinner{
+        margin: auto;
+      }
+    
+      .btn-colour-1 {
+        color: #ffffff;
+        background-color: #D67AB1;
+        border-color: #D67AB1;
+        font-weight: 400;
+        font-size: 20px;
+        border-radius: 4;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
+        0 2px 2px rgba(0,0,0,0.12), 
+        0 4px 4px rgba(0,0,0,0.12), 
+        0 8px 8px rgba(0,0,0,0.12),
+        0 16px 16px rgba(0,0,0,0.12);
+      }
+    
+      .btn-colour-1:hover,
+      .btn-colour-1:active,
+      .btn-colour-1:focus,
+      .btn-colour-1.active {
+        /* let's darken #004E64 a bit for hover effect */
+        background: #bd6c9c;
+        color: #ffffff;
+        border-color: #bd6c9c;
+      }
+    }

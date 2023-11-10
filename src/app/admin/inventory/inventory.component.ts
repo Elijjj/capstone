@@ -22,6 +22,7 @@ export class InventoryComponent implements OnInit, OnDestroy{
     userIsAuthenticated = false;
     private inventorySub: Subscription;
     private authStatusSub: Subscription;
+    isMenuCollapsed = true; // Add this line
 
     constructor(public inventoryService: InventoryService, private authService: AuthService) {}
 
@@ -58,6 +59,9 @@ export class InventoryComponent implements OnInit, OnDestroy{
 
     onLogout() {
         this.authService.logout();
+      }
+      toggleMenu() {
+        this.isMenuCollapsed = !this.isMenuCollapsed;
       }
 
     ngOnDestroy(){

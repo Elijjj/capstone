@@ -23,6 +23,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   private accountsSub: Subscription;
   private authStatusSub: Subscription;
+  isMenuCollapsed = true; // Add this line
 
   constructor(
     private route: ActivatedRoute,
@@ -57,6 +58,10 @@ export class AccountsComponent implements OnInit, OnDestroy {
     this.currentPage = pageData.pageIndex + 1;
     this.accountsPerPage = pageData.pageSize;
     this.accountsService.getAccounts(this.accountsPerPage, this.currentPage);
+  }
+
+  toggleMenu() {
+    this.isMenuCollapsed = !this.isMenuCollapsed;
   }
 
   ngOnDestroy() {}

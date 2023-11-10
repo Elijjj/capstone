@@ -1,3 +1,4 @@
+@media screen and (min-width:844px) {
 hr{
     border-color: #c05938;
     margin-right: 2%;
@@ -40,4 +41,108 @@ h2{
 
 div{
     overflow: hidden;
+}
+
+.leftAboutUs{
+    width: 100%;
+    margin-left: -12%;
+}
+
+.middleAboutUs{
+    width: 50%;
+}
+
+.middleAboutUs2{
+    width: 75%;
+}
+
+.rectangleAboutUs{
+    width: 100%; 
+    margin-top: 15%;
+}
+
+.circleAboutUs{
+    width: 80%; 
+    margin-bottom: 5%;
+}
+
+.rightAboutUs{
+    width: 110%;
+}
+}
+
+@media screen and (max-width:844px) {
+    hr{
+        border-color: #c05938;
+    }
+    
+    h1{
+        font-size: 28px;
+        color:#c05938;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        margin-left: 5%;
+    }
+    
+    h2{
+        font-size: 24px;
+        color: #92683D;
+    }
+    
+    .aboutusText1{
+        font-size: 12px;
+        color: #DD9057;
+    }
+    
+    .aboutusText2{
+        font-size: 16px;
+        color: #DD9057;
+        text-align: right;
+    }
+    
+    .aboutusText3{
+        font-size: 16px;
+        color: #DD9057;
+    }
+    
+    .aboutusHeading1{
+        text-align: right;
+    }
+    
+    .visionText{
+        margin-top: 5%;
+    }
+
+    .missionText{
+        margin-top: 5%;
+    }
+    
+    div{
+        overflow: hidden;
+    }
+
+    img.leftAboutUs{
+        width: 0%;
+    }
+
+    .middleAboutUs{
+        width: 80%;
+        margin-bottom: 2rem;
+    }
+
+    .middleAboutUs2{
+        width: 100%;
+    }
+
+    .rectangleAboutUs{
+        width: 0%;
+    }
+
+    .circleAboutUs{
+        width: 0%;
+    }
+    
+    .rightAboutUs{
+        width: 0%;
+    }
 }

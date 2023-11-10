@@ -28,6 +28,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
     userIsAuthenticated = false;
     private productsSub: Subscription;
     private authStatusSub: Subscription;
+    isMenuCollapsed = true; // Add this line
 
     constructor(public productsService: ProductsService, private authService: AuthService,
         private fb: FormBuilder) {}
@@ -79,6 +80,9 @@ export class ProductsComponent implements OnInit, OnDestroy{
         this.authService.logout();
       }
 
+      toggleMenu() {
+        this.isMenuCollapsed = !this.isMenuCollapsed;
+      }
     ngOnDestroy(){
         this.productsSub.unsubscribe();
         this.authStatusSub.unsubscribe();

@@ -17,6 +17,7 @@ export class AdminHomepageComponent implements OnInit, OnDestroy{
     authData: string;
     private authStatusSub: Subscription;
     userIsAuthenticated = false;
+    isMenuCollapsed = true; // Add this line
 
     constructor(private route: ActivatedRoute, private authService: AuthService) {}
 
@@ -32,6 +33,9 @@ export class AdminHomepageComponent implements OnInit, OnDestroy{
             });
       }
       
+      toggleMenu() {
+        this.isMenuCollapsed = !this.isMenuCollapsed;
+      }
 
     ngOnDestroy(){
     }

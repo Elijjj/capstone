@@ -29,6 +29,7 @@ export class ProductsUpdateComponent implements OnInit, OnDestroy {
   isLoading = false;
   form: FormGroup;
   imagePreview: string;
+  isMenuCollapsed = true; // Add this line
   constructor(
     private snackBar: MatSnackBar,
     public productsService: ProductsService,
@@ -133,6 +134,10 @@ export class ProductsUpdateComponent implements OnInit, OnDestroy {
   onLogout() {
     this.authService.logout();
   }
+  toggleMenu() {
+    this.isMenuCollapsed = !this.isMenuCollapsed;
+  }
+
   ngOnDestroy() {
     this.authStatusSub.unsubscribe();
   }

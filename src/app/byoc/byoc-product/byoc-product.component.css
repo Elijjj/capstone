@@ -1,7 +1,8 @@
+@media screen and (min-width:844px) {
 h1{
-    font-size: 40px;
+    font-size: 38px;
     color:#c05938;
-    margin-bottom: 0%;
+    
 }
 
 .prodName{
@@ -9,20 +10,14 @@ h1{
 }
 
 .prodDetails{
-    margin-top: 6%;
-    margin-bottom: 2rem;
-    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 5%;
 }
 
 .hrr{
     border-color: #c05938;
-    margin-top: 5%;
     margin-right: 1%;
-}
-
-.hrrr{
-    border-color: #c05938;
-    margin-right: 10%;
 }
 
 .productDescriptionn{
@@ -69,4 +64,79 @@ h1{
   input[type=radio]{
     margin-left: 1rem;
 }
-  
+}
+
+@media screen and (max-width:844px) {
+    h1{
+        font-size: 24px;
+        color:#c05938;
+        margin-bottom: 0%;
+    }
+    
+    .prodName{
+        font-size: 32px;
+        text-align: center;
+    }
+    
+    .prodDetails{
+        text-align: center;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    
+    .hrr{
+        border-color: #c05938;
+        margin-top: 5%;
+        margin-right: 1%;
+    }
+    
+    .hrrr{
+        border-color: #c05938;
+    }
+    
+    .prodImage{
+        width: 70%;
+    }
+    
+    .backToMenu{
+        text-decoration: none;
+        color: #d67ab1;
+    }
+    
+    .btn-colour-1 {
+        color: #fff;
+        background-color: #d67ab1;
+        border-color: #d67ab1;
+        font-weight: 400;
+        letter-spacing: 0.05em;
+        border-radius: 4;
+      }
+      
+      .btn-colour-1:hover,
+      .btn-colour-1:active,
+      .btn-colour-1:focus,
+      .btn-colour-1.active {
+        /* let's darken #004E64 a bit for hover effect */
+        background: #c46fa2;
+        color: #fff;
+        border-color: #c46fa2;
+        font-weight: bold;
+      }
+    
+      p b{
+        font-size: 16px;
+      }
+      
+      p{
+        font-size: 16px;
+      }
+
+      .productDescriptionn{
+        font-size: 18px;
+        text-align: center;
+      }
+
+      input[type=radio]{
+        margin-left: 12px;
+    }
+}

@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class ReportsComponent implements OnInit, OnDestroy{
     isLoading=false;
     private token: string;
+    isMenuCollapsed = true; // Add this line
 
     constructor(private route: ActivatedRoute, private authService: AuthService) {}
 
@@ -22,6 +23,10 @@ export class ReportsComponent implements OnInit, OnDestroy{
             this.isLoading = false;
         });
     }
+
+    toggleMenu() {
+        this.isMenuCollapsed = !this.isMenuCollapsed;
+      }
 
     ngOnDestroy(){
     }

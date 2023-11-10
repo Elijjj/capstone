@@ -25,6 +25,7 @@ export class AccountsDiscountComponent implements OnInit, OnDestroy {
   private accountsSub: Subscription;
   private authStatusSub: Subscription;
   form: FormGroup;
+  isMenuCollapsed = true; // Add this line
 
   private email: string;
     private password: string;
@@ -117,6 +118,10 @@ export class AccountsDiscountComponent implements OnInit, OnDestroy {
         this.userId = this.authService.getUserId();
       });
   });
+}
+
+toggleMenu() {
+  this.isMenuCollapsed = !this.isMenuCollapsed;
 }
 
 onAccept() {
