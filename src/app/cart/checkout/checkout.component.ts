@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, map, switchMap } from 'rxjs';
 import { AuthData } from 'src/app/auth/auth-data.model';
 import { AuthService } from '../../auth/auth.service';
 import { Cart } from '../cart.model';
@@ -18,7 +19,6 @@ import { CheckoutService } from './checkout.service';
 export class CheckoutComponent implements OnInit, OnDestroy {
   isLoading = false;
   private authStatusSub: Subscription;
-  private checkoutStatusSub: Subscription;
   private cartId: string;
   userId: string;
   discountType: string;
@@ -27,6 +27,14 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   checkout: Checkout;
   userIsAuthenticated = false;
   private cartSubscription: Subscription;
+
+  private unsubscribe$ = new Subject();
+
+  checkoutForm = new FormGroup({
+    orderType: new FormControl('Pick-Up', Validators.required),
+    claimDate: new FormControl(null, Validators.required),
+    claimTime: new FormControl('10:00 AM', Validators.required),
+  });
 
   constructor(
     private authService: AuthService,
@@ -100,6 +108,13 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     console.log(this.discountType);
   }
 
+  getMinClaimDate(): Date {
+    const currentDate = new Date();
+    let tomorrow = new Date(currentDate);
+    tomorrow.setDate(currentDate.getDate() + 1);
+    return tomorrow;
+  }
+
   getTotalPrice(): number {
     let totalPrice = 0;
     for (const item of this.carts) {
@@ -125,30 +140,37 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.checkoutStatusSub) {
-      this.checkoutStatusSub.unsubscribe();
-    }
-    this.authStatusSub.unsubscribe();
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.complete();
   }
 
   onProceedToPaymentClick() {
-    // Open Payment Gateway
-    const payload = {
-      data: {
-        attributes: {
-          send_email_receipt: false,
-          show_description: false,
-          show_line_items: true,
-          payment_method_types: ['card', 'paymaya', 'gcash', 'grab_pay'],
-          line_items: this.mapPaymentItems(),
-          success_url: 'http:localhost:4200',
-        },
-      },
-    };
-
-    this.selfService.openPaymongoGateway(payload).subscribe((res: any) => {
-      window.location.replace(res.data.attributes.checkout_url);
-    });
+    this.selfService
+      .saveOrderDetails(this.getSaveOrderDetailsPayload())
+      .pipe(
+        switchMap((orderId: string) => {
+          const payload = {
+            data: {
+              attributes: {
+                send_email_receipt: false,
+                show_description: false,
+                show_line_items: true,
+                payment_method_types: ['card', 'paymaya', 'gcash', 'grab_pay'],
+                line_items: this.mapPaymentItems(),
+                success_url: `http:localhost:4200/payment-success/${orderId}`,
+              },
+            },
+          };
+          return this.selfService.openPaymongoGateway(payload);
+        }),
+        map((gatewayResponse: any) => {
+          return gatewayResponse.data.attributes.checkout_url;
+        })
+      )
+      .subscribe((checkOutUrl: string) => {
+        window.location.replace(checkOutUrl);
+        // window.open(checkOutUrl, "_blank");
+      });
   }
 
   private mapPaymentItems() {
@@ -158,6 +180,35 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         quantity: cart.quantity,
         amount: cart.price * 100, //Price is in cents
         currency: 'PHP',
+      };
+    });
+  }
+
+  private getSaveOrderDetailsPayload() {
+    const claimDate = this.checkoutForm.value.claimDate.toLocaleDateString();
+    const claimTime = this.checkoutForm.value.claimTime;
+    const finalClaimDate = new Date(`${claimDate} ${claimTime}`).toISOString();
+
+    return {
+      userId: this.authService.getUserId(),
+      totalPrice: this.getTotalPrice(),
+      discount: 0,
+      checkoutAmount: this.getTotalPrice(),
+      orderType: this.checkoutForm.value.orderType,
+      claimDate: finalClaimDate,
+      cartItems: this.mapOrderCartItems(),
+      paymentStatus: 'UNPAID',
+      orderStatus: 'PROCESSING',
+    };
+  }
+
+  private mapOrderCartItems() {
+    return this.carts.map((cart) => {
+      return {
+        productId: cart.productId,
+        quantity: cart.quantity,
+        price: cart.price,
+        name: cart.productName,
       };
     });
   }

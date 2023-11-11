@@ -1,0 +1,57 @@
+<div class="px-5 pt-3">
+  <h3 class="text-main-color">My Orders</h3>
+  <hr />
+  <ng-container *ngIf="(orders$ | async)?.length === 0; else table">
+    <div class="py-5 d-flex justify-content-center"><h3>No orders yet</h3></div>
+  </ng-container>
+  <ng-template #table>
+    <div class="table-responsive table-container">
+      <table class="table mb-0 table-striped">
+        <thead>
+          <tr class="text-nowrap">
+            <th scope="col">Order Id</th>
+            <th scope="col">Order Type</th>
+            <th scope="col">Order Status</th>
+            <th scope="col">Claim Date</th>
+            <th scope="col">Items</th>
+            <th scope="col">Item Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Checkout Amount</th>
+            <th scope="col">Payment Status</th>
+            <th scope="col">Checkout Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-nowrap" *ngFor="let order of orders$ | async">
+            <td>{{ order._id }}</td>
+            <td>{{ order.orderType }}</td>
+            <td>{{ order.orderStatus }}</td>
+            <td class="date-data">{{ getFormattedDate(order?.claimDate) }}</td>
+            <td>
+              <ng-container *ngFor="let item of order.cartItems">
+                <div class="item text-bold">{{ item.name }}</div>
+              </ng-container>
+            </td>
+            <td>
+              <ng-container *ngFor="let item of order.cartItems">
+                <div class="item text-bold">{{ item.price }}</div>
+              </ng-container>
+            </td>
+            <td>
+              <ng-container *ngFor="let item of order.cartItems">
+                <div class="item text-bold">{{ item.quantity }}</div>
+              </ng-container>
+            </td>
+            <td>{{ order.totalPrice }}</td>
+            <td>{{ order.discount }}</td>
+            <td>{{ order.checkoutAmount }}</td>
+            <td>{{ order.paymentStatus }}</td>
+            <td class="date-data">{{ getFormattedDate(order.createdAt) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+</div>

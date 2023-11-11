@@ -1,17 +1,19 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { HomepageComponent } from "./homepage/homepage.component";
-import { AuthGuard } from "./auth/auth.guard";
-import { MenuComponent } from "./menu/menu.component";
-import { ByocComponent } from "./byoc/byoc.component";
 import { AboutUsComponent } from "./aboutus/aboutus.component";
-import { ProfileComponent } from "./profile/profile.component";
 import { AdminGuard } from "./admin/admin.guard";
-import { MenuProductComponent } from "./menu/menu-product/menu-product.component";
-import { CartComponent } from "./cart/cart.component";
+import { AuthGuard } from "./auth/auth.guard";
 import { ByocProductComponent } from "./byoc/byoc-product/byoc-product.component";
-import { ProfileDiscountComponent } from "./profile/profile-discount/profile-discount.component";
+import { ByocComponent } from "./byoc/byoc.component";
+import { CartComponent } from "./cart/cart.component";
 import { CheckoutComponent } from "./cart/checkout/checkout.component";
+import { PaymentSuccessComponent } from "./cart/payment-success/payment-success.component";
+import { ClientOrdersComponent } from "./client-orders/client-orders.component";
+import { HomepageComponent } from "./homepage/homepage.component";
+import { MenuProductComponent } from "./menu/menu-product/menu-product.component";
+import { MenuComponent } from "./menu/menu.component";
+import { ProfileDiscountComponent } from "./profile/profile-discount/profile-discount.component";
+import { ProfileComponent } from "./profile/profile.component";
 // import { AdminGuard } from "./admin/admin.guard";
 
 const routes: Routes = [
@@ -28,7 +30,9 @@ const routes: Routes = [
     { path: "admin", loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
     { path: 'inventory', loadChildren: () => import('./admin/inventory-products.module').then(m => m.InventoryProductsModule)},
     { path: 'products', loadChildren: () => import('./admin/inventory-products.module').then(m => m.InventoryProductsModule)},
-    { path: "auth", loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)}
+    { path: "auth", loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
+    { path: "payment-success/:orderId", component: PaymentSuccessComponent},
+    { path: "my-orders", component: ClientOrdersComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  height: calc(100vh - 114px);
+}
+
+.table-container {
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
+}
+
+.table-container td,
+.table-container th {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.table-container .item:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.table-container .date-data {
+  white-space-collapse: break-spaces;
+  text-wrap: balance;
+  max-width: 150px;
+}

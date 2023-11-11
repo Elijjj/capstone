@@ -23,6 +23,7 @@
     "@angular/router": "^16.2.0",
     "@coreui/angular": "^4.5.16",
     "@coreui/icons-angular": "^4.5.16",
+    "@iconscout/unicons": "^4.0.8",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",

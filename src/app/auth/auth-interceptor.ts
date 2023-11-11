@@ -17,10 +17,10 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const authToken = this.authService.getToken();
-    console.log(req.headers)
+
     if (req.headers.has('X-Skip-Interceptor')) {
       const modifiedReq = req.clone({
-        headers: req.headers.delete('X-Skip-Interceptor')
+        headers: req.headers.delete('X-Skip-Interceptor'),
       });
       return next.handle(modifiedReq);
     }

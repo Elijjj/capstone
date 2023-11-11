@@ -18,7 +18,7 @@
         class="info-text mat-body-1 text-center"
         *ngIf="carts.length <= 0 && !isLoading"
       >
-        Click here to add to your cart!
+        <a href="/menu"> Click here to add to your cart! </a>
       </p>
       <div *ngIf="carts">
         <div class="rectangleMoments mb-3" *ngFor="let item of carts">
@@ -66,7 +66,7 @@
             <button class="btn btn-colour-1 mx-3" (click)="onCheckout()"><b></b>Check Out</button>
           </a>
           <h4>Subtotal: <b>P{{ getTotalPrice() }}</b></h4>
-        </div>    
+        </div>
       </div>
       <mat-spinner *ngIf="isLoading"></mat-spinner>
     </div>

@@ -27,6 +27,7 @@
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/@iconscout/unicons/css/line.css",
               "src/styles.css"
             ],
             "scripts": []

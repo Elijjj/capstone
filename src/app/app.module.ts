@@ -1,30 +1,32 @@
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CarouselModule } from '@coreui/angular';
+import { AboutUsComponent } from './aboutus/aboutus.component';
+import { AngularMaterialModule } from './angular-material.model';
 import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { ByocProductComponent } from './byoc/byoc-product/byoc-product.component';
+import { ByocComponent } from './byoc/byoc.component';
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './cart/checkout/checkout.component';
+import { PaymentSuccessComponent } from './cart/payment-success/payment-success.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
-import { AngularMaterialModule } from './angular-material.model';
-import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 import { CarouselComponent } from './homepage/carousel/carousel.component';
-import { CarouselModule } from '@coreui/angular';
 import { HomepageComponent } from './homepage/homepage.component';
-import { MenuComponent } from './menu/menu.component';
-import { ByocComponent } from './byoc/byoc.component';
-import { AboutUsComponent } from './aboutus/aboutus.component';
-import { ProfileComponent } from './profile/profile.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuProductComponent } from './menu/menu-product/menu-product.component';
-import { CartComponent } from './cart/cart.component';
-import { ByocProductComponent } from './byoc/byoc-product/byoc-product.component';
+import { MenuComponent } from './menu/menu.component';
 import { ProfileDiscountComponent } from './profile/profile-discount/profile-discount.component';
-import { CheckoutComponent } from './cart/checkout/checkout.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ClientOrdersComponent } from './client-orders/client-orders.component';
 // import { CartService } from './cart/cart.service';
 // import { AdminHeaderComponent } from './header/admin-header.component';
 
@@ -45,6 +47,8 @@ import { CheckoutComponent } from './cart/checkout/checkout.component';
     MenuProductComponent,
     CartComponent,
     CheckoutComponent,
+    PaymentSuccessComponent,
+    ClientOrdersComponent,
   ],
   imports: [
     CommonModule,
