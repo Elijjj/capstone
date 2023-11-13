@@ -1,8 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .text-main-color {
-  color: #C05938;
+  color: #c05938;
+}
+
+/* .btn {
+  width: 145px;
+  height: 42px;
+
+  @media screen and (min-width: 768px) {
+    width: 170px !important;
+  }
+} */
+
+.btn-colour-1 {
+  color: #ffffff;
+
+  background-color: rgb(214, 122, 177);
+  border-color: rgb(214, 122, 177);
+  font-weight: 400;
+  border-radius: 4;
+}
+
+.btn-colour-1:hover,
+.btn-colour-1:active,
+.btn-colour-1:focus,
+.btn-colour-1.active {
+  /* let's darken #004E64 a bit for hover effect */
+  background: #bd6c9c !important;
+  color: #ffffff !important;
+  border-color: #bd6c9c !important;
+}
+
+.btn-colour-1:disabled {
+  color: #ffffff;
+  background-color: rgb(214, 122, 177, 0.9);
+  border-color: rgb(214, 122, 177, 0.9);
+}
+
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:active {
+  background-color: rgb(220, 223, 226);
+  border-color: rgb(220, 223, 226);
+  color: #0f1d36;
+}
+
+.btn-secondary:hover,
+.btn-secondary:active {
+  background-color: rgb(200, 203, 206);
+  border-color: rgb(200, 203, 206);
+  color: #0f1d36;
 }

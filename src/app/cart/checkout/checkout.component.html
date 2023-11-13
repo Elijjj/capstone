@@ -127,14 +127,16 @@
   <div class="row">
     <div class="col-12 d-flex justify-content-end">
       <button
-        class="btn btn-primary mx-3"
+        class="btn btn-colour-1 mx-3"
         (click)="onProceedToPaymentClick()"
         [disabled]="checkoutForm.invalid"
       >
         Proceed to Payment
       </button>
       <a href="/cart"
-        ><button class="btn btn-secondary">Back to Cart</button></a
+        ><button class="btn btn-secondary">
+          <i class="uil uil-arrow-left mx-1"></i>Back to Cart
+        </button></a
       >
     </div>
   </div>
