@@ -2,21 +2,30 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar Column Starts here -->
-    <div class="col-md-3" style="background-color: #c05938; margin:0; padding: 0;">
+    <div
+      class="col-md-3"
+      style="background-color: #c05938; margin: 0; padding: 0"
+    >
       <div class="d-flex sidenavv align-items-center">
         <nav class="navbar navbar-expand-md bg-body-tertiary">
           <div class="container-fluid">
-            <img
-              src="/assets/logo4.png"
-              alt=""
-              class="fediciImageSidebar"
-            />
-            <button class="navbar-toggler" type="button" (click)="toggleMenu()"
-            [attr.aria-expanded]="!isMenuCollapsed" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+            <img src="/assets/logo4.png" alt="" class="fediciImageSidebar" />
+            <button
+              class="navbar-toggler"
+              type="button"
+              (click)="toggleMenu()"
+              [attr.aria-expanded]="!isMenuCollapsed"
+              aria-controls="navbarSupportedContent"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <div class="collapse navbar-collapse" [class.show]="!isMenuCollapsed" id="navbarSupportedContent">
+            <div
+              class="collapse navbar-collapse"
+              [class.show]="!isMenuCollapsed"
+              id="navbarSupportedContent"
+            >
               <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="h3">Welcome, Admin!</li>
                 <li class="separator"></li>
@@ -94,7 +103,7 @@
               <div class="bg-custom-color-padding mt-3 mb-2 h5 shadow">
                 <i id="picSize" class="bi bi-bag-check"><br /></i>Current
                 Orders:<br />
-                <div class="pinkText fw-bold">x</div>
+                <div class="pinkText fw-bold">{{ ordersCount$ | async }}</div>
               </div>
             </div>
           </a>
@@ -103,7 +112,7 @@
               <div class="bg-custom-color-padding mt-3 mb-2 h5 shadow">
                 <i id="picSize" class="bi bi-truck"><br /></i>Orders for
                 Delivery:<br />
-                <div class="pinkText fw-bold">x</div>
+                <div class="pinkText fw-bold">{{ deliveryCount$ | async }}</div>
               </div>
             </div>
           </a>
@@ -112,7 +121,7 @@
               <div class="bg-custom-color-padding mt-3 mb-2 h5 shadow">
                 <i id="picSize" class="bi bi-shop-window"><br /></i>Orders for
                 Pick-up:<br />
-                <div class="pinkText fw-bold">x</div>
+                <div class="pinkText fw-bold">{{ pickUpCount$ | async }}</div>
               </div>
             </div>
           </a>
@@ -121,7 +130,7 @@
               <div class="bg-custom-color-padding mt-3 mb-2 h5 shadow">
                 <i id="picSize" class="material-symbols-outlined">cake</i
                 ><br />Available Products:<br />
-                <div class="pinkText fw-bold">x</div>
+                <div class="pinkText fw-bold">{{ productsCount$ | async }}</div>
               </div>
             </div>
           </a>
@@ -130,7 +139,7 @@
               <div class="bg-custom-color-padding mt-3 mb-2 h5 shadow">
                 <i id="picSize" class="bi bi-person"><br /></i>Admin
                 Accounts:<br />
-                <div class="pinkText fw-bold">x</div>
+                <div class="pinkText fw-bold">{{ adminCount$ | async }}</div>
               </div>
             </div>
           </a>
@@ -138,8 +147,11 @@
             <div class="col">
               <div class="bg-custom-color-padding mt-3 mb-2 h5 shadow">
                 <i id="picSize" class="material-symbols-outlined">monitoring</i
-                ><br />Total Sales This Month:<br />
-                <div class="pinkText fw-bold">x</div>
+                ><br /><span class="text-nowrap">Total Sales This Month:</span
+                ><br />
+                <div class="pinkText fw-bold mb-1">
+                  {{ totalSaleThisMonth$ | async | currency : "PHP" }}
+                </div>
               </div>
             </div>
           </a>

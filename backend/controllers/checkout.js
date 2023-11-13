@@ -103,15 +103,17 @@ exports.updateCheckoutPaymentStatus = (req, res, next) => {
     });
 };
 
-// GET: Retrieve a checkout entry by userId
+// GET: Retrieve a checkout entry by checkout ID
 exports.getCheckouts = (req, res, next) => {
-  const userId = req.params.userId; // Assuming you're using the userId in the route
+  const orderId = req.query.orderId; // Assuming you're using the userId in the route
+  const userId = req.query.userId;
+  const query = orderId ? { _id: orderId } : userId ? userId : {};
 
-  Checkout.find({ userId: userId })
+  Checkout.find(query)
     .then((checkouts) => {
       res.status(200).json({
-        message: "Checkouts fetched successfully",
-        checkouts: checkouts,
+        message: "Order fetched successfully",
+        order: checkouts,
       });
     })
     .catch((err) => {
@@ -122,14 +124,35 @@ exports.getCheckouts = (req, res, next) => {
 };
 
 // GET: Retrieve a checkout entry by checkout ID
-exports.getCheckoutByOrderid = (req, res, next) => {
-  const orderId = req.query.orderId; // Assuming you're using the userId in the route
+exports.getTotalSalesPerMonth = (req, res, next) => {
+  // Get the current date and time
+  const currentDate = new Date();
 
-  Checkout.find({ _id: orderId })
+  // Calculate the start of the current month
+  const startOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1
+  );
+
+  Checkout.aggregate([
+    {
+      $match: {
+        // Filter by documents created in the current month
+        createdAt: { $gte: startOfMonth },
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        totalAmount: { $sum: "$checkoutAmount" },
+      },
+    },
+  ])
     .then((checkouts) => {
       res.status(200).json({
         message: "Order fetched successfully",
-        order: checkouts[0],
+        order: checkouts,
       });
     })
     .catch((err) => {

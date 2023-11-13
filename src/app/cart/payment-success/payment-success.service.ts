@@ -17,6 +17,6 @@ export class PaymentSuccessService {
   getOrderByOrderId$(orderId: string): Observable<any> {
     return this.http
       .get(`${environment.apiUrl}/checkout?orderId=${orderId}`)
-      .pipe(map((res: { message: string; order: any }) => res.order as any));
+      .pipe(map((res: { message: string; order: any[] }) => res.order[0] as any));
   }
 }

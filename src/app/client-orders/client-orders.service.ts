@@ -9,7 +9,7 @@ export class ClientOrdersService {
 
   getClientOrders$(userId: string): Observable<any[]> {
     return this.http
-      .get(`${environment.apiUrl}/checkout/${userId}`)
+      .get(`${environment.apiUrl}/checkout?userId=${userId}`)
       .pipe(
         map(
           (res: { message: string; checkouts: any }) => res.checkouts as any[]

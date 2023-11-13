@@ -19,4 +19,6 @@ router.put("/profile/discount/:id", checkAuth, extractFile, UserController.uploa
 
 router.get("/profile/discount/:id", checkAuth, UserController.displayUserDiscountPage);
 
+router.get("/getAdminAccounts", checkAuth, UserController.getAdminAccounts);
+
 module.exports= router;
