@@ -14,4 +14,5 @@ export interface Cart{
   toppings: string;
   crust: string;
   flowers: string;
+  isOutOfStock?: boolean;
 }

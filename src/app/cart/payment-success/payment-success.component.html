@@ -1,7 +1,12 @@
 <div class="p-5 d-flex align-items-center flex-column">
-  <i class="uil uil-check-circle success-icon"></i>
-  <h1 class="my-3">Order Created</h1>
-  <h3>Thank you!</h3>
-  <p>Your order has been processed successfully.</p>
-  <a class="nav-link link-color text-primary" href="/"> Go back to homepage </a>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <div class="d-flex align-items-center flex-column" *ngIf="!isLoading">
+    <i class="uil uil-check-circle success-icon"></i>
+    <h1 class="my-3">Order Created</h1>
+    <h3>Thank you!</h3>
+    <p>Your order has been processed successfully.</p>
+    <a class="nav-link link-color text-primary" href="/">
+      Go back to homepage
+    </a>
+  </div>
 </div>

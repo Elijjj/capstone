@@ -31,22 +31,26 @@
         </div> -->
     <div class="col-lg-6">
       <h2>Order Summary</h2>
-      <div *ngIf="carts" class="rectangleMoments1">
-        <div class="mb-3" *ngFor="let item of carts">
-          <h4>
-            {{ item.productName }}: <b>P {{ item.price }}</b>
-          </h4>
+      <div class="rectangleMoments1">
+        <div class="mb-3" *ngFor="let item of carts$ | async">
+          <h4>{{ item.productName }} ({{ item.size }})</h4>
+          <h5>
+            Price: {{ item.price | currency : "PHP" }}
+          </h5>
+          <h5>
+            Quantity:
+            {{ item?.selectedQuantity }}
+          </h5>
         </div>
+        <hr />
         <h5>
           Discount:
-          <b>P <input type="text" value="{{ getDiscounted() }}" readonly /></b>
+          <b> {{ getDiscounted() | currency : "PHP" }}</b>
         </h5>
         <hr />
         <h4>
           Computed Total:
-          <b
-            >P <input type="text" value="{{ getComputedDiscount() }}" readonly
-          /></b>
+          <b>{{ getComputedDiscount() | currency : "PHP" }} </b>
         </h4>
       </div>
     </div>

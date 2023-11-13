@@ -1,77 +1,104 @@
 <div class="min-vh-100">
-<div class="container-fluid">
-  <div class="row align-items-center mb-4">
-    <div class="col-md-3 col-6">
-      <h1>Shopping Cart</h1>
-    </div>
-    <div class="col-md-9 col-6">
-      <hr class="border border-danger border-2 opacity-75" />
+  <div class="container-fluid">
+    <div class="row align-items-center mb-4">
+      <div class="col-md-3 col-6">
+        <h1>Shopping Cart</h1>
+      </div>
+      <div class="col-md-9 col-6">
+        <hr class="border border-danger border-2 opacity-75" />
+      </div>
     </div>
   </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 cartContainerr">
-      <h1 class="text-center"
-      *ngIf="carts.length <= 0 && !isLoading">Cart is empty!</h1>
-      <p
-        class="info-text mat-body-1 text-center"
-        *ngIf="carts.length <= 0 && !isLoading"
-      >
-        <a href="/menu"> Click here to add to your cart! </a>
-      </p>
-      <div *ngIf="carts">
-        <div class="rectangleMoments mb-3" *ngFor="let item of carts">
-          <div class="row">
-            <div class="col-md-2 d-flex align-items-center justify-content-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 cartContainerr">
+        <div *ngIf="showNoCartMsg()">
+          <h1 class="text-center">Cart is empty!</h1>
+          <p class="info-text mat-body-1 text-center">
+            <a href="/menu"> Click here to add to your cart! </a>
+          </p>
+        </div>
+
+        <div>
+          <div
+            class="rectangleMoments mb-3"
+            *ngFor="let item of carts$ | async"
+          >
+            <div class="row">
+              <div
+                class="col-md-2 d-flex align-items-center justify-content-center"
+              >
                 <img
                   [src]="item.imagePath"
                   [alt]="item.productName"
                   class="img-thumbnail"
                 />
-            </div>
-            <div class="col-md-6 col-4 d-flex flex-column justify-content-center">
-              <h3>{{ item.productName }}</h3>
-              <h5>{{ item.size }}</h5>
-              <p>{{ item.productDescription }}</p>
-              <div *ngIf="item.productType === 'Build-Your-Own'">
-                <p>{{item.toppings}}, {{item.crust}}, Flowers: {{item.flowers}}</p>
-            </div>
-            </div>
-            <div class="col-md-1 col-2 d-flex align-items-center">
-                <input
-                type="number"
-                class="form-control"
-                [(ngModel)]="item.selectedQuantity"
-                min="1"
-                (change)="updatePrice(item)"
-              />
-            </div>
-            <div class="col-md-2 col-4 d-flex align-items-center">
-              <h5>Total Price: P{{ calculateItemPrice(item) }}</h5>
-            </div>
-            <div class="col-md-1 col-2 d-flex align-items-center">
-              <button
-                (click)="removeFromCart(item.productId)"
-                class="btn"
-                type="button"
+              </div>
+              <div
+                class="col-md-6 col-4 d-flex flex-column justify-content-center"
               >
-                <i class="bi bi-trash-fill"></i>
-              </button>
+                <h3>{{ item.productName }}</h3>
+                <h5>{{ item.size }}</h5>
+                <p class="product-desc">{{ item.productDescription }}</p>
+                <div *ngIf="item.productType === 'Build-Your-Own'">
+                  <p>
+                    {{ item.toppings }}, {{ item.crust }}, Flowers:
+                    {{ item.flowers }}
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-1 col-2 d-flex align-items-center">
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="item.selectedQuantity"
+                  min="1"
+                  [disabled]="item.isOutOfStock"
+                  (change)="updatePrice(item)"
+                />
+              </div>
+              <div class="col-md-2 col-4 d-flex align-items-center">
+                <h5>
+                  Total Price: {{ calculateItemPrice(item) | currency : "PHP" }}
+                </h5>
+              </div>
+              <div class="col-md-1 col-2 d-flex align-items-center">
+                <button
+                  (click)="removeFromCart(item.productId)"
+                  class="btn"
+                  type="button"
+                >
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </div>
+
+              <div
+                class="col-12 text-danger d-flex justify-content-end"
+                *ngIf="item.isOutOfStock"
+              >
+                <p class="px-3 mb-0">Product is out of stock. Kindly remove and find similar item.</p>
+              </div>
             </div>
           </div>
+          <div
+            *ngIf="!isLoading"
+            class="d-flex flex-column-reverse align-items-end"
+          >
+            <button
+              [disabled]="isCheckoutBtnDisabled()"
+              class="btn btn-colour-1"
+              (click)="onCheckout()"
+            >
+              <b></b>Check Out
+            </button>
+            <h4>
+              Subtotal: <b>{{ getTotalPrice() | currency : "PHP" }}</b>
+            </h4>
+          </div>
         </div>
-        <div class="d-flex flex-column-reverse align-items-end">
-          <a [routerLink]="['/cart/checkout/', userId]">
-            <button class="btn btn-colour-1" (click)="onCheckout()"><b></b>Check Out</button>
-          </a>
-          <h4>Subtotal: <b>P{{ getTotalPrice() }}</b></h4>
-        </div>
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
       </div>
-      <mat-spinner *ngIf="isLoading"></mat-spinner>
+      <div class="col-md-12 my-4"></div>
     </div>
-    <div class="col-md-12 my-4">
   </div>
-  </div>
-</div>
 </div>

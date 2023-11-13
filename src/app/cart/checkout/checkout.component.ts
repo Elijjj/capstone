@@ -2,7 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Subject, Subscription, map, switchMap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  Subscription,
+  finalize,
+  map,
+  switchMap,
+} from 'rxjs';
 import { AuthData } from 'src/app/auth/auth-data.model';
 import { AuthService } from '../../auth/auth.service';
 import { Cart } from '../cart.model';
@@ -22,7 +30,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   private cartId: string;
   userId: string;
   discountType: string;
-  carts: Cart[]; // Replace CartItem[] with your cart item model
+  carts$!: Observable<Cart[]>; // Replace CartItem[] with your cart item model
+  cartsSubject = new BehaviorSubject([]);
   authData: AuthData;
   checkout: Checkout;
   userIsAuthenticated = false;
@@ -70,14 +79,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.userIsAuthenticated = authStatus;
       });
 
-    this.cartSubscription = this.cartService
-      .getCartsUpdateListener()
-      .subscribe((cartData: { carts: Cart[] }) => {
-        this.isLoading = false;
-        this.carts = cartData.carts;
-      });
+    this.carts$ = this.cartService.getCartsUpdateListener().pipe(
+      map((carts) => {
+        this.cartsSubject.next(carts);
+        return carts;
+      }),
+      finalize(() => (this.isLoading = false))
+    );
 
-    this.cartService.fetchCart(this.userId);
+    this.cartService.getCarts$(this.authService.getUserId()).subscribe();
+
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.userId = paramMap.get('userId');
       this.discountType = paramMap.get('discountType');
@@ -117,7 +128,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   getTotalPrice(): number {
     let totalPrice = 0;
-    for (const item of this.carts) {
+    for (const item of this.cartsSubject.value) {
       totalPrice += item.price;
     }
     return Math.round(totalPrice * 100) / 100; // Limit to 2 decimal places
@@ -174,14 +185,25 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   private mapPaymentItems() {
-    return this.carts.map((cart) => {
-      return {
-        name: cart.productName,
-        quantity: cart.quantity,
-        amount: cart.price * 100, //Price is in cents
+    const names = this.cartsSubject.value.map((cart) => cart.productName);
+    const quantities = this.cartsSubject.value.map(
+      (cart) => cart.selectedQuantity
+    );
+    const prices = this.cartsSubject.value.map((cart) => cart.price);
+
+    const resultArray = names.map(
+      (name, index) => `${name} - ${quantities[index]} - ${prices[index]}`
+    );
+    const resultString = resultArray.join(' | ');
+
+    return [
+      {
+        name: `${resultString}, Discount - ${this.getDiscounted()}`,
+        quantity: 1,
+        amount: Math.round(this.getComputedDiscount() * 100 * 100) / 100, //Price is in cents
         currency: 'PHP',
-      };
-    });
+      },
+    ];
   }
 
   private getSaveOrderDetailsPayload() {
@@ -192,8 +214,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     return {
       userId: this.authService.getUserId(),
       totalPrice: this.getTotalPrice(),
-      discount: 0,
-      checkoutAmount: this.getTotalPrice(),
+      discount: this.getDiscounted(),
+      checkoutAmount: this.getComputedDiscount(),
       orderType: this.checkoutForm.value.orderType,
       claimDate: finalClaimDate,
       cartItems: this.mapOrderCartItems(),
@@ -203,12 +225,13 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   private mapOrderCartItems() {
-    return this.carts.map((cart) => {
+    return this.cartsSubject.value.map((cart) => {
       return {
         productId: cart.productId,
-        quantity: cart.quantity,
+        quantity: cart.selectedQuantity,
         price: cart.price,
         name: cart.productName,
+        size: cart.size,
       };
     });
   }

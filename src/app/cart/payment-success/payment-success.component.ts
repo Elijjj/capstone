@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, of, switchMap, takeUntil } from 'rxjs';
 import { PaymentSuccessService } from './payment-success.service';
 
 @Component({
@@ -12,6 +12,8 @@ import { PaymentSuccessService } from './payment-success.service';
 export class PaymentSuccessComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<boolean>();
 
+  isLoading = true;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private selfService: PaymentSuccessService
@@ -19,10 +21,30 @@ export class PaymentSuccessComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const orderId = this.activatedRoute.snapshot.params.orderId;
+
     this.selfService
-      .updatePaymentStatus(orderId)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe();
+      .getOrderByOrderId$(orderId)
+      .pipe(
+        switchMap((order) => {
+          if (order.orderStatus === 'CONFIRMED') {
+            return of(true);
+          }
+
+          const items = order.cartItems.map((item) => {
+            return {
+              productId: item.productId,
+              quantity: item.quantity,
+            };
+          });
+          let payload = {
+            productUpdates: items,
+          };
+
+          return this.selfService.updatePaymentStatus(orderId, payload);
+        }),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe(() => (this.isLoading = false));
   }
 
   ngOnDestroy(): void {

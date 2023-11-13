@@ -1,64 +1,90 @@
 <div class="min-vh-100">
-<div class="container-fluid">
+  <div class="container-fluid">
     <div class="row align-items-center">
-        <div class="col-md-3 col-8">
-            <h1 class="prodDetails">Product Details</h1>
+      <div class="col-md-3 col-8">
+        <h1 class="prodDetails">Product Details</h1>
+      </div>
+      <div class="col-md-9 col-4">
+        <div class="flex-grow-1 hrr">
+          <hr class="border border-danger border-2 opacity-75" />
         </div>
-        <div class="col-md-9 col-4">
-            <div class="flex-grow-1 hrr">
-                <hr class="border border-danger border-2 opacity-75" />
-            </div>
-        </div>
+      </div>
     </div>
-</div>
-    <div class="container mt-3">
+  </div>
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-md-12 col-12" *ngIf="products">
         <div class="row">
-            <div class="col-md-12 col-12" *ngIf="products">
-                    <div class="row">
-                        <div class="col-md-4 col-12">
-                            <a [routerLink]="['/menu']" class="backToMenu ms-3"><i class="bi bi-arrow-left"></i> Back</a>
-                            <div class="d-flex justify-content-center mt-4">
-                                <img [src]="products.imagePath" [alt]="products.productName" class="prodImage">
-                            </div>
-                        </div>
-                        <div class="col-md-8 col-12">
-                            <div class="col-md-12 mt-5 mb-3">
-                                <h1 class="prodName">{{ products.productName }}</h1>
-                            </div>
-                            <div class="flex-grow-1 mb-2">
-                                <h5 class="productDescriptionn">{{ products.productDescription }}</h5>
-                            </div>
-                            <div class="flex-grow-1 hrrr">
-                                <hr class="border border-danger border-1 opacity-75" />
-                            </div>
-                            <div class="col-md-12 my-3">
-                                <h6 class="productInfo">Available Products: {{ products.quantity }}</h6>
-                            </div>
-                            <div class="col-md-12 my-3">
-                                <h6 class="productInfo">Size: {{ products.size }}</h6>
-                            </div>
-                            <div class="col-md-12 my-3">
-                                <h6 class="productInfo">Price: P {{ products.price }}</h6>
-                            </div>
-                            <div class="col-md-3 my-3">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <h6 class="me-4" class="productInfo">Quantity:&nbsp;</h6>
-                                    <select id="quantity" [(ngModel)]="selectedQuantity" class="form-control">
-                                        <option *ngFor="let i of getQuantityOptions()" [value]="i">{{ i }}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="">
-                                <a [routerLink]="['/cart']">
-                                    <button class="btn btn-colour-1 mb-5" type="button" *ngIf="!isLoading" (click)="onAddToCart()">
-                                        Add to Cart
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                <mat-spinner *ngIf="isLoading"></mat-spinner>
+          <div class="col-md-4 col-12">
+            <a [routerLink]="['/menu']" class="backToMenu ms-3"
+              ><i class="bi bi-arrow-left"></i> Back</a
+            >
+            <div class="d-flex justify-content-center mt-4">
+              <img
+                [src]="products.imagePath"
+                [alt]="products.productName"
+                class="prodImage"
+              />
             </div>
+          </div>
+          <div class="col-md-8 col-12">
+            <div class="col-md-12 mt-5 mb-3">
+              <h1 class="prodName">{{ products.productName }}</h1>
+            </div>
+            <div class="flex-grow-1 mb-2">
+              <h5 class="productDescriptionn">
+                {{ products.productDescription }}
+              </h5>
+            </div>
+            <div class="flex-grow-1 hrrr">
+              <hr class="border border-danger border-1 opacity-75" />
+            </div>
+            <div class="col-md-12 my-3">
+              <h6 class="productInfo">
+                Available Products: {{ products.quantity }}
+                <span *ngIf="products.quantity <= 0" class="text-danger mx-3"
+                  >Out of stock</span
+                >
+              </h6>
+            </div>
+            <div class="col-md-12 my-3">
+              <h6 class="productInfo">Size: {{ products.size }}</h6>
+            </div>
+            <div class="col-md-12 my-3">
+              <h6 class="productInfo">Price: P {{ products.price }}</h6>
+            </div>
+            <div class="col-md-3 my-3">
+              <div class="d-flex align-items-center justify-content-center">
+                <h6 class="me-4" class="productInfo">Quantity:&nbsp;</h6>
+                <select
+                  id="quantity"
+                  [(ngModel)]="selectedQuantity"
+                  class="form-control"
+                  [disabled]="products.quantity <= 0"
+                >
+                  <option *ngFor="let i of getQuantityOptions()" [value]="i">
+                    {{ i }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="">
+              <a>
+                <button
+                  class="btn btn-colour-1 mb-5"
+                  type="button"
+                  *ngIf="!isLoading"
+                  [disabled]="products.quantity <= 0"
+                  (click)="onAddToCart()"
+                >
+                  Add to Cart
+                </button>
+              </a>
+            </div>
+          </div>
         </div>
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+      </div>
     </div>
+  </div>
 </div>
