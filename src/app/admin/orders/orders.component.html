@@ -2,21 +2,30 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Sidebar Column Starts here -->
-    <div class="col-md-3" style="background-color: #c05938; margin:0; padding: 0;">
+    <div
+      class="col-md-3"
+      style="background-color: #c05938; margin: 0; padding: 0"
+    >
       <div class="d-flex sidenavv align-items-center">
         <nav class="navbar navbar-expand-md bg-body-tertiary">
           <div class="container-fluid">
-            <img
-              src="/assets/logo4.png"
-              alt=""
-              class="fediciImageSidebar"
-            />
-            <button class="navbar-toggler" type="button" (click)="toggleMenu()"
-            [attr.aria-expanded]="!isMenuCollapsed" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+            <img src="/assets/logo4.png" alt="" class="fediciImageSidebar" />
+            <button
+              class="navbar-toggler"
+              type="button"
+              (click)="toggleMenu()"
+              [attr.aria-expanded]="!isMenuCollapsed"
+              aria-controls="navbarSupportedContent"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <div class="collapse navbar-collapse" [class.show]="!isMenuCollapsed" id="navbarSupportedContent">
+            <div
+              class="collapse navbar-collapse"
+              [class.show]="!isMenuCollapsed"
+              id="navbarSupportedContent"
+            >
               <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="h3">Welcome, Admin!</li>
                 <li class="separator"></li>
@@ -80,127 +89,63 @@
 
       <!-- Centered buttons with desired colors and extra space -->
 
-      <div class="table-container">
-        <!-- Left Curve -->
-        <div class="left-curve"></div>
-        <div class="row cols-cols-1">
-          <div class="table-responsive">
-            <!-- Table -->
-            <table id="example" class="table table-hover" style="width: 100%">
-              <thead>
-                <tr>
-                  <th id="theader1" style="color: white">Account No.</th>
-                  <th id="theader" style="color: white">Customer Name</th>
-                  <th id="theader" style="color: white">Orders</th>
-                  <th id="theader" style="color:white;">Payment Method</th>
-                  <th id="theader" style="color:white;">
-                    Date of Pick-up/Delivery
-                  </th>
-                  <th id="theader" style="color:white;">Type</th>
-                  <th id="theader" style="color:white;">Status</th>
-                  <th id="theader8" style="color:white;"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>100001</td>
-                  <td>Juan Dela Cruz</td>
-                  <td>White Chocolate Cheesecake</td>
-                  <td>BPI</td>
-                  <td>05/16/23</td>
-                  <td>Pick-up</td>
-                  <td style="color: red">Pending</td>
-                  <td>
-                    <div class="square-button">
-                      <div class="square-button check-button">
-                        <div class="check">✓</div>
-                      </div>
-                      <div class="square-button cross-button">
-                        <div class="cross">×</div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>100001</td>
-                  <td>Juan Dela Cruz</td>
-                  <td>White Chocolate Cheesecake</td>
-                  <td>BPI</td>
-                  <td>05/16/23</td>
-                  <td>Pick-up</td>
-                  <td style="color: red">Pending</td>
-                  <td>
-                    <div class="square-button">
-                      <div class="square-button check-button">
-                        <div class="check">✓</div>
-                      </div>
-                      <div class="square-button cross-button">
-                        <div class="cross">×</div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>100001</td>
-                  <td>Juan Dela Cruz</td>
-                  <td>White Chocolate Cheesecake</td>
-                  <td>BPI</td>
-                  <td>05/16/23</td>
-                  <td>Pick-up</td>
-                  <td style="color: red">Pending</td>
-                  <td>
-                    <div class="square-button">
-                      <div class="square-button check-button">
-                        <div class="check">✓</div>
-                      </div>
-                      <div class="square-button cross-button">
-                        <div class="cross">×</div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>100001</td>
-                  <td>Juan Dela Cruz</td>
-                  <td>White Chocolate Cheesecake</td>
-                  <td>BPI</td>
-                  <td>05/16/23</td>
-                  <td>Pick-up</td>
-                  <td style="color: red">Pending</td>
-                  <td>
-                    <div class="square-button">
-                      <div class="square-button check-button">
-                        <div class="check">✓</div>
-                      </div>
-                      <div class="square-button cross-button">
-                        <div class="cross">×</div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>100001</td>
-                  <td>Juan Dela Cruz</td>
-                  <td>White Chocolate Cheesecake</td>
-                  <td>BPI</td>
-                  <td>05/16/23</td>
-                  <td>Pick-up</td>
-                  <td style="color: red">Pending</td>
-                  <td>
-                    <div class="square-button">
-                      <div class="square-button check-button">
-                        <div class="check">✓</div>
-                      </div>
-                      <div class="square-button cross-button">
-                        <div class="cross">×</div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+      <div class="table-responsive table-container rounded">
+        <table class="table mb-0 table-striped">
+          <thead>
+            <tr class="text-nowrap">
+              <th scope="col">Order Id</th>
+              <th scope="col">Customer Name</th>
+              <th scope="col">Order Type</th>
+              <th scope="col">Order Status</th>
+              <th scope="col">Pick-Up/Delivery Date</th>
+              <th scope="col">Items</th>
+              <th scope="col">Item Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total Price</th>
+              <th scope="col">Discount</th>
+              <th scope="col">Checkout Amount</th>
+              <th scope="col">Payment Status</th>
+              <th scope="col">Checkout Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-nowrap" *ngFor="let order of orders$ | async">
+              <td>{{ order.orderProperties._id }}</td>
+              <td>{{ order.orderProperties.userName }}</td>
+              <td>{{ order.orderProperties.orderType }}</td>
+              <td>{{ order.orderProperties.orderStatus }}</td>
+              <td class="date-data">
+                {{ getFormattedDate(order.orderProperties?.claimDate) }}
+              </td>
+              <td>
+                <ng-container
+                  *ngFor="let item of order.orderProperties.cartItems"
+                >
+                  <div class="item text-bold">
+                    {{ item.name }} ({{ item.size }})
+                  </div>
+                </ng-container>
+              </td>
+              <td>
+                <ng-container *ngFor="let item of order.orderProperties.cartItems">
+                  <div class="item text-bold">{{ item.price }}</div>
+                </ng-container>
+              </td>
+              <td>
+                <ng-container *ngFor="let item of order.orderProperties.cartItems">
+                  <div class="item text-bold">{{ item.quantity }}</div>
+                </ng-container>
+              </td>
+              <td>{{ order.orderProperties.totalPrice }}</td>
+              <td>{{ order.orderProperties.discount }}</td>
+              <td>{{ order.orderProperties.checkoutAmount }}</td>
+              <td>{{ order.orderProperties.paymentStatus }}</td>
+              <td class="date-data">
+                {{ getFormattedDate(order.orderProperties.createdAt) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

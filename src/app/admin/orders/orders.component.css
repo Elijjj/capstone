@@ -1,28 +1,24 @@
-#theader1, #theader,#theader, #theader,#theader,#theader,#theader, #theader8 {
-    text-align: center;
-    background-color: #d67ab1;
+.table-container {
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
 }
 
-#theader1 {
-    border-top-left-radius: 10px;    
+.table-container td,
+.table-container th {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-#theader8 {
-    border-top-right-radius: 10px;    
+.table-container th {
+  background-color: #d67ab1;
+  color: #fff;
 }
 
-table {
-    text-align: center;
+.table-container .item:not(:last-child) {
+  margin-bottom: 0.5rem;
 }
 
-.dataTables_wrapper .dataTables_paginate {
-    text-align: center;
-}
-
-table tr:first-child {
-    background-color: #d67ab1;
-}
-
-.square-button{
-    margin: 3%;
+.table-container {
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
 }

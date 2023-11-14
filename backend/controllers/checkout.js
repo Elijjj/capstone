@@ -259,3 +259,44 @@ exports.getReportsPerMonth = (req, res, next) => {
         .json({ message: "Error fetching checkout data", error: err });
     });
 };
+
+// GET: Retrieve a checkout entry by checkout ID
+exports.getAllCheckouts = (req, res, next) => {
+  Checkout.aggregate([
+    {
+      $lookup: {
+        from: "users",
+        localField: "userId",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    {
+      $unwind: "$user",
+    },
+    {
+      $project: {
+        _id: 0, // Exclude the _id field if you don't need it
+        orderProperties: {
+          $mergeObjects: [
+            "$$ROOT", // Keep all original checkout properties
+            {
+              userName: { $concat: ["$user.firstname", " ", "$user.lastname"] },
+            },
+          ],
+        },
+      },
+    },
+  ])
+    .then((checkouts) => {
+      res.status(200).json({
+        message: "Order fetched successfully",
+        order: checkouts,
+      });
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: "Error fetching checkout data", error: err });
+    });
+};
