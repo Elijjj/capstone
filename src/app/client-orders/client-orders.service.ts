@@ -12,7 +12,7 @@ export class ClientOrdersService {
       .get(`${environment.apiUrl}/checkout?userId=${userId}`)
       .pipe(
         map(
-          (res: { message: string; checkouts: any }) => res.checkouts as any[]
+          (res: { message: string; order: any }) => res.order as any[]
         )
       );
   }

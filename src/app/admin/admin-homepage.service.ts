@@ -19,7 +19,6 @@ export class AdminHomepageService {
         const deliveryOrders = orders.filter(
           (order) => order.orderType === 'Delivery'
         );
-        console.log(deliveryOrders);
         return deliveryOrders.length;
       })
     );
@@ -31,7 +30,6 @@ export class AdminHomepageService {
         const pickUpOrders = orders.filter(
           (order) => order.orderType === 'Pick-Up'
         );
-        console.log(pickUpOrders);
         return pickUpOrders.length;
       })
     );

@@ -10,7 +10,7 @@ export class CheckoutService {
   openPaymongoGateway(payload: any) {
     // TO DO: Move this to .env
     // Replace this with your secret key in paymongo account
-    const paymongoSecretKey = 'sk_test_N5d44ZGz6gy6nGCcB6z3PrAF';
+    const paymongoSecretKey = 'sk_test_Ltx8vDkLyXi5RxTfKXy5mytS';
 
     const httpOptions = {
       headers: new HttpHeaders({

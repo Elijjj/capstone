@@ -107,7 +107,7 @@ exports.updateCheckoutPaymentStatus = (req, res, next) => {
 exports.getCheckouts = (req, res, next) => {
   const orderId = req.query.orderId; // Assuming you're using the userId in the route
   const userId = req.query.userId;
-  const query = orderId ? { _id: orderId } : userId ? userId : {};
+  const query = orderId ? { _id: orderId } : userId ? { userId: userId } : {};
 
   Checkout.find(query)
     .then((checkouts) => {
@@ -146,6 +146,104 @@ exports.getTotalSalesPerMonth = (req, res, next) => {
       $group: {
         _id: null,
         totalAmount: { $sum: "$checkoutAmount" },
+      },
+    },
+  ])
+    .then((checkouts) => {
+      res.status(200).json({
+        message: "Order fetched successfully",
+        order: checkouts,
+      });
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: "Error fetching checkout data", error: err });
+    });
+};
+
+exports.getReportsPerMonth = (req, res, next) => {
+  // Get the current date and time
+  const monthDate = req.query.startOfMonth;
+
+  const currentDate = monthDate ? new Date(monthDate) : new Date();
+
+  // Calculate the start of the current month
+  const startOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1
+  );
+
+  // Calculate the end of the current month
+  const endOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1,
+    0,
+    23,
+    59,
+    59
+  );
+
+  Checkout.aggregate([
+    {
+      $match: {
+        // Filter by documents created in the current month
+        createdAt: { $gte: startOfMonth, $lte: endOfMonth },
+      },
+    },
+    {
+      $group: {
+        _id: "$userId",
+        firstname: { $first: "$firstname" },
+        lastname: { $first: "$lastname" },
+        orderCount: { $sum: 1 },
+        mostOrderedItem: {
+          $push: "$cartItems",
+        },
+      },
+    },
+    {
+      $unwind: "$mostOrderedItem",
+    },
+    {
+      $unwind: "$mostOrderedItem",
+    },
+    {
+      $sort: {
+        "mostOrderedItem.quantity": -1,
+      },
+    },
+    {
+      $group: {
+        _id: "$_id",
+        firstname: { $first: "$firstname" },
+        lastname: { $first: "$lastname" },
+        orderCount: { $first: "$orderCount" },
+        mostOrderedItem: {
+          $first: "$mostOrderedItem",
+        },
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "_id",
+        foreignField: "_id",
+        as: "customerInfo",
+      },
+    },
+    {
+      $unwind: "$customerInfo",
+    },
+    {
+      $project: {
+        _id: 0,
+        customerId: "$_id",
+        firstname: "$customerInfo.firstname",
+        lastname: "$customerInfo.lastname",
+        orderCount: 1,
+        mostOrderedItem: 1,
       },
     },
   ])
