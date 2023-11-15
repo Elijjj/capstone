@@ -232,6 +232,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         price: cart.price,
         name: cart.productName,
         size: cart.size,
+        description: cart.toppings
+          ? `${cart.toppings}, ${cart.crust}, Flowers: ${cart.flowers}`
+          : 'N/A',
       };
     });
   }

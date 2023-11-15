@@ -99,6 +99,7 @@
               <th scope="col">Order Status</th>
               <th scope="col">Pick-Up/Delivery Date</th>
               <th scope="col">Items</th>
+              <th scope="col">Item Customization (For BYOC only)</th>
               <th scope="col">Item Price</th>
               <th scope="col">Quantity</th>
               <th scope="col">Total Price</th>
@@ -128,11 +129,20 @@
               </td>
               <td>
                 <ng-container *ngFor="let item of order.orderProperties.cartItems">
+                  <div class="item text-bold">{{ item.description }}</div>
+                </ng-container>
+              </td>
+              <td>
+                <ng-container
+                  *ngFor="let item of order.orderProperties.cartItems"
+                >
                   <div class="item text-bold">{{ item.price }}</div>
                 </ng-container>
               </td>
               <td>
-                <ng-container *ngFor="let item of order.orderProperties.cartItems">
+                <ng-container
+                  *ngFor="let item of order.orderProperties.cartItems"
+                >
                   <div class="item text-bold">{{ item.quantity }}</div>
                 </ng-container>
               </td>

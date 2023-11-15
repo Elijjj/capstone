@@ -57,6 +57,8 @@ export class ByocProductComponent implements OnInit, OnDestroy {
           };
         });
     });
+
+    this.cartService.getCarts$(this.authService.getUserId()).subscribe();
   }
 
   onAddToCart() {
@@ -83,30 +85,42 @@ export class ByocProductComponent implements OnInit, OnDestroy {
         .getCartsSnapshot()
         .findIndex((item) => item.productId === cartItem.id);
 
-      if (existingCartItemIndex) {
-        this.cartService.getCartsSnapshot()[
-          existingCartItemIndex
-        ].selectedQuantity = +this.selectedQuantity;
-        this.cartService
-          .updateCartItem(
-            cartItem.userId,
-            cartItem.id,
-            cartItem.selectedQuantity,
-            cartItem.quantity,
-            cartItem.originalPrice,
-            cartItem.price,
-            cartItem.imagePath,
-            cartItem.size,
-            cartItem.productDescription,
-            cartItem.productName,
-            cartItem.productType,
-            cartItem.toppings,
-            cartItem.crust,
-            cartItem.flowers
-          )
-          .subscribe(() => {
-            this.router.navigate(['/cart']);
-          });
+      if (existingCartItemIndex >= 0) {
+        const existingCartItem =
+          this.cartService.getCartsSnapshot()[existingCartItemIndex];
+
+        cartItem.selectedQuantity =
+          +existingCartItem.selectedQuantity + +this.selectedQuantity;
+
+        if (cartItem.selectedQuantity > this.products.quantity) {
+          this.snackBar.open(
+            'You exceed the maximum quantity of the product in your cart.',
+            'Close',
+            { duration: 3000 }
+          );
+        } else {
+          this.cartService
+            .updateCartItem(
+              cartItem.userId,
+              cartItem.id,
+              cartItem.selectedQuantity,
+              cartItem.quantity,
+              cartItem.originalPrice,
+              cartItem.price,
+              cartItem.imagePath,
+              cartItem.size,
+              cartItem.productDescription,
+              cartItem.productName,
+              cartItem.productType,
+              cartItem.toppings,
+              cartItem.crust,
+              cartItem.flowers
+            )
+            .subscribe(() => {
+              this.router.navigate(['/cart']);
+              this.snackBar.open('Cart Updated!', 'Close', { duration: 3000 });
+            });
+        }
       } else {
         this.cartService
           .addToCart(

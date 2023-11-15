@@ -9,6 +9,7 @@ const checkoutSchema = mongoose.Schema({
       price: { type: Number, required: true },
       name: { type: String, required: true },
       size: { type: String, required: true },
+      description: { type: String, required: true },
     },
   ],
   totalPrice: { type: Number, required: true },
