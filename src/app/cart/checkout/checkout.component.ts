@@ -26,7 +26,8 @@ import { CheckoutService } from './checkout.service';
 export class CheckoutComponent implements OnInit, OnDestroy {
   isLoading = false;
   userId: string;
-  discountType: string;
+  discountType = '';
+  discountStatus = '';
   carts$!: Observable<Cart[]>; // Replace CartItem[] with your cart item model
   cartsSubject = new BehaviorSubject([]);
   authData: AuthData;
@@ -60,6 +61,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       .subscribe((userData: AuthData) => {
         this.authData = userData;
         this.discountType = userData.discountType;
+        this.discountStatus = userData.discountStatus;
       });
 
     this.carts$ = this.cartService.getCartsUpdateListener().pipe(
@@ -89,7 +91,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   getComputedDiscount(): number {
-    if (this.discountType === 'Senior Citizen' || this.discountType === 'PWD') {
+    if (
+      this.discountStatus === 'Accepted' &&
+      (this.discountType === 'Senior Citizen' || this.discountType === 'PWD')
+    ) {
       let discountVat = this.getTotalPrice() / 1.12;
       let discountVatComputed = discountVat * 0.2;
       let computedDiscount = discountVat - discountVatComputed;
