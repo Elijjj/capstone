@@ -1,15 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
   BehaviorSubject,
   Observable,
   Subject,
-  Subscription,
   finalize,
   map,
   switchMap,
+  takeUntil,
 } from 'rxjs';
 import { AuthData } from 'src/app/auth/auth-data.model';
 import { AuthService } from '../../auth/auth.service';
@@ -26,16 +25,12 @@ import { CheckoutService } from './checkout.service';
 })
 export class CheckoutComponent implements OnInit, OnDestroy {
   isLoading = false;
-  private authStatusSub: Subscription;
-  private cartId: string;
   userId: string;
   discountType: string;
   carts$!: Observable<Cart[]>; // Replace CartItem[] with your cart item model
   cartsSubject = new BehaviorSubject([]);
   authData: AuthData;
   checkout: Checkout;
-  userIsAuthenticated = false;
-  private cartSubscription: Subscription;
 
   private unsubscribe$ = new Subject();
 
@@ -49,34 +44,22 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private cartService: CartService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    private selfService: CheckoutService,
-    private router: Router
+    private selfService: CheckoutService
   ) {}
 
   ngOnInit() {
     this.isLoading = true;
     this.userId = this.authService.getUserId();
     this.isLoading = true;
-    this.authService.getUserProfile().subscribe(
-      (data: any) => {
-        this.authData = data;
-        this.isLoading = false;
-      },
-      (error) => {
-        console.error('Error fetching user profile: ', error);
-      }
-    );
-    if (!this.authData) {
-      this.isLoading = false;
-    }
 
-    this.userIsAuthenticated = this.authService.getIsAuth();
-    this.authStatusSub = this.authService
-      .getAuthStatusListener()
-      .subscribe((authStatus) => {
-        this.isLoading = false;
-        this.userIsAuthenticated = authStatus;
+    const userId = this.route.snapshot.params['userId'];
+
+    this.authService
+      .getUserProfileDiscount(userId)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((userData: AuthData) => {
+        this.authData = userData;
+        this.discountType = userData.discountType;
       });
 
     this.carts$ = this.cartService.getCartsUpdateListener().pipe(
@@ -88,35 +71,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     );
 
     this.cartService.getCarts$(this.authService.getUserId()).subscribe();
-
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      this.userId = paramMap.get('userId');
-      this.discountType = paramMap.get('discountType');
-      this.authService
-        .getUserProfileDiscount(this.userId)
-        .subscribe((userData) => {
-          this.isLoading = false;
-          this.authData = {
-            id: userData.id,
-            email: userData.email,
-            password: userData.password,
-            firstname: userData.firstname,
-            lastname: userData.lastname,
-            contactnumber: userData.contactnumber,
-            city: userData.city,
-            province: userData.province,
-            bls: userData.bls,
-            subdivision: userData.subdivision,
-            postalcode: userData.postalcode,
-            role: userData.role,
-            imagePath: userData.imagePath,
-            birthday: userData.birthday,
-            discountType: userData.discountType,
-            discountStatus: userData.discountStatus,
-          };
-        });
-    });
-    console.log(this.discountType);
   }
 
   getMinClaimDate(): Date {
@@ -135,7 +89,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   getComputedDiscount(): number {
-    if (this.discountType !== 'Senior Citizen' || 'PWD') {
+    if (this.discountType === 'Senior Citizen' || this.discountType === 'PWD') {
       let discountVat = this.getTotalPrice() / 1.12;
       let discountVatComputed = discountVat * 0.2;
       let computedDiscount = discountVat - discountVatComputed;

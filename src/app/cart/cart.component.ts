@@ -130,7 +130,10 @@ export class CartComponent implements OnInit {
   }
 
   isCheckoutBtnDisabled() {
-    return this.cartsSubject.value.some((x) => x.isOutOfStock);
+    return (
+      this.cartsSubject.value.length === 0 ||
+      this.cartsSubject.value.some((x) => x.isOutOfStock)
+    );
   }
 
   onCheckout() {
