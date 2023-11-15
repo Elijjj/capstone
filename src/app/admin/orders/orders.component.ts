@@ -29,7 +29,7 @@ export class OrdersComponent implements OnInit, OnDestroy {
       this.isLoading = false;
     });
 
-    this.orders$ = this.selfService.getAllOrders$();
+    this.onMonthChange(1);
   }
 
   ngOnDestroy() {}
@@ -53,5 +53,22 @@ export class OrdersComponent implements OnInit, OnDestroy {
       second: 'numeric',
     };
     return new Date(dateString).toLocaleDateString('en-US', options as any);
+  }
+
+  onMonthChange(event: any) {
+    const monthDate = this.getDateFromMonth(event as number);
+    this.setOrdersData(monthDate);
+  }
+
+  private getDateFromMonth(month: number): string {
+    // Create a new Date object with the current year and the specified month
+    const currentDate = new Date();
+    currentDate.setMonth(month - 1); // Months in JavaScript are zero-based, so subtract 1
+
+    return currentDate.toLocaleDateString();
+  }
+
+  private setOrdersData(monthDate: string): void {
+    this.orders$ = this.selfService.getAllOrders$(monthDate);
   }
 }

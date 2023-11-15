@@ -9,9 +9,9 @@ import { environment } from 'src/environments/environments';
 export class ReportsService {
   constructor(private http: HttpClient) {}
 
-  getAllOrders$(): Observable<any> {
+  getAllOrders$(monthDate: string): Observable<any> {
     return this.http
-      .get(`${environment.apiUrl}/checkout/getAll`)
+      .get(`${environment.apiUrl}/checkout/getAll?startOfMonth=${monthDate}`)
       .pipe(map((res: { message: string; order: any }) => res.order as any[]));
   }
 }

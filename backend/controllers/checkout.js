@@ -262,7 +262,35 @@ exports.getReportsPerMonth = (req, res, next) => {
 
 // GET: Retrieve a checkout entry by checkout ID
 exports.getAllCheckouts = (req, res, next) => {
+  // Get the current date and time
+  const monthDate = req.query.startOfMonth;
+
+  const currentDate = monthDate ? new Date(monthDate) : new Date();
+
+  // Calculate the start of the current month
+  const startOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1
+  );
+
+  // Calculate the end of the current month
+  const endOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth() + 1,
+    0,
+    23,
+    59,
+    59
+  );
+
   Checkout.aggregate([
+    {
+      $match: {
+        // Filter by documents created in the current month
+        createdAt: { $gte: startOfMonth, $lte: endOfMonth },
+      },
+    },
     {
       $lookup: {
         from: "users",

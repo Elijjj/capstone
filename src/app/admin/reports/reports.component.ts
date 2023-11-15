@@ -49,7 +49,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
     this.setReportsData(monthDate);
   }
 
-  getDateFromMonth(month: number): string {
+  private getDateFromMonth(month: number): string {
     // Create a new Date object with the current year and the specified month
     const currentDate = new Date();
     currentDate.setMonth(month - 1); // Months in JavaScript are zero-based, so subtract 1
@@ -57,7 +57,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
     return currentDate.toLocaleDateString();
   }
 
-  setReportsData(monthDate: string): void {
+  private setReportsData(monthDate: string): void {
     this.monthlyCustomers$ = this.selfService.getMonthlyCustomers$(monthDate);
 
     this.mostFrequentCustomer$ =
