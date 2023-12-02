@@ -13,7 +13,7 @@ hr{
 h2{
     margin-bottom: 2rem;
     color: #c05938;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 /* .btn-colour-1 {
@@ -57,6 +57,7 @@ h2{
 
   input[type=checkbox]{
     margin-left: 1rem;
+    background-color: #d67ab1;
 }
 }
 
@@ -120,5 +121,6 @@ h2{
 
   input[type=checkbox]{
     margin-left: 1rem;
+    background-color: #d67ab1;
 }
 }

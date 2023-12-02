@@ -60,7 +60,6 @@ export class AuthService {
 
 getUserProfileDiscount(userId: string) {
   return this.http.get<{
-    discountStatus: string;
     id: string;
     email: string,
     password: string,
@@ -75,7 +74,9 @@ getUserProfileDiscount(userId: string) {
     role: string,
     imagePath: string,
     birthday: Date,
-    discountType: string
+    discountType: string,
+    discountStatus: string;
+
 
   }>(BACKEND_URL + 'profile/discount/' + userId);
 }

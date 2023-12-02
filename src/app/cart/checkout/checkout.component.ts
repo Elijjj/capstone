@@ -32,13 +32,14 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   cartsSubject = new BehaviorSubject([]);
   authData: AuthData;
   checkout: Checkout;
+  timeOptions: string[] = [];
 
   private unsubscribe$ = new Subject();
 
   checkoutForm = new FormGroup({
     orderType: new FormControl('Pick-Up', Validators.required),
     claimDate: new FormControl(null, Validators.required),
-    claimTime: new FormControl('10:00 AM', Validators.required),
+    claimTime: new FormControl(null, Validators.required),
   });
 
   constructor(
@@ -62,6 +63,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.authData = userData;
         this.discountType = userData.discountType;
         this.discountStatus = userData.discountStatus;
+        this.discountStatus = userData.discountStatus;
       });
 
     this.carts$ = this.cartService.getCartsUpdateListener().pipe(
@@ -73,6 +75,19 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     );
 
     this.cartService.getCarts$(this.authService.getUserId()).subscribe();
+
+    this.onOrderTypeChange();
+    this.checkoutForm.get('orderType').valueChanges.subscribe((value) => {
+      this.onOrderTypeChange();
+    });
+  }
+
+  onOrderTypeChange() {
+    if (this.checkoutForm.get('orderType').value === 'Pick-Up') {
+      this.timeOptions = ['12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM'];
+    } else {
+      this.timeOptions = ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM'];
+    }
   }
 
   getMinClaimDate(): Date {
@@ -93,7 +108,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   getComputedDiscount(): number {
     if (
       this.discountStatus === 'Accepted' &&
-      (this.discountType === 'Senior Citizen' || this.discountType === 'PWD')
+      (this.discountType === 'Senior Citizen' || this.discountType === 'PWD' && this.discountStatus === 'Accepted')
     ) {
       let discountVat = this.getTotalPrice() / 1.12;
       let discountVatComputed = discountVat * 0.2;
@@ -127,7 +142,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
                 show_line_items: true,
                 payment_method_types: ['card', 'paymaya', 'gcash', 'grab_pay'],
                 line_items: this.mapPaymentItems(),
-                success_url: `http:localhost:4200/payment-success/${orderId}`,
+                success_url: `http://fediciph-env-1.eba-niry4jf9.ap-southeast-2.elasticbeanstalk.com/payment-success/${orderId}`,
               },
             },
           };

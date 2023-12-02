@@ -1,6 +1,6 @@
 :host {
   display: block;
-  height: calc(100vh - 114px);
+  height: calc(100vh - 10px);
 }
 
 .table-container {
@@ -8,8 +8,21 @@
   max-height: calc(100vh - 200px);
 }
 
-.table-container td,
 .table-container th {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: #d67ab1;
+    color: white;
+}
+
+.table-container td{
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: #d67ab1;
+    color: white;
+}
+
+.table-container td{
   padding-left: 1rem;
   padding-right: 1rem;
 }
@@ -22,4 +35,23 @@
   white-space-collapse: break-spaces;
   text-wrap: balance;
   max-width: 150px;
+}
+
+hr{
+  border-color: #c05938;
+  margin-right: 2%;
+}
+
+h1{
+  font-size: 46px;
+  color:#c05938;
+}
+.prodDetails{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 5%;
+}
+
+.orderTable{
+  font-size: 14px;
 }

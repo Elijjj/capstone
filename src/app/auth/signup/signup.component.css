@@ -1,43 +1,37 @@
+@media screen and (min-width:844px) {
 input[type=email]{
-    margin-left: 1rem;
-    width:90%;
-    font-size: 16px;
+    width:100%;
+    font-size: 14px;
 }
 
 input[type=password]{
-    margin-left: 1rem;
-    width:90%;
-    font-size: 16px;
+    width:100%;
+    font-size: 14px;
 }
 
 input[type=text]{
-    margin-left: 1rem;
-    width:90%;
-    font-size: 16px;
+    width:100%;
+    font-size: 14px;
 }
 
 input[type=number]{
-    margin-left: 1rem;
-    width:90%;
-    font-size: 16px;
+    width:100%;
+    font-size: 14px;
 }
 
 input[type=text].blsTxt{
-    margin-left: 1rem;
-    width:95%;
-    font-size: 16px;
+    width:100%;
+    font-size: 14px;
 }
 
 input[type=text].subdivTxt{
-    margin-left: 1rem;
-    width:95%;
-    font-size: 16px;
+    width:100%;
+    font-size: 14px;
 }
 
 input[type=number].postalTxt{
-    margin-left: 1rem;
-    width:95%;
-    font-size: 16px;
+    width:100%;
+    font-size: 14px;
 }
 
 mat-spinner{
@@ -49,17 +43,16 @@ mat-card{
 }
 
 button{
-    margin: 1rem;
-    width: 70%;
-    font-size: 20px;
+    width: 50%;
 }
 
 h1{
     text-align: center;
-    margin: 7%;
+    margin-top: 7%;
+    margin-bottom: 5%;
     color: #c05938;
     letter-spacing: 2px;
-    font-size: 48px;
+    font-size: 42px;
 }
 
 h4{
@@ -72,30 +65,28 @@ h4{
 
 .imagee{
     background-image: url("/assets/login1.png");
-    background-size:142%;
+    background-size:cover;
 }
 
 .signupForms{
     background-color: #f8f7f2;
-    overflow-y: scroll;
-    overflow-x: hidden;
     height: 100vh;
 }
 
 .inputLabels{
-    color:#181818;
-    font-size: 16px;
-    margin: 1rem;
+    color:#c05938;
+    font-size: 14px;
+    margin: 0.5rem;
 }
 
 .btn-colour-1 {
     color: #fff;
     background-color: #c05938;
     border-color: #c05938;
-    font-weight: bold;
+    font-weight: 500;
+    font-size: 16px;
     letter-spacing: 0.05em;
     border-radius: 4;
-    margin-bottom: 10%;
   }
   
   .btn-colour-1:hover,
@@ -104,22 +95,128 @@ h4{
   .btn-colour-1.active {
     /* let's darken #004E64 a bit for hover effect */
     background: #aa5032;
-    color: #ffffff;
+    color: #181818;
     border-color: #aa5032;
   }
-
+  
   a{
     color:#c09853;
     text-decoration: underline;
-  }
-
-  .registerLabel{
-    font-size: 16px;
-    color: #181818;
-    margin-bottom: 24%;
   }
   
 .addressPart{
     overflow-y: scroll;
 }
+}
 
+@media screen and (max-width:844px) {
+    input[type=email]{
+        width:100%;
+        font-size: 14px;
+    }
+    
+    input[type=password]{
+        width:100%;
+        font-size: 14px;
+    }
+    
+    input[type=text]{
+        width:100%;
+        font-size: 14px;
+    }
+    
+    input[type=number]{
+        width:100%;
+        font-size: 14px;
+    }
+    
+    input[type=text].blsTxt{
+        width:100%;
+        font-size: 14px;
+    }
+    
+    input[type=text].subdivTxt{
+        width:100%;
+        font-size: 14px;
+    }
+    
+    input[type=number].postalTxt{
+        width:100%;
+        font-size: 14px;
+    }
+    
+    mat-spinner{
+        margin: auto;
+    }
+    
+    mat-card{
+        height:100%;
+    }
+    
+    button{
+        width: 50%;
+    }
+    
+    h1{
+        text-align: center;
+        margin-top: 7%;
+        margin-bottom: 5%;
+        color: #c05938;
+        letter-spacing: 2px;
+        font-size: 42px;
+    }
+    
+    h4{
+        text-align: center;
+        margin: 1rem;
+        color: #181818;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+    
+    .imagee{
+        background-image: url("/assets/login1.png");
+        background-size:cover;
+        height: 50vh;
+    }
+    
+    .signupForms{
+        background-color: #f8f7f2;
+        height: auto;
+    }
+    
+    .inputLabels{
+        color:#c05938;
+        font-size: 14px;
+        margin: 0.5rem;
+    }
+    
+    .btn-colour-1 {
+        color: #fff;
+        background-color: #c05938;
+        border-color: #c05938;
+        font-weight: 500;
+        font-size: 16px;
+        letter-spacing: 0.05em;
+        border-radius: 4;
+      }
+      
+      .btn-colour-1:hover,
+      .btn-colour-1:active,
+      .btn-colour-1:focus,
+      .btn-colour-1.active {
+        /* let's darken #004E64 a bit for hover effect */
+        background: #aa5032;
+        color: #181818;
+        border-color: #aa5032;
+      }
+      
+      a{
+        color:#c09853;
+        text-decoration: underline;
+      }
+      
+    .addressPart{
+        overflow-y: scroll;
+    }
+    }

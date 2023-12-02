@@ -6,6 +6,7 @@ import { InventoryService } from '../inventory.service';
 import { Inventory } from '../inventory.model';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-inventory-update',
@@ -27,6 +28,7 @@ export class InventoryUpdateComponent implements OnInit, OnDestroy {
   form: FormGroup;
   isMenuCollapsed = true; // Add this line
   constructor(
+    private snackBar: MatSnackBar,
     public inventoryService: InventoryService,
     public route: ActivatedRoute,
     private authService: AuthService
@@ -82,6 +84,7 @@ export class InventoryUpdateComponent implements OnInit, OnDestroy {
         this.form.value.description,
         this.form.value.quantity
       );
+      this.snackBar.open('Item Added!', 'Close', { duration: 3000 });
     } else {
       this.inventoryService.updateItem(
         this.itemId,
@@ -89,6 +92,7 @@ export class InventoryUpdateComponent implements OnInit, OnDestroy {
         this.form.value.description,
         this.form.value.quantity
       );
+      this.snackBar.open('Item Updated!', 'Close', { duration: 3000 });
     }
     this.form.reset();
   }

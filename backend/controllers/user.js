@@ -42,7 +42,7 @@ exports.userLogin = (req, res, next) => {
       console.log(user);
       if (!user) {
         return res.status(401).json({
-          message: "Auth Failed",
+          message: "Incorrect e-mail or password!",
         });
       }
       fetchedUser = user;
@@ -51,7 +51,7 @@ exports.userLogin = (req, res, next) => {
     .then((result) => {
       if (!result) {
         return res.status(401).json({
-          message: "Auth Failed",
+          message: "Incorrect e-mail or password!",
         });
       }
       const token = jwt.sign(

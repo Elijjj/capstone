@@ -24,7 +24,7 @@ mat-card{
 button{
     margin: 1rem;
     width: 70%;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 h1{
@@ -38,7 +38,7 @@ h1{
 
 .imagee{
     background-image: url("/assets/login1.png");
-    background-size:142%;
+    background-size:cover;
 }
 
 .loginForms{
@@ -54,7 +54,7 @@ h1{
     color: #fff;
     background-color: #c05938;
     border-color: #c05938;
-    font-weight: bold;
+    font-weight: 500;
     letter-spacing: 0.05em;
     border-radius: 4;
   }
@@ -77,7 +77,6 @@ h1{
   .registerLabel{
     font-size: 18px;
     color: #c05938;
-    margin-bottom: 24%;
   }
 
   .innerLogin{
@@ -124,8 +123,10 @@ h1{
     }
     
     .imagee{
-        background:none;
+      background-image: url("/assets/login1.png");
+      background-size:cover;
     }
+
     
     .loginForms{
         background-color: #f8f7f2;
@@ -168,7 +169,7 @@ h1{
       }
 
       .innerLogin{
-        height: 0;
+        height: 50vh;
       }
     }
     

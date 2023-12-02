@@ -1,8 +1,19 @@
+mat-spinner{
+    margin: auto;
+    stroke: #c05938;
+    stroke-opacity: initial;
+  }
+
 @media screen and (min-width:844px) {
 hr{
     border-color: #c05938;
     margin-right: 2%;
 }
+
+mat-spinner{
+    margin: auto;
+    stroke: #c05938;
+  }
 
 h1{
     font-size: 38px;
@@ -12,9 +23,14 @@ h1{
     margin-left: 5%;
 }
 
+h2{
+    color:#c05938;
+}
+
 p{
     font-size: 20px;
     margin: 2%;
+    text-align: justify;
 }
 
 .containerr{
@@ -37,6 +53,7 @@ h1{
 
 h2{
     font-size: 20px;
+    color:#c05938;
 }
 
 p{

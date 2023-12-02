@@ -105,7 +105,7 @@
                   <td>{{account.contactnumber}}</td>
                   <td>{{account.bls}} {{account.subdivision}} {{account.city}}, {{account.province}} {{account.postalcode}}</td>
                   <td>{{account.discountStatus}}</td>
-                  <td><a [routerLink]="['/admin/accounts/', account.id]"><button class="btn btn-colour-1">View Details</button></a></td>
+                  <td *ngIf="account.discountStatus === 'Pending'"><a [routerLink]="['/admin/accounts/', account.id]"><button class="btn btn-colour-1">View Details</button></a></td>
                 </tr>
               </tbody>
             </table>

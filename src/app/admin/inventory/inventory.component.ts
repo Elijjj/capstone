@@ -5,6 +5,7 @@ import { Inventory } from "./inventory.model";
 import { PageEvent } from "@angular/material/paginator";
 import { AuthService } from "src/app/auth/auth.service";
 import { InventoryService } from "./inventory.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
     selector:'app-inventory',
@@ -24,7 +25,8 @@ export class InventoryComponent implements OnInit, OnDestroy{
     private authStatusSub: Subscription;
     isMenuCollapsed = true; // Add this line
 
-    constructor(public inventoryService: InventoryService, private authService: AuthService) {}
+    constructor(private snackBar: MatSnackBar,
+        public inventoryService: InventoryService, private authService: AuthService) {}
 
     ngOnInit(){
         this.isLoading=true;
@@ -55,6 +57,7 @@ export class InventoryComponent implements OnInit, OnDestroy{
         }, () => {
             this.isLoading = false;
         });
+        this.snackBar.open('Product Deleted!', 'Close', { duration: 3000 });
     }
 
     onLogout() {

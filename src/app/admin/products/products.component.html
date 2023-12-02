@@ -144,12 +144,12 @@
                   <a
                     class="btn btn-colour-1 my-1"
                     color="primary"
-                    [routerLink]="['/admin/products/edit', product.id]"
+                    [routerLink]="['/admin/products/edit', product._id]"
                     >EDIT&nbsp;<i class="bi bi-pencil-square"></i></a
                   ><button
                     class="btn btn-colour-2 my-1"
                     color="warn"
-                    (click)="onDelete(product.id)"
+                    (click)="onDelete(product._id)"
                   >
                     DELETE&nbsp;<i class="bi bi-trash"></i>
                   </button>

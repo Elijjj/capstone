@@ -6,6 +6,7 @@ import { PageEvent } from "@angular/material/paginator";
 import { Products } from "./products.model";
 import { ProductsService } from "./products.service";
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 
 @Component({
@@ -30,7 +31,9 @@ export class ProductsComponent implements OnInit, OnDestroy{
     private authStatusSub: Subscription;
     isMenuCollapsed = true; // Add this line
 
-    constructor(public productsService: ProductsService, private authService: AuthService,
+    constructor(
+        private snackBar: MatSnackBar,
+        public productsService: ProductsService, private authService: AuthService,
         private fb: FormBuilder) {}
 
     ngOnInit(){
@@ -67,6 +70,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
         }, () => {
             this.isLoading = false;
         });
+        this.snackBar.open('Product Deleted!', 'Close', { duration: 3000 });
     }
 
     onSearch() {

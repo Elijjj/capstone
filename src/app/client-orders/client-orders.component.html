@@ -1,6 +1,29 @@
-<div class="px-5 pt-3">
-  <h3 class="text-main-color">My Orders</h3>
-  <hr />
+<div class="container-fluid">
+  <div class="row align-items-center">
+      <div class="col-md-3 col-9">
+          <h1 class="prodDetails">My Orders</h1>
+      </div>
+      <div class="col-md-9 col-3">
+          <div class="flex-grow-1 hrr">
+              <hr class="border border-danger border-2 opacity-75" />
+          </div>
+      </div>
+  </div>
+</div>
+<div class="orderTable px-5 pt-3">
+<div class="container-fluid">
+  <div class="row align-items-center">
+      <div class="col-md-3 col-9">
+          <h1 class="prodDetails">My Orders</h1>
+      </div>
+      <div class="col-md-9 col-3">
+          <div class="flex-grow-1 hrr">
+              <hr class="border border-danger border-2 opacity-75" />
+          </div>
+      </div>
+  </div>
+</div>
+<div class="orderTable px-4 pt-3">
   <ng-container *ngIf="(orders$ | async)?.length === 0; else table">
     <div class="py-5 d-flex justify-content-center"><h3>No orders yet</h3></div>
   </ng-container>
@@ -14,7 +37,7 @@
             <th scope="col">Order Status</th>
             <th scope="col">Claim Date</th>
             <th scope="col">Items</th>
-            <th scope="col">Item Customization (For BYOC only)</th>
+            <th scope="col">Build-Your-Own Cake</th>
             <th scope="col">Item Price</th>
             <th scope="col">Quantity</th>
             <th scope="col">Total Price</th>
@@ -26,7 +49,7 @@
         </thead>
         <tbody>
           <tr class="text-nowrap" *ngFor="let order of orders$ | async">
-            <td>{{ order._id }}</td>
+            <td class="">{{ order._id }}</td>
             <td>{{ order.orderType }}</td>
             <td>{{ order.orderStatus }}</td>
             <td class="date-data">{{ getFormattedDate(order?.claimDate) }}</td>

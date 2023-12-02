@@ -21,11 +21,11 @@ h1{
 }
 
 .productDescriptionn{
-    margin-right: 10%;
+    margin-right: 0%;
 }
 
 .prodImage{
-    width: 90%;
+    width: 95%;
 }
 
 .backToMenu{
@@ -58,7 +58,7 @@ h1{
   }
 
   p{
-    font-size: 16px;
+    font-size: 18px;
   }
 
   input[type=radio]{
@@ -79,7 +79,6 @@ h1{
     }
     
     .prodDetails{
-        text-align: center;
         margin-top: 5%;
         margin-bottom: 5%;
     }
@@ -110,6 +109,7 @@ h1{
         font-weight: 400;
         letter-spacing: 0.05em;
         border-radius: 4;
+        margin-left: 35%;
       }
       
       .btn-colour-1:hover,
@@ -124,7 +124,7 @@ h1{
       }
     
       p b{
-        font-size: 16px;
+        font-size: 18px;
       }
       
       p{

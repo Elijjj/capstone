@@ -6,6 +6,7 @@ import { Accounts } from '../accounts.model';
 import { AccountsService } from '../accounts.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { mimeType } from '../../products/products-update/mime-type.validator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-accounts-discount',
@@ -44,6 +45,7 @@ export class AccountsDiscountComponent implements OnInit, OnDestroy {
     private birthday: Date | string;
 
   constructor(
+    private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private authService: AuthService,
     public accountsService: AccountsService
@@ -145,6 +147,7 @@ onUploadDiscount() {
       );
     this.form.reset();
     this.isLoading = true;
+    this.snackBar.open('Discount Updated!', 'Close', { duration: 3000 });
     console.log(this.form.value);
   }
 
