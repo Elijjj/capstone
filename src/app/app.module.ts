@@ -27,6 +27,8 @@ import { MenuComponent } from './menu/menu.component';
 import { ProfileDiscountComponent } from './profile/profile-discount/profile-discount.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ClientOrdersComponent } from './client-orders/client-orders.component';
+import { VerifyComponent } from './verify/verify.component';
+import { CapitalizeFirstDirective } from './auth/signup/capitalize-first.directive';
 // import { CartService } from './cart/cart.service';
 // import { AdminHeaderComponent } from './header/admin-header.component';
 
@@ -49,6 +51,8 @@ import { ClientOrdersComponent } from './client-orders/client-orders.component';
     CheckoutComponent,
     PaymentSuccessComponent,
     ClientOrdersComponent,
+    VerifyComponent,
+    CapitalizeFirstDirective
   ],
   imports: [
     CommonModule,

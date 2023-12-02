@@ -14,6 +14,7 @@ exports.createCheckout = (req, res, next) => {
     claimDate: req.body.claimDate,
     paymentStatus: req.body.paymentStatus,
     orderStatus: req.body.orderStatus,
+    deliveryStatus: req.body.deliveryStatus,
     size: req.body.size,
   });
 
@@ -25,7 +26,7 @@ exports.createCheckout = (req, res, next) => {
     })
     .then((createdCheckout) => {
       res.status(201).json({
-        message: "Checkout successful",
+        message: "Checkout successful!",
         checkout: {
           ...createdCheckout._doc,
           id: createdCheckout._id,
@@ -41,20 +42,33 @@ exports.createCheckout = (req, res, next) => {
 };
 
 exports.updateCheckoutPaymentStatus = (req, res, next) => {
-  const updatedFields = {
-    paymentStatus: "PAID",
-    orderStatus: "CONFIRMED",
-  };
-
   const productUpdates = req.body.productUpdates;
 
-  Checkout.updateOne({ _id: req.params.orderId }, { $set: updatedFields })
+  // Fetch the current order details
+  Checkout.findOne({ _id: req.params.orderId })
+    .then((checkout) => {
+      if (!checkout) {
+        throw new Error("Checkout not found!");
+      }
+
+      const updatedFields = {
+        paymentStatus: "PAID",
+        orderStatus: "CONFIRMED",
+      };
+
+      // Conditionally set deliveryStatus if orderType is Delivery
+      if (checkout.orderType === "Delivery") {
+        updatedFields.deliveryStatus = "PREPARING";
+      }
+
+      return Checkout.updateOne({ _id: req.params.orderId }, { $set: updatedFields });
+    })
     .then((checkoutUpdateResult) => {
       if (checkoutUpdateResult.matchedCount > 0) {
         // Fetch the products after updating the checkout
         return Product.find({});
       } else {
-        throw new Error("Checkout not found or not updated");
+        throw new Error("Checkout not updated!");
       }
     })
     .then((products) => {
@@ -66,17 +80,17 @@ exports.updateCheckoutPaymentStatus = (req, res, next) => {
           (product) => product._id.toString() === productId
         );
 
-        const newQuantity = productToUpdate.quantity - update.quantity;
-
-        if (productToUpdate) {
-          // Update the quantity
-          return Product.updateOne(
-            { _id: productToUpdate._id },
-            { $set: { quantity: newQuantity >= 0 ? newQuantity : 0 } }
-          );
-        } else {
+        if (!productToUpdate) {
           throw new Error(`Product with ID ${productId} not found`);
         }
+
+        const newQuantity = productToUpdate.quantity - update.quantity;
+
+        // Update the quantity
+        return Product.updateOne(
+          { _id: productToUpdate._id },
+          { $set: { quantity: newQuantity >= 0 ? newQuantity : 0 } }
+        );
       });
 
       return Promise.all(updatePromises);
@@ -94,7 +108,7 @@ exports.updateCheckoutPaymentStatus = (req, res, next) => {
       } else {
         res
           .status(401)
-          .json({ message: "Not Authorized or Product Update Failed" });
+          .json({ message: "Not Authorized or Product Update Failed!" });
       }
     })
     .catch((error) => {
@@ -102,6 +116,7 @@ exports.updateCheckoutPaymentStatus = (req, res, next) => {
       res.status(500).json({ message: "Internal Server Error" });
     });
 };
+
 
 // GET: Retrieve a checkout entry by checkout ID
 exports.getCheckouts = (req, res, next) => {
@@ -123,6 +138,49 @@ exports.getCheckouts = (req, res, next) => {
     });
 };
 
+exports.getCheckoutsAdmin = (req, res, next) => {
+  const orderId = req.query.orderId;
+  const userId = req.query.userId;
+  const status = ['CONFIRMED', 'COMPLETED']; // Array of statuses
+
+  // Get the current date and time
+  const currentDate = new Date();
+
+  // Calculate the start of the current month
+  const startOfMonth = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
+    1
+  );
+
+  // Base query with date filter for the current month
+  let query = {
+    createdAt: { $gte: startOfMonth },
+    orderStatus: { $in: status }
+  };
+
+  // Additional filters based on orderId or userId
+  if (orderId) {
+    query._id = orderId; // Filter by orderId
+  } else if (userId) {
+    query.userId = userId; // Filter by userId
+  }
+
+  Checkout.find(query)
+    .then((checkouts) => {
+      res.status(200).json({
+        message: "Order fetched successfully",
+        order: checkouts,
+      });
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ message: "Error fetching checkout data", error: err });
+    });
+};
+
+
 // GET: Retrieve a checkout entry by checkout ID
 exports.getTotalSalesPerMonth = (req, res, next) => {
   // Get the current date and time
@@ -140,6 +198,7 @@ exports.getTotalSalesPerMonth = (req, res, next) => {
       $match: {
         // Filter by documents created in the current month
         createdAt: { $gte: startOfMonth },
+        orderStatus: { $in: ['CONFIRMED', 'COMPLETED'] } 
       },
     },
     {
@@ -190,6 +249,7 @@ exports.getReportsPerMonth = (req, res, next) => {
       $match: {
         // Filter by documents created in the current month
         createdAt: { $gte: startOfMonth, $lte: endOfMonth },
+        orderStatus: { $in: ['CONFIRMED', 'COMPLETED'] } 
       },
     },
     {
@@ -198,9 +258,8 @@ exports.getReportsPerMonth = (req, res, next) => {
         firstname: { $first: "$firstname" },
         lastname: { $first: "$lastname" },
         orderCount: { $sum: 1 },
-        mostOrderedItem: {
-          $push: "$cartItems",
-        },
+        totalAmount: { $sum: "$checkoutAmount" },
+        mostOrderedItem: { $push: "$cartItems" },
       },
     },
     {
@@ -220,9 +279,8 @@ exports.getReportsPerMonth = (req, res, next) => {
         firstname: { $first: "$firstname" },
         lastname: { $first: "$lastname" },
         orderCount: { $first: "$orderCount" },
-        mostOrderedItem: {
-          $first: "$mostOrderedItem",
-        },
+        totalAmount: { $first: "$totalAmount" }, // Corrected to use summed totalAmount
+        mostOrderedItem: { $first: "$mostOrderedItem" },
       },
     },
     {
@@ -242,6 +300,7 @@ exports.getReportsPerMonth = (req, res, next) => {
         customerId: "$_id",
         firstname: "$customerInfo.firstname",
         lastname: "$customerInfo.lastname",
+        totalAmount: 1,
         orderCount: 1,
         mostOrderedItem: 1,
       },
@@ -260,36 +319,28 @@ exports.getReportsPerMonth = (req, res, next) => {
     });
 };
 
+
 // GET: Retrieve a checkout entry by checkout ID
 exports.getAllCheckouts = (req, res, next) => {
-  // Get the current date and time
-  const monthDate = req.query.startOfMonth;
+  const dateParam = req.query.date;
+  const statusParam = req.query.orderStatus;
+  const date = dateParam ? new Date(dateParam) : new Date();
 
-  const currentDate = monthDate ? new Date(monthDate) : new Date();
+  const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+  const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59);
 
-  // Calculate the start of the current month
-  const startOfMonth = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth(),
-    1
-  );
-
-  // Calculate the end of the current month
-  const endOfMonth = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth() + 1,
-    0,
-    23,
-    59,
-    59
-  );
+  let matchFilter = {
+    createdAt: { $gte: startOfMonth, $lte: endOfMonth },
+  };
+  
+  // Add status filter if it's not 'ALL'
+  if (statusParam && statusParam !== 'ALL') {
+    matchFilter.orderStatus = statusParam; // Assuming the status field is named 'status'
+  }
 
   Checkout.aggregate([
     {
-      $match: {
-        // Filter by documents created in the current month
-        createdAt: { $gte: startOfMonth, $lte: endOfMonth },
-      },
+      $match: matchFilter,
     },
     {
       $lookup: {
@@ -326,5 +377,71 @@ exports.getAllCheckouts = (req, res, next) => {
       res
         .status(500)
         .json({ message: "Error fetching checkout data", error: err });
+    });
+};
+
+
+exports.deleteOrderAdmin = (req, res, next) => {
+  // Ensure the ID is provided in the request
+  if (!req.body.id) {
+    return res.status(400).json({ message: "Order ID not provided" });
+  }
+
+  Checkout.deleteOne({ _id: req.body.id })
+    .then(result => {
+      // Check if an order was actually deleted
+      if (result.deletedCount > 0) {
+        res.status(200).json({ message: "Deletion successful!" });
+      } else {
+        // If no order was deleted, it could mean the order wasn't found
+        res.status(404).json({ message: "Order not found" });
+      }
+    })
+    .catch(error => {
+      console.error("Error deleting order:", error);
+      res.status(500).json({ message: "Deleting order failed!" });
+    });
+};
+
+exports.updateDeliveryStatus = (req, res, next) => {
+  const orderId = req.body.id;
+  const newStatus = req.body.deliveryStatus;
+
+  if (!orderId || !newStatus) {
+    return res.status(400).json({ message: "Missing order ID or status" });
+  }
+
+  Checkout.updateOne({ _id: orderId }, { $set: { deliveryStatus: newStatus } })
+    .then((result) => {
+      if (result.matchedCount > 0) {
+        res.status(200).json({ message: "Delivery status updated successfully" });
+      } else {
+        res.status(404).json({ message: "Order not found" });
+      }
+    })
+    .catch((error) => {
+      console.error("Error updating delivery status:", error);
+      res.status(500).json({ message: "Error updating delivery status" });
+    });
+};
+
+exports.updateOrderStatus = (req, res) => {
+  const orderId = req.body.id;
+  
+  if (!orderId) {
+    return res.status(400).json({ message: "Order ID is required" });
+  }
+
+  Checkout.updateOne({ _id: orderId }, { $set: { orderStatus: "COMPLETED" } })
+    .then(result => {
+      if (result.modifiedCount > 0) {
+        res.status(200).json({ message: "Order status updated to COMPLETED" });
+      } else {
+        res.status(404).json({ message: "Order not found" });
+      }
+    })
+    .catch(err => {
+      console.error("Error updating order status:", err);
+      res.status(500).json({ message: "Error updating order status" });
     });
 };

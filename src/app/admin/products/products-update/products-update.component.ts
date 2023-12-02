@@ -114,7 +114,7 @@ export class ProductsUpdateComponent implements OnInit, OnDestroy {
         this.form.value.quantity,
         this.form.value.size,
       );
-      this.snackBar.open('Product Added!', 'Close', { duration: 3000 });
+      this.snackBar.open('Product Added! Please wait to be redirected to the Products Page!', 'Close', { duration: 10000 });
     } else {
       this.productsService.updateProduct(
         this.productId,
@@ -126,7 +126,7 @@ export class ProductsUpdateComponent implements OnInit, OnDestroy {
         this.form.value.quantity,
         this.form.value.size,
       );
-      this.snackBar.open('Product Updated!', 'Close', { duration: 3000 });
+      this.snackBar.open('Product Updated! Please wait to be redirected to the Products Page!', 'Close', { duration: 10000 });
     }
     this.form.reset();
   }

@@ -35,7 +35,7 @@ exports.addToCart = (req, res, next) => {
 
     cartItem.save()
         .then(result => {
-            res.status(200).json({ message: 'Product added to cart successfully', cartItem: result.productName });
+            res.status(200).json({ message: 'Product added to cart successfully!', cartItem: result.productName });
         })
         .catch(error => {
             res.status(500).json({ error: error });
@@ -56,14 +56,13 @@ exports.getCart = (req, res, next) => {
         });
     }).catch(error => {
         res.status(500).json({
-            message: "Fetching Cart failed!"
+            message: "Fetching cart failed!"
         });
     });
 }
 
 exports.updateCart = (req, res, next) => {
-    const productId = req.params.productId;
-    const userId = req.params.userId;
+    const { userId, productId } = req.params;
 
     const updatedCartItem = {
         userId: req.body.userId,
@@ -85,9 +84,9 @@ exports.updateCart = (req, res, next) => {
     CartItem.updateOne({ productId: req.params.productId, userId: req.userData.userId }, updatedCartItem)
         .then(result => {
             if (result.matchedCount > 0) {
-                res.status(200).json({ message: "Update Successful!" });
+                res.status(200).json({ message: "Update successful!" });
             } else {
-                res.status(401).json({ message: "Not Authorized or No Modification Needed" });
+                res.status(401).json({ message: "Not authorized or No Modification needed!" });
             }
         })
         .catch(error => {
@@ -101,13 +100,13 @@ exports.deleteCartItem = (req, res, next) => {
     CartItem.deleteOne({productId: req.params.productId}).then(result =>{
         console.log(result);
         if(result.deletedCount > 0){
-            res.status(200).json({message:"Product Removed!"});
+            res.status(200).json({message:"Product removed!"});
         } else {
-            res.status(401).json({message:"Not Authorized"});
+            res.status(401).json({message:"Not authorized!"});
         }
     }).catch(error => {
         res.status(500).json({
-            message: "Product Removal Failed!"
+            message: "Product removal failed!"
         });
     });;
 }

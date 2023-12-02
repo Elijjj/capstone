@@ -100,10 +100,10 @@
                 <label for="fulladdress">Address</label>
                 <input type="textarea" class="form-control" value="{{accounts.bls}} {{accounts.subdivision}} {{accounts.city}}, {{accounts.province}} {{accounts.postalcode}}" readonly name="fulladdress">
             </div>
-            <div class="my-1">
+            <!-- <div class="my-1">
                 <label for="birthday">Birthday</label>
                 <input type="text" class="form-control" value="{{accounts.birthday | date:'shortDate'}}" readonly name="birthday">
-            </div>
+            </div> -->
             <div class="my-1">
                 <label for="discountStatus">Discount Status</label>
                 <input type="text" class="form-control" value="{{accounts.discountStatus}}" formControlName="discountStatus" name="discountStatus" readonly>
@@ -114,6 +114,7 @@
             </div>  
         </div>
         <div class="col-md-6 m-auto">
+          <h5>Photo of ID:</h5>
             <img [src]="accounts.imagePath" alt="" class="img-fluid"> <br>
             <div class="d-flex justify-content-center m-2 align-self-center">
                 <button type="button" class="btn btn-success m-2" (click)="onAccept()">Accept</button>

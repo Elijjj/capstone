@@ -8,7 +8,7 @@ exports.createItem = (req, res, next) => {
     });
     inventory.save().then(createdItem => {
       res.status(201).json({
-        message: "Item added successfully",
+        message: "Item added successfully!",
         inventory: {
           id: createdItem._id,
           ...createdItem
@@ -30,9 +30,9 @@ exports.createItem = (req, res, next) => {
     });
     Inventory.updateOne({_id: req.params.id }, inventory).then(result => {
         if(result.matchedCount > 0){
-            res.status(200).json({message:"Update Successful!"});
+            res.status(200).json({message:"Update successful!"});
         } else {
-            res.status(401).json({message:"Not Authorized"});
+            res.status(401).json({message:"Not authorized!"});
         }
     }).catch(error => {
         res.status(500).json({
@@ -54,7 +54,7 @@ exports.getItems = (req, res, next) => {
         return Inventory.count();
     }).then(count =>{
         res.status(200).json({
-            message: "Items fetched Successfully!",
+            message: "Items fetched successfully!",
             inventory: fetchedItems,
             maxItems: count
         });
@@ -71,7 +71,7 @@ exports.getItem = (req, res, next) => {
             res.status(200).json(item);
         }
         else{
-            res.status(404).json({message:'Item not Found!'});
+            res.status(404).json({message:'Item not found!'});
         }
     }).catch(error => {
         res.status(500).json({
@@ -84,13 +84,13 @@ exports.deleteItem = (req, res, next) => {
     Inventory.deleteOne({_id: req.params.id }).then (result =>{
         console.log(result);
         if(result.deletedCount > 0){
-            res.status(200).json({message:"Deletion Successful!"});
+            res.status(200).json({message:"Deletion successful!"});
         } else {
-            res.status(401).json({message:"Not Authorized"});
+            res.status(401).json({message:"Not authorized!"});
         }
     }).catch(error => {
         res.status(500).json({
-            message: "Fetching posts failed!"
+            message: "Deleting item failed!"
         });
     });;
 }

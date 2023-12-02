@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ReportsService } from './reports.service';
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-reports',
@@ -17,6 +19,7 @@ export class ReportsComponent implements OnInit, OnDestroy {
   monthlyCustomers$!: Observable<number>;
   mostFrequentCustomer$!: Observable<string>;
   mostBoughtProduct$!: Observable<string>;
+  totalSaleThisMonth$!: Observable<number>;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +35,19 @@ export class ReportsComponent implements OnInit, OnDestroy {
     });
 
     this.onMonthChange(1);
+  }
+
+  exportToPDF() {
+    html2canvas(document.getElementById('contentToExport')).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'landscape',
+        unit: 'px',
+        format: [canvas.width, canvas.height]
+      });
+      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+      pdf.save('monthlyreports.pdf');
+    });
   }
 
   toggleMenu() {
@@ -64,5 +80,6 @@ export class ReportsComponent implements OnInit, OnDestroy {
       this.selfService.getMostFrequentCustomer$(monthDate);
 
     this.mostBoughtProduct$ = this.selfService.getMostBoughtProduct$(monthDate);
+    this.totalSaleThisMonth$ = this.selfService.getTotalSalesPerMonth$(monthDate);
   }
 }

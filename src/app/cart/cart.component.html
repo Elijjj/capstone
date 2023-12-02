@@ -5,7 +5,7 @@
         <h1>Shopping Cart</h1>
       </div>
       <div class="col-md-8 col-5">
-        <hr class="border border-danger border-2 opacity-75" />
+        <hr/>
       </div>
     </div>
   </div>
@@ -28,11 +28,9 @@
               <div
                 class="col-md-2 d-flex align-items-center justify-content-center"
               >
-                <img
-                  [src]="item.imagePath"
-                  [alt]="item.productName"
-                  class="img-thumbnail"
-                />
+              <div class="imageContainer">
+                <img [src]="item.imagePath" [alt]="item.productName" class="productImage card-img-top">
+            </div>
               </div>
               <div
                 class="col-md-6 col-4 d-flex flex-column justify-content-center"
@@ -40,9 +38,9 @@
                 <h3>{{ item.productName }}</h3>
                 <h5>{{ item.size }}</h5>
                 <p class="product-desc">{{ item.productDescription }}</p>
-                <div *ngIf="item.productType === 'Build-Your-Own'">
+                <div *ngIf="item.productType === 'Build-Your-Own' || item.productType === 'Mini Cheesecake' || item.productType === 'Signature Cheesecake'" >
                   <p>
-                    {{ item.toppings }}, {{ item.crust }}, Flowers:
+                    {{ item.toppings }}, {{ item.crust }}, <span *ngIf="item.productType === 'Build-Your-Own'">Flowers:</span>
                     {{ item.flowers }}
                   </p>
                 </div>

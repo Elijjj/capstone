@@ -1,3 +1,13 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red; /* Adjust the border size and style as needed */
+  }
+
 @media screen and (min-width:844px) {
 input[type=email]{
     width:100%;
@@ -58,9 +68,9 @@ h1{
 h4{
     text-align: center;
     margin: 1rem;
-    color: #181818;
-    letter-spacing: 1px;
-    font-weight: 600;
+    color: #c05938;
+    font-weight: 500;
+    font-size: 24px;
 }
 
 .imagee{
@@ -100,49 +110,72 @@ h4{
   }
   
   a{
-    color:#c09853;
+    color:#c05938;
     text-decoration: underline;
   }
   
 .addressPart{
     overflow-y: scroll;
 }
+
+.password-wrapper {
+    position: relative;
+    display: inline-block; /* or 'flex' depending on your layout */
+  }
+  
+  .password-input {
+    padding-right: 60px; /* Adjust as needed to make space for the button */
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px; /* Adjust as needed */
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: auto;
+    font-size: 16px;
+    z-index: 11;
+  }
+  
 }
 
 @media screen and (max-width:844px) {
     input[type=email]{
         width:100%;
-        font-size: 14px;
+        font-size: 13px;
     }
     
     input[type=password]{
         width:100%;
-        font-size: 14px;
+        font-size: 13px;
     }
     
     input[type=text]{
         width:100%;
-        font-size: 14px;
+        font-size: 13px;
     }
     
     input[type=number]{
         width:100%;
-        font-size: 14px;
+        font-size: 13px;
     }
     
     input[type=text].blsTxt{
         width:100%;
-        font-size: 14px;
+        font-size: 13px;
     }
     
     input[type=text].subdivTxt{
         width:100%;
-        font-size: 14px;
+        font-size: 13px;
     }
     
     input[type=number].postalTxt{
         width:100%;
-        font-size: 14px;
+        font-size: 13px;
     }
     
     mat-spinner{
@@ -169,9 +202,9 @@ h4{
     h4{
         text-align: center;
         margin: 1rem;
-        color: #181818;
-        letter-spacing: 1px;
-        font-weight: 600;
+        color: #c05938;
+        font-weight: 500;
+        font-size: 20px;
     }
     
     .imagee{
@@ -187,8 +220,8 @@ h4{
     
     .inputLabels{
         color:#c05938;
-        font-size: 14px;
-        margin: 0.5rem;
+        font-size: 13px;
+        margin: 0.4rem;
     }
     
     .btn-colour-1 {
@@ -212,11 +245,36 @@ h4{
       }
       
       a{
-        color:#c09853;
+        color:#c05938;
         text-decoration: underline;
       }
       
     .addressPart{
         overflow-y: scroll;
     }
+    p{
+        font-size: 14px;
+    }
+
+    .password-wrapper {
+        position: relative;
+        display: inline-block; /* or 'flex' depending on your layout */
+      }
+      
+      .password-input {
+        padding-right: 60px; /* Adjust as needed to make space for the button */
+      }
+      
+      .toggle-password {
+        font-size: 12px;
+        position: absolute;
+        right: 10px; /* Adjust as needed */
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        background: none;
+        cursor: pointer;
+        width: auto;
+        z-index: 11;
+      }
     }

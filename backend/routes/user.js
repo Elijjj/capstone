@@ -15,10 +15,13 @@ router.get("/profile", checkAuth, UserController.displayUser);
 
 router.put("/profile", checkAuth, UserController.updateUserAddress);
 
+router.get("/verify/:userId", UserController.verifyEmail);
+
 router.put("/profile/discount/:id", checkAuth, extractFile, UserController.uploadDiscountImage);
 
 router.get("/profile/discount/:id", checkAuth, UserController.displayUserDiscountPage);
 
 router.get("/getAdminAccounts", checkAuth, UserController.getAdminAccounts);
+
 
 module.exports= router;

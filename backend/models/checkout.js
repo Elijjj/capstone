@@ -19,6 +19,7 @@ const checkoutSchema = mongoose.Schema({
   claimDate: { type: String, required: true },
   pickupDate: { type: String },
   paymentStatus: { type: String, required: true },
+  deliveryStatus: { type: String, required: true },
   orderStatus: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });

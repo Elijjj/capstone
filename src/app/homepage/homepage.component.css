@@ -6,6 +6,9 @@
 
 hr{
     border-color: #c05938;
+    background-color: #c05938;
+    height: 5px;
+    opacity: 1;
 }
 
 
@@ -87,17 +90,17 @@ h1{
     border-color: #b65635;
   }
 
-  .homepageImageBottom{
-    background-image: url("/assets/homepage/homepageImageBottom3.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    max-width: 100%;
+  .homepageImageBottom {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if needed */
     padding: 0;
-margin: 0;
-  }
-  .homepageImageBottom img{
+    margin: 0;
+}
+
+.homepageImageBottom img {
     max-width: 100%;
-  }
+}
 }
 
 /* for mobile */
@@ -109,7 +112,10 @@ margin: 0;
     
     hr{
         border-color: #c05938;
-    }
+        background-color: #c05938;
+        height: 2px;
+        opacity: 1;
+      }
     
     
     .carouselHomepage{
@@ -192,18 +198,17 @@ margin: 0;
         border-color: #b65635;
       }
     
-      .homepageImageBottom{
-        background-image: url("/assets/homepage/homepageImageBottom3.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-        max-width: 100%;
+      .homepageImageBottom {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically if needed */
         padding: 0;
-    margin: 0;
-      }
-
-      .homepageImageBottom img{
+        margin: 0;
+    }
+    
+    .homepageImageBottom img {
         max-width: 100%;
-      }
+    }
 
       h3{
         font-size: 16px;

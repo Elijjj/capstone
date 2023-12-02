@@ -42,7 +42,7 @@ export class AccountsDiscountComponent implements OnInit, OnDestroy {
     private discountStatus: string;
     private discountType: string;
     private image: any;
-    private birthday: Date | string;
+    // private birthday: Date | string;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -80,7 +80,7 @@ export class AccountsDiscountComponent implements OnInit, OnDestroy {
         this.postalcode = paramMap.get('postalcode');
         this.role = paramMap.get('role');
         this.image = paramMap.get('imagePath');
-        this.birthday = paramMap.get('birthday');
+        // this.birthday = paramMap.get('birthday');
           this.isLoading = true;
           this.accountsService
             .getAccount(this.userId)
@@ -100,7 +100,7 @@ export class AccountsDiscountComponent implements OnInit, OnDestroy {
                 postalcode: accountData.postalcode,
                 role: accountData.role,
                 imagePath: accountData.imagePath,
-                birthday: accountData.birthday,
+                // birthday: accountData.birthday,
                 discountType: accountData.discountType,
                 discountStatus: accountData.discountStatus
               };

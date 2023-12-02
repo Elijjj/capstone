@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="min-vh-100 container-fluid">
   <div class="row">
     <!-- Sidebar Column Starts here -->
     <div class="col-md-3" style="background-color: #c05938; margin:0; padding: 0;">
@@ -93,32 +93,27 @@
       <form [formGroup]="form" (submit)="onSaveProduct()" *ngIf="!isLoading">
         <div class="row">
           <div class="d-flex align-items-center my-2">
-            <div class="col-md-2">
-              <h5>Product Type:</h5>
+            <div class="col-md-2 col-4">
+              <h5>Product Type: </h5>
             </div>
-            <div class="col-md-8">
-              <select
-                class="form-select"
-                id="productType"
-                formControlName="productType"
-                name="productType"
-              >
-                <option value="Premium Cheesecake">Premium Cheesecake</option>
-                <option value="Signature Cheesecake">
-                  Signature Cheesecake
-                </option>
-                <option value="Mini Cheesecake">Mini Cheesecake</option>
-                <option value="Cup O' Berry Cheesecake">Cup O' Berry Cheesecake</option>
-                <option value="Build-Your-Own">Build-Your-Own</option>
-              </select>
+            <div class="col-md-8 col-8">
+              <input type="text" class="form-control" list="productTypes" formControlName="productType" />
+<datalist id="productTypes">
+  <option value="Premium Cheesecake">Premium Cheesecake</option>
+  <option value="Signature Cheesecake">Signature Cheesecake</option>
+  <option value="Mini Cheesecake">Mini Cheesecake</option>
+  <option value="Cup O' Berry Cheesecake">Cup O' Berry Cheesecake</option>
+  <option value="Build-Your-Own">Build-Your-Own</option>
+</datalist>
+
             </div>
           </div>
 
           <div class="d-flex align-items-center my-2">
-            <div class="col-md-2">
-              <h5>Product Name:</h5>
+            <div class="col-md-2 col-4">
+              <h5>Product Name: </h5>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 col-8">
               <input
                 type="text"
                 class="form-control"
@@ -131,10 +126,10 @@
           </div>
 
           <div class="d-flex align-items-start my-2">
-            <div class="col-md-2">
+            <div class="col-md-2 col-4">
               <h5>Product Description:</h5>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 col-8">
               <textarea
                 class="form-control"
                 id="productDescription"
@@ -147,10 +142,10 @@
           </div>
 
           <div class="d-flex align-items-start my-2">
-            <div class="col-md-2">
+            <div class="col-md-2 col-4">
               <h5>Product Image:</h5>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 col-8">
               <button
                 class="btn btn-colour-1"
                 type="button"
@@ -159,6 +154,7 @@
                 Pick Image &nbsp;<i class="bi bi-image"></i>
               </button>
               <input type="file" #filePicker (change)="onImagePicked($event)" />
+              <p class="mt-3" style="color: #c05938;">Size should be no more than 1 MB and '.png', '.jpg', or '.jpeg' file types only</p>
               <div
                 class="image-preview"
                 *ngIf="
@@ -170,11 +166,11 @@
             </div>
           </div>
 
-          <div class="d-flex align-items-center my-2">
-            <div class="col-md-2">
+          <div class="row align-items-center my-2">
+            <div class="col-md-2 col-4">
               <h5>Product Price:</h5>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-8">
               <input
                 type="number"
                 class="form-control"
@@ -184,14 +180,12 @@
                 placeholder="e.g. 1000"
               />
             </div>
-            <div class="col-md-5">
-              <div class="d-flex align-items-center">
-                <div class="ms-3 col-md-4">
+                <div class="col-md-2 col-4">
                   <h5>Product Size:</h5>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-3 col-8">
                   <select
-        class="form-select"
+        class="form-select my-2"
         id="size"
         formControlName="size"
         name="size"
@@ -205,15 +199,13 @@
                     <option value="Box of 3">Box of 3</option>
                   </select>
                 </div>
-              </div>
-            </div>
           </div>
 
           <div class="d-flex align-items-center my-2">
-            <div class="col-md-2">
+            <div class="col-md-2 col-4">
               <h5>Product Stock:</h5>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-8 col-8">
               <input
                 type="number"
                 class="form-control"
@@ -230,7 +222,6 @@
             <div class="col-md-8">
               <button
                 class="btn btn-colour-2 my-2"
-                style="width: 30%"
                 type="submit"
               >
                 Save&nbsp;<i class="bi bi-file-earmark-plus"></i>

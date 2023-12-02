@@ -18,14 +18,34 @@
   margin-bottom: 0.5rem;
 }
 
-.table-container {
-  overflow-y: auto;
-  max-height: calc(100vh - 200px);
-}
 .orderTable{
   font-size: 14px;
 }
 
-.orderTable{
+.table-container button{
+  width: 100%;
   font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c05938; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
 }

@@ -1,0 +1,14 @@
+@media screen and (min-width: 844px) {
+h1{
+    color: #c05938;
+    font-size:32px;
+    margin: 2%;
+}
+}
+@media screen and (max-width: 844px) {
+    h1{
+        color: #c05938;
+        font-size:24px;
+        margin: 2%;
+    }
+    }

@@ -54,6 +54,15 @@ export class ReportsService {
     );
   }
 
+  getTotalSalesPerMonth$(monthDate: string): Observable<number> {
+    return this.getReportsPerMonth$(monthDate).pipe(
+      map((orders) => {
+        // Sum the totalAmount from each order
+        return orders.reduce((total, order) => total + order.totalAmount, 0);
+      })
+    );
+  }
+
   getReportsPerMonth$(monthDate: string) {
     return this.http
       .get(

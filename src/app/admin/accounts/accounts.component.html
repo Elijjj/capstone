@@ -83,6 +83,24 @@
       <div class="row">
         <div class="row cols-cols-1">
           <div class="table-responsive">
+            <div class="row align-items-center">
+              <div class="col-md-3">
+                <h4><i>Discount Status</i></h4>
+              </div>
+              <div class="col-md-3">
+                <div class="search-dropdown">
+                  <select id="discountStatus" class="form-select my-3" (change)="onStatusSelected($event.target.value)">
+                    <option value="">All</option>
+                    <option value="None">None</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Accepted">Accepted</option>
+                </select>
+                  <!-- (change)="onStatusSelected($event.target.value)" -->
+                </div>
+              </div>
+            </div>
+            
             <table
               id="example"
               class="table table-hover table-sm"
@@ -90,12 +108,12 @@
             >
               <thead>
                 <tr>
-                  <th id="theader1">Email</th>
-                  <th id="theader">Name</th>
-                  <th id="theader">Contact No.</th>
-                  <th id="theader">Address</th>
-                  <th id="theader">Discount Status</th>
-                  <th id="theader5">Discount Details</th>
+                  <th id="theader1" class="text-nowrap">Email</th>
+                  <th id="theader" class="text-nowrap">Name</th>
+                  <th id="theader" class="text-nowrap">Contact No.</th>
+                  <th id="theader" class="text-nowrap">Address</th>
+                  <th id="theader" class="text-nowrap">Discount Status</th>
+                  <th id="theader5" class="text-nowrap">Discount Details</th>
                 </tr>
               </thead>
               <tbody>
@@ -103,13 +121,22 @@
                   <td>{{account.email}}</td>
                   <td>{{account.firstname}} {{account.lastname}}</td>
                   <td>{{account.contactnumber}}</td>
-                  <td>{{account.bls}} {{account.subdivision}} {{account.city}}, {{account.province}} {{account.postalcode}}</td>
+                  <td class="text-wrap w-25">{{account.bls}} {{account.subdivision}} {{account.city}} {{account.province}} {{account.postalcode}}</td>
                   <td>{{account.discountStatus}}</td>
                   <td *ngIf="account.discountStatus === 'Pending'"><a [routerLink]="['/admin/accounts/', account.id]"><button class="btn btn-colour-1">View Details</button></a></td>
+                  <td *ngIf="account.discountStatus === 'Accepted' || account.discountStatus === 'None' || account.discountStatus === 'Rejected'">
+                    {{account.discountType}}
+                  </td>
                 </tr>
               </tbody>
             </table>
             <mat-spinner *ngIf="isLoading"></mat-spinner>
+            <p
+                  class="info-text mat-body-1"
+                  *ngIf="accounts.length <= 0 && !isLoading"
+                >
+                  No account found!
+                </p>
             <mat-paginator [length] ="totalAccounts" [pageSize]="accountsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)" *ngIf="accounts.length > 0 "></mat-paginator>
           </div>
         </div>

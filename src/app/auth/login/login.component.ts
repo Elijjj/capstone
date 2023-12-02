@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     isLoading = false;
     private authStatusSub: Subscription;
     private userId: string;
+    showPassword = false;
     constructor(public authService: AuthService,
         private snackBar: MatSnackBar) {}
 
@@ -42,11 +43,16 @@ export class LoginComponent implements OnInit, OnDestroy {
             form.value.postalcode,
             'Customer',
             form.value.imagePath,
-            form.value.birthday,
+            // form.value.birthday,
             form.value.discountType,
-            form.value.discountStatus
+            form.value.discountStatus,
+            false
         );
     }
+
+    togglePasswordVisibility() {
+        this.showPassword = !this.showPassword;
+      }
 
     ngOnDestroy() {
         this.authStatusSub.unsubscribe();

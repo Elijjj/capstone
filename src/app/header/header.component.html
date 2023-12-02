@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #c05938">
+<nav class="navbar sticky-top navbar-expand-lg" style="background-color: #c05938">
   <div class="container-fluid">
     <button
       class="navbar-toggler"
@@ -11,56 +11,56 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand mx-5" routerLink=""
-      ><img src="/assets/logo.png" class="headerImage" alt="dsadsa"
+      ><img src="/assets/logo.png" class="headerImage" alt="dsadsa" (click)="toggleMenu()"
     /></a>
     <div
       class="collapse navbar-collapse"
       [class.show]="!isMenuCollapsed"
       id="navbarTogglerDemo01"
     >
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex text-nowrap">
         <li class="nav-item me-5">
-          <a class="nav-link" routerLink="">Home</a>
+          <a class="nav-link navbarText" routerLink="" (click)="toggleMenu()"><b>Home</b></a>
         </li>
         <li class="nav-item me-5">
-          <a class="nav-link" routerLink="/menu">Menu</a>
+          <a class="nav-link navbarText" routerLink="/menu" (click)="toggleMenu()"><b>Menu</b></a>
         </li>
         <li class="nav-item me-5">
-          <a class="nav-link" routerLink="/byoc">Build-Your-Own Cake</a>
+          <a class="nav-link navbarText" routerLink="/byoc" (click)="toggleMenu()"><b>Build-Your-Own&nbsp;Cake</b></a>
         </li>
         <li class="nav-item me-5">
-          <a class="nav-link" routerLink="/aboutus">About Us</a>
+          <a class="nav-link navbarText" routerLink="/aboutus" (click)="toggleMenu()"><b>About&nbsp;Us</b></a>
         </li>
       </ul>
       <div class="d-flex">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-nowrap">
           <li class="nav-item me-4">
-            <a class="nav-link" routerLink="/cart">
+            <a class="nav-link navbarText" routerLink="/cart" (click)="toggleMenu()">
               <i class="bi bi-cart2"></i>
-              Cart
+              &nbsp;<b>Cart</b>
             </a>
           </li>
           <li class="nav-item me-4" *ngIf="userIsAuthenticated">
-            <a class="nav-link" routerLink="/my-orders">
+            <a class="nav-link navbarText" routerLink="/my-orders" (click)="toggleMenu()">
               <i class="uil uil-shopping-bag"></i>
-              Orders
+              &nbsp;<b>Orders</b>
             </a>
           </li>
           <li class="nav-item me-4" *ngIf="!userIsAuthenticated">
-            <a class="nav-link" routerLink="/auth/signup">
+            <a class="nav-link navbarText" routerLink="/auth/signup" (click)="toggleMenu()">
               <i class="bi bi-person-plus-fill"></i>
-              Signup</a>
+              &nbsp;<b>Sign&nbsp;Up</b></a>
           </li>
           <li class="nav-item me-4" *ngIf="!userIsAuthenticated">
-            <a class="nav-link" routerLink="/auth/login">
+            <a class="nav-link navbarText" routerLink="/auth/login" (click)="toggleMenu()">
               <i class="bi bi-person-circle"></i>
-              Log-In</a>
+              &nbsp;<b>Log&nbsp;In</b></a>
           </li>
           <li class="nav-item me-4" *ngIf="userIsAuthenticated">
-            <button (click)="onLogout()" class="btn nav-link"><i class="bi bi-box-arrow-left"></i> Logout</button>
+            <a class="nav-link navbarText" routerLink="/profile" (click)="toggleMenu()"><i class="bi bi-person-circle"></i>&nbsp;<b>Profile</b></a>
           </li>
           <li class="nav-item me-4" *ngIf="userIsAuthenticated">
-            <a class="nav-link" routerLink="/profile"><i class="bi bi-person-circle"></i>&nbsp;<b>Profile</b></a>
+            <button (click)="onLogout(); toggleMenu()" class="btn nav-link navbarText"><i class="bi bi-box-arrow-left"></i>&nbsp;<b>Log&nbsp;Out</b></button>
           </li>
         </ul>
       </div>

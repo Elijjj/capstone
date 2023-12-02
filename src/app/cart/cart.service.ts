@@ -84,6 +84,10 @@ export class CartService {
     flowers: string
   ) {
     // If the product is not in the cart, add it as a new item
+    if (productType === 'Build-Your-Own') {
+      selectedQuantity = 1;
+    }
+
     const cartItem: Cart = {
       userId: userId,
       productId: productId,
@@ -117,14 +121,19 @@ export class CartService {
       );
   }
 
-  removeFromCart(productId: string): Observable<void> {
-    return this.http.delete<void>(`${BACKEND_URL}${productId}`).pipe(
-      catchError((error) => {
-        // Handle errors if needed
-        return throwError(error);
-      })
-    );
-  }
+  removeFromCart(cartItemId: string): Observable<void> {
+  return this.http.delete<void>(`${BACKEND_URL}${cartItemId}`).pipe(
+    catchError((error) => {
+      // Handle errors if needed
+      return throwError(error);
+    }),
+    tap(() => {
+      // Update the local carts array to remove the item
+      this.carts = this.carts.filter(cartItem => cartItem._id !== cartItemId);
+      this.cartItemsUpdated.next({ carts: [...this.carts] });
+    })
+  );
+}
 
   updateCartItem(
     userId: string,
@@ -141,7 +150,27 @@ export class CartService {
     toppings: string,
     crust: string,
     flowers: string
-  ) {
+  ): Observable<{ message: string; cartItem: Cart }> {
+
+    if (productType === 'Build-Your-Own') {
+      // Call addToCart instead of updating
+      return this.addToCart(
+        userId,
+        productId,
+        selectedQuantity,
+        quantity,
+        originalPrice,
+        price,
+        imagePath,
+        size,
+        productDescription,
+        productName,
+        productType,
+        toppings,
+        crust,
+        flowers
+      );
+    }
     // Call the API endpoint to update the item on the server
     let cartData: Cart;
     cartData = {
@@ -150,7 +179,7 @@ export class CartService {
       selectedQuantity: selectedQuantity,
       quantity: quantity,
       originalPrice: originalPrice,
-      price: price,
+      price: selectedQuantity * originalPrice,
       imagePath: imagePath,
       size: size,
       productDescription: productDescription,
@@ -161,9 +190,17 @@ export class CartService {
       flowers: flowers,
     };
 
-    return this.http.put<{ message: string; cartItem: Cart[] }>(
+    return this.http.put<{ message: string; cartItem: Cart }>(
       BACKEND_URL + productId,
       cartData
+    ).pipe(
+      tap(response => {
+        // Handle successful response
+      }),
+      catchError(error => {
+        // Handle error
+        return throwError(error);
+      })
     );
   }
 

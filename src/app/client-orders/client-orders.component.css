@@ -6,6 +6,8 @@
 .table-container {
   overflow-y: auto;
   max-height: calc(100vh - 200px);
+  border-top-left-radius: 10px;   
+  border-top-right-radius: 10px;   
 }
 
 .table-container th {
@@ -18,8 +20,6 @@
 .table-container td{
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: #d67ab1;
-    color: white;
 }
 
 .table-container td{
@@ -33,13 +33,14 @@
 
 .table-container .date-data {
   white-space-collapse: break-spaces;
-  text-wrap: balance;
-  max-width: 150px;
+  text-wrap: wrap;
 }
 
 hr{
   border-color: #c05938;
-  margin-right: 2%;
+  background-color: #c05938;
+  height: 5px;
+  opacity: 1;
 }
 
 h1{
@@ -55,3 +56,42 @@ h1{
 .orderTable{
   font-size: 14px;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888888; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #696969; 
+}
+
+h3{
+  color: #c05938;
+}
+
+@media screen and (max-width: 844px) {  
+  hr{
+    border-color: #c05938;
+    background-color: #c05938;
+    height: 3px;
+    opacity: 1;
+  }
+  
+  h1{
+    font-size: 24px;
+    color:#c05938;
+  }
+  }

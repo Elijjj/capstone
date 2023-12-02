@@ -1,93 +1,98 @@
 <div class="min-vh-100">
-<div class="container-fluid">
-    <div class="row align-items-center">
-        <div class="col-md-4 col-9">
-            <h1 class="prodDetails">Build-Your-Own Cake</h1>
-        </div>
-        <div class="col-md-8 col-3">
-            <div class="flex-grow-1 hrr">
-                <hr class="border border-danger border-2 opacity-75" />
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-4 col-9">
+                <h1 class="prodDetails">Build-Your-Own Cake</h1>
+            </div>
+            <div class="col-md-8 col-3">
+                <div class="flex-grow-1 hrr">
+                    <hr/>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container mt-3">
-    <div class="row">
-        <div class="col-md-12 col-12" *ngIf="products">
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12 col-12" *ngIf="products">
                 <div class="row">
                     <div class="col-md-4 col-12">
                         <a [routerLink]="['/byoc']" class="backToMenu ms-3"><i class="bi bi-arrow-left"></i> Back</a>
-                        <div class="d-flex justify-content-center">
-                            <img [src]="products.imagePath" [alt]="products.productName" class="prodImage mt-4">
+                        <div class="d-flex justify-content-center mt-4">
+                            <div class="imageContainer">
+                                <img [src]="products.imagePath" [alt]="products.productName" class="productImage card-img-top">
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-8 col-12">
-                        <div class="col-md-12 my-4">
+                        <div class="col-md-12 mt-5 mb-3">
                             <h1 class="prodName">{{ products.productName }}</h1>
                         </div>
                         <div class="flex-grow-1">
                             <h5 class="productDescriptionn">{{ products.productDescription }}</h5>
                         </div>
                         <div class="flex-grow-1 mb-2 hrrr">
-                            <hr class="border border-danger border-1 opacity-75" />
+                            <hr />
                         </div>
                         <div class="flex-grow-1 my-3">
                             <p><b>Size:</b> 
-                            <input class="form-check-input" type="radio" id="size" name="size" [(ngModel)]="size" value="3 inches">
-                            <label for="size">&nbsp;3 Inches</label>
-                            <input class="form-check-input" type="radio" id="size2" name="size" [(ngModel)]="size" value="6 inches">
-                            <label for="size2">&nbsp;6 Inches</label>
-                            <input class="form-check-input" type="radio" id="size3" name="size" [(ngModel)]="size" value="8 inches">
-                            <label for="size3">&nbsp;8 Inches</label>
+                                <input class="form-check-input" type="radio" id="size" name="size" [(ngModel)]="size" value="3 inches">
+                                <label for="size">&nbsp;3 Inches</label>
+                                <input class="form-check-input" type="radio" id="size2" name="size" [(ngModel)]="size" value="6 inches">
+                                <label for="size2">&nbsp;6 Inches</label>
+                                <input class="form-check-input" type="radio" id="size3" name="size" [(ngModel)]="size" value="8 inches">
+                                <label for="size3">&nbsp;8 Inches</label>
                             </p>
                         </div>
                         <div class="my-3">
                             <p><b>Toppings:</b> 
-                            <input class="form-check-input" type="radio" id="toppings" name="toppings" [(ngModel)]="toppings" value="Strawberries">
-                            <label for="toppings">&nbsp;Strawberries</label>
-                            <input class="form-check-input" type="radio" id="toppings2" name="toppings" [(ngModel)]="toppings" value="Blueberries">
-                            <label for="toppings2">&nbsp;Blueberries</label>
-                            <input class="form-check-input" type="radio" id="toppings3" name="toppings" [(ngModel)]="toppings" value="Almonds">
-                            <label for="toppings3">&nbsp;Almonds</label>
-                            <input class="form-check-input" type="radio" id="toppings4" name="toppings" [(ngModel)]="toppings" value="Brulee">
-                            <label for="toppings4">&nbsp;Brulee</label>
-                            <input class="form-check-input" type="radio" id="toppings5" name="toppings" [(ngModel)]="toppings" value="Mangoes">
-                            <label for="toppings5">&nbsp;Mangoes</label>
-                            <input class="form-check-input" type="radio" id="toppings6" name="toppings" [(ngModel)]="toppings" value="Pistachios">
-                            <label for="toppings6">&nbsp;Pistachios</label>
-                            <input class="form-check-input" type="radio" id="toppings7" name="toppings" [(ngModel)]="toppings" value="White Chocolate">
-                            <label for="toppings7">&nbsp;White Chocolate</label>
-                            <input class="form-check-input" type="radio" id="toppings8" name="toppings" [(ngModel)]="toppings" value="Milk Chocolate">
-                            <label for="toppings8">&nbsp;Milk Chocolate</label>
+                                <input class="form-check-input" type="radio" id="toppings" name="toppings" [(ngModel)]="toppings" value="Strawberries">
+                                <label for="toppings">&nbsp;Strawberries</label>
+                                <input class="form-check-input" type="radio" id="toppings2" name="toppings" [(ngModel)]="toppings" value="Blueberries">
+                                <label for="toppings2">&nbsp;Blueberries</label>
+                                <input class="form-check-input" type="radio" id="toppings3" name="toppings" [(ngModel)]="toppings" value="Almonds">
+                                <label for="toppings3">&nbsp;Almonds</label>
+                                <input class="form-check-input" type="radio" id="toppings4" name="toppings" [(ngModel)]="toppings" value="Brulee">
+                                <label for="toppings4">&nbsp;Brulee</label>
+                                <input class="form-check-input" type="radio" id="toppings5" name="toppings" [(ngModel)]="toppings" value="Mangoes">
+                                <label for="toppings5">&nbsp;Mangoes</label>
+                                <input class="form-check-input" type="radio" id="toppings6" name="toppings" [(ngModel)]="toppings" value="Pistachios">
+                                <label for="toppings6">&nbsp;Pistachios</label>
+                                <input class="form-check-input" type="radio" id="toppings7" name="toppings" [(ngModel)]="toppings" value="White Chocolate">
+                                <label for="toppings7">&nbsp;White Chocolate</label>
+                                <input class="form-check-input" type="radio" id="toppings8" name="toppings" [(ngModel)]="toppings" value="Milk Chocolate">
+                                <label for="toppings8">&nbsp;Milk Chocolate</label>
                             </p>
                         </div>
                         <div class="flex-grow-1 my-3">
                             <p><b>Crust:</b> 
-                            <input class="form-check-input" type="radio" id="crust" name="crust" [(ngModel)]="crust" value="Regular Crust">
-                            <label for="crust">&nbsp;Regular Crust</label>
-                            <input class="form-check-input" type="radio" id="crust2" name="crust" [(ngModel)]="crust" value="Vanilla Crust">
-                            <label for="crust2">&nbsp;Vanilla Crust</label>
+                                <input class="form-check-input" type="radio" id="crust" name="crust" [(ngModel)]="crust" value="Regular Crust">
+                                <label for="crust">&nbsp;Regular Crust</label>
+                                <input class="form-check-input" type="radio" id="crust2" name="crust" [(ngModel)]="crust" value="Vanilla Crust">
+                                <label for="crust2">&nbsp;Vanilla Crust</label>
                             </p>
                         </div>
                         <div class="flex-grow-1 my-3">
                             <p><b>Flowers:</b>
-                            <input class="form-check-input" type="radio" id="flowers" name="flowers" [(ngModel)]="flowers" value="Yes">
-                            <label for="flowers">&nbsp;Yes</label>
-                            <input class="form-check-input" type="radio" id="flowers2" name="flowers" [(ngModel)]="flowers" value="No">
-                            <label for="flowers2">&nbsp;No</label>
+                                <input class="form-check-input" type="radio" id="flowers" name="flowers" [(ngModel)]="flowers" value="Yes">
+                                <label for="flowers">&nbsp;Yes</label>
+                                <input class="form-check-input" type="radio" id="flowers2" name="flowers" [(ngModel)]="flowers" value="No">
+                                <label for="flowers2">&nbsp;No</label>
                             </p>
                         </div>
                         <div class="">
-                            <a [routerLink]="['/cart']">
-                                <button class="btn btn-colour-1" type="button" *ngIf="!isLoading" (click)="onAddToCart()">
+                            <!-- <a [routerLink]="['/cart']"> -->
+                                <button [routerLink]="['/cart']" class="btn btn-colour-1" type="button" *ngIf="!isLoading" (click)="onAddToCart()" [disabled]="!size || !toppings || !crust || !flowers">
                                     Add to Cart
-                                  </button>
-                                  </a>
+                                </button>
+                            <!-- </a> -->
                         </div>
                     </div>
                 </div>
-            <mat-spinner *ngIf="isLoading"></mat-spinner>
+            </div>
+        </div>
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <div class="col-md-12 d-flex justify-content-center mt-3">
+            <img src="/assets/logo3.png" class="logoBottom mt-5 mb-3" alt="fedici.ph logo"/>
         </div>
     </div>
-</div>
 </div>

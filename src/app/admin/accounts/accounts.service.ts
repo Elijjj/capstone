@@ -18,8 +18,8 @@ export class AccountsService {
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  getAccounts(accountsPerPage: number, currentPage: number) {
-    const queryParams = `?pagesize=${accountsPerPage}&page=${currentPage}`;
+  getAccounts(accountsPerPage: number, currentPage: number, discountStatus1: string ='') {
+    const queryParams = `?pagesize=${accountsPerPage}&page=${currentPage}&discountStatus=${discountStatus1}`;
     this.httpClient
       .get<{ message: String; accounts: any; maxAccounts: number }>(
         BACKEND_URL + queryParams
@@ -40,7 +40,7 @@ export class AccountsService {
                 subdivision: account.subdivision,
                 postalcode: account.postalcode,
                 imagePath: account.imagePath,
-                birthday: account.birthday,
+                // birthday: account.birthday,
                 discountType: account.discountType,
                 discountStatus: account.discountStatus
               };
@@ -78,7 +78,7 @@ export class AccountsService {
       postalcode: string;
       role: string;
       imagePath: string;
-      birthday: Date | string;
+      // birthday: Date | string;
       discountType: string;
       discountStatus: string;
     }>(BACKEND_URL + id);

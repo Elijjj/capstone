@@ -2,7 +2,7 @@
   <div class="row align-items-center">
     <div class="col-md-10 col-8">
       <div class="flex-grow-1 hrr">
-        <hr class="border border-danger border-2 opacity-75" />
+        <hr/>
       </div>
     </div>
     <div class="col-md-2 col-4">
@@ -13,42 +13,49 @@
   </div>
   <div class="row">
     <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <div class="col-md-12" *ngIf="authData">
-      <h1>Hi, {{authData.firstname}} {{authData.lastname}}!</h1>
+    <div class="col-md-12 col-12" *ngIf="authData">
+      <div class="row">
+        <div class="d-flex align-items-center">
+          <h1>Hi, {{authData.firstname}} {{authData.lastname}}!</h1>
+          <a [routerLink]="['/profile/discount', authData.id]" *ngIf="authData.discountStatus !== 'Accepted' && authData.discountStatus !== 'Rejected' && authData.discountStatus !== 'Pending'">
+            <button class="btn btn-colour-3 p-3 ms-5">Apply for Discount here!</button>
+          </a>
+      </div>
+      </div>
       <br>
       <div class="row">
-        <div class="col-md-6" *ngIf="authData">
+        <div class="col-md-6 col-12" *ngIf="authData">
         <h2>User Details</h2>
         <label for="emailTxt" class="m-2 addressLabel">Email: </label>
-        <input type="email" name="emailTxt" placeholder="Carmona" class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.email">
+        <input type="email" name="emailTxt" placeholder="Email" class="form-control" [disabled]="true" [(ngModel)]="authData.email">
         <label for="firstnameTxt" class="m-2 addressLabel">First Name: </label>
-        <input type="text" name="firstnameTxt" placeholder="Cavite" class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.firstname">
+        <input type="text" name="firstnameTxt" placeholder="First Name" class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.firstname">
         <label for="lastnameTxt" class="m-2 addressLabel">Last Name: </label>
-        <input type="text" name="lastnameTxt" placeholder="B17 L4 Phase 1 Canyon Ranch Dr." class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.lastname">
+        <input type="text" name="lastnameTxt" placeholder="Last Name." class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.lastname">
         <label for="numberTxt" class="m-2 addressLabel">Contact Number: </label>
-        <input type="text" name="numberTxt" placeholder="Canyon Ranch" class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.contactnumber">
+        <input type="text" name="numberTxt" placeholder="Contact Number" #contactNumber="ngModel" pattern="09[0-9]{9}" class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.contactnumber">
       </div>
-      <div class="col-md-6" *ngIf="authData">
+      <div class="col-md-6 col-12" *ngIf="authData">
         <h2>Address</h2>
         <div class="d-flex">
-            <div class="col-md-6">
+            <div class="col-md-6 col-6">
                 <label for="cityTxt" class="m-2 addressLabel">City: </label>
-                <input type="text" name="city" placeholder="Carmona" class="form-control addressTxtBox" [disabled]="isInputDisabled" [(ngModel)]="authData.city">
+                <input type="text" name="city" placeholder="e.g. Carmona" class="form-control addressTxtBox" [disabled]="isInputDisabled" [(ngModel)]="authData.city">
         </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-6">
                 <label for="provTxt" class="m-2 addressLabel">Province: </label>
-                <input type="text" name="province" placeholder="Cavite" class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.province">
+                <input type="text" name="province" placeholder="e.g. Cavite" class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.province">
             </div>
         </div>
         
         <label for="lbsTxt" class="m-2 addressLabel">Block/Lot/Street: </label>
-        <input type="text" name="bls" placeholder="B17 L4 Phase 1 Canyon Ranch Dr." class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.bls">
+        <input type="text" name="bls" placeholder="Block/Lot/Street" class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.bls">
         <label for="villageTxt" class="m-2 addressLabel">Village/Subdivision: </label>
-        <input type="text" name="subdivision" placeholder="Canyon Ranch" class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.subdivision">
+        <input type="text" name="subdivision" placeholder="Village/Subdivision" class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.subdivision">
         <div class="d-flex">
-            <div class="col-md-12">
+            <div class="col-md-12 col-12">
                 <label for="postalTxt" class="m-2 addressLabel">Postal Code: </label>
-                <input type="text" name="postalcode" placeholder="4116" class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.postalcode">
+                <input type="number" name="postalcode" pattern="\d{4}" placeholder="e.g. 4116" class="form-control" [disabled]="isInputDisabled" [(ngModel)]="authData.postalcode">
             </div>
         </div>
       </div>
@@ -66,21 +73,23 @@
           <input *ngIf="authData.discountStatus !== 'None'" type="text" name="discountStatus" class="form-control" [disabled]="true" [(ngModel)]="authData.discountStatus">
         </div>
       <div class="col-md-6">    
-          <label *ngIf="authData.discountStatus !== 'N/A'" for="discountType" class="m-2 addressLabel">Discount Type: </label>
-          <input *ngIf="authData.discountStatus !== 'N/A'" type="text" name="discountType" class="form-control" [disabled]="true" [(ngModel)]="authData.discountType">
+          <label *ngIf="authData.discountType !== 'N/A'" for="discountType" class="m-2 addressLabel">Discount Type: </label>
+          <input *ngIf="authData.discountType !== 'N/A'" type="text" name="discountType" class="form-control" [disabled]="true" [(ngModel)]="authData.discountType">
         </div>
     </div>
   </div>
 </div>
 <div class="col-md-12 d-flex justify-content-center my-4" *ngIf="authData">
   <button (click)="toggleInputDisabled()" class="btn btn-colour-1 p-2 mx-2">Edit Profile</button>
-  <button (click)="onUpdateAddressDetails()" class="btn btn-colour-2 p-2 mx-2" [disabled]="isInputDisabled">Update User Information</button>
-  <a [routerLink]="['/profile/discount', authData.id]" *ngIf="authData.discountStatus !== 'Accepted' && authData.discountStatus !== 'Rejected' && authData.discountStatus !== 'Pending'">
-    <button class="btn btn-colour-1 p-2 mx-2"><b>Apply for Discount!</b></button>
-  </a>
+  <button (click)="showConfirmation()" class="btn btn-colour-1 p-2 mx-2" [disabled]="isInputDisabled" *ngIf="!showConfirmButtons">Update User Information</button>
+  <div *ngIf="showConfirmButtons">
+    <button (click)="onUpdateAddressDetails()" class="btn btn-success p-2 mx-2">Confirm</button>
+    <button (click)="hideConfirmation()" class="btn btn-danger p-2 mx-2">Cancel</button>
+  </div>
 </div>
 <div class="col-md-12 d-flex justify-content-center mt-3">
-  <img src="/assets/logo3.png" class="logoBottom" alt="fedici.ph logo"/>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <img src="/assets/logo3.png" class="logoBottom mb-4" alt="fedici.ph logo"/>
 </div>
 </div>
 </div>

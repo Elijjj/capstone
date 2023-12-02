@@ -61,7 +61,7 @@ export class AdminHomepageService {
 
   private getOrders$(): Observable<any[]> {
     return this.http
-      .get(`${environment.apiUrl}/checkout`)
+      .get(`${environment.apiUrl}/checkout/admin`)
       .pipe(map((res: { message: string; order: any[] }) => res.order));
   }
 }

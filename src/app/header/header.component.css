@@ -24,6 +24,7 @@ a {
   }
 }
 
+
 @media screen and (max-width:844px) {
   a {
       color: #f8f7f2;
@@ -49,5 +50,3 @@ a {
       color: #181818;
     }
   }
-
-  

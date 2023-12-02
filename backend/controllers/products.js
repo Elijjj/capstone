@@ -45,9 +45,9 @@ exports.createProduct = (req, res, next) => {
     });
     Product.updateOne({_id: req.params.id }, product).then(result => {
         if(result.matchedCount > 0){
-            res.status(200).json({message:"Update Successful!"});
+            res.status(200).json({message:"Update successful!"});
         } else {
-            res.status(401).json({message:"Not Authorized"});
+            res.status(401).json({message:"Not authorized!"});
         }
     }).catch(error => {
         res.status(500).json({
@@ -81,7 +81,7 @@ exports.getProducts = (req, res, next) => {
         }
     }).then(count => {
         res.status(200).json({
-            message: "Products fetched Successfully!",
+            message: "Products fetched successfully!",
             products: fetchedProducts,
             maxProducts: count
         });
@@ -100,7 +100,7 @@ exports.getProduct = (req, res, next) => {
             res.status(200).json(product);
         }
         else{
-            res.status(404).json({message:'Product not Found!'});
+            res.status(404).json({message:'Product not found!'});
         }
     }).catch(error => {
         res.status(500).json({
@@ -115,7 +115,7 @@ exports.getMenuProduct = (req, res, next) => {
             res.status(200).json(product);
         }
         else{
-            res.status(404).json({message:'Product not Found!'});
+            res.status(404).json({message:'Product not found!'});
         }
     }).catch(error => {
         res.status(500).json({
@@ -130,7 +130,7 @@ exports.getByocProduct = (req, res, next) => {
             res.status(200).json(product);
         }
         else{
-            res.status(404).json({message:'Product not Found!'});
+            res.status(404).json({message:'Product not found!'});
         }
     }).catch(error => {
         res.status(500).json({
@@ -143,9 +143,9 @@ exports.deleteProduct = (req, res, next) => {
     Product.deleteOne({_id: req.params.id }).then (result =>{
         console.log(result);
         if(result.deletedCount > 0){
-            res.status(200).json({message:"Deletion Successful!"});
+            res.status(200).json({message:"Deletion successful!"});
         } else {
-            res.status(401).json({message:"Not Authorized"});
+            res.status(401).json({message:"Not authorized!"});
         }
     }).catch(error => {
         res.status(500).json({

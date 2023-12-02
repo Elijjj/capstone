@@ -30,6 +30,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
     private productsSub: Subscription;
     private authStatusSub: Subscription;
     isMenuCollapsed = true; // Add this line
+    confirmationActive: { [key: string]: boolean } = {};
 
     constructor(
         private snackBar: MatSnackBar,
@@ -63,14 +64,25 @@ export class ProductsComponent implements OnInit, OnDestroy{
         this.productsService.getProducts(this.productsPerPage, this.currentPage, searchTerm);
     }
     
-    onDelete(postId: string){
-        this.isLoading=true;
-        this.productsService.deleteProduct(postId).subscribe(() => {
+    onDelete(productId: string) {
+        // Activate confirmation for the selected product
+        this.confirmationActive[productId] = true;
+    }
+
+    confirmDelete(productId: string) {
+        this.isLoading = true;
+        this.productsService.deleteProduct(productId).subscribe(() => {
             this.productsService.getProducts(this.productsPerPage, this.currentPage);
+            this.confirmationActive[productId] = false; // Reset confirmation state
         }, () => {
             this.isLoading = false;
         });
         this.snackBar.open('Product Deleted!', 'Close', { duration: 3000 });
+    }
+
+    cancelDelete(productId: string) {
+        // Reset confirmation state
+        this.confirmationActive[productId] = false;
     }
 
     onSearch() {

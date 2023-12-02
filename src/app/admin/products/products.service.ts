@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environments';
 import { Products } from './products.model';
@@ -157,5 +157,13 @@ export class ProductsService {
           };
         })
       );
+  }
+
+  getCategoriesAndSizes(): Observable<{ categories: string[], sizes: string[] }> {
+    // Replace with actual HTTP call to fetch categories and sizes
+    return of({
+      categories: ["Premium Cheesecake", "Signature Cheesecake", "Mini Cheesecake", "Cup O' Berry Cheesecake", "Mamamo"],
+      sizes: ["6 inch", "8 inch", "Box of 3", "Box of 6", "Box of 12"]
+    });
   }
 }

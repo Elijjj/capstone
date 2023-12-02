@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from "../auth/auth.service";
 import { AuthData } from "../auth/auth-data.model";
 import { ActivatedRoute } from "@angular/router";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarHorizontalPosition } from "@angular/material/snack-bar";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 
@@ -22,6 +22,8 @@ export class ProfileComponent implements OnInit, OnDestroy{
     isInputDisabled = true;
     form: FormGroup;
     imagePreview: string;
+    horizontalPosition: MatSnackBarHorizontalPosition = "right";
+    showConfirmButtons = false;
 
     constructor(public route: ActivatedRoute, private authService: AuthService, private snackBar: MatSnackBar) {}
 
@@ -70,19 +72,27 @@ export class ProfileComponent implements OnInit, OnDestroy{
             postalcode: this.authData.postalcode,
             role: this.authData.role,
             imagePath: this.authData.imagePath,
-            birthday: this.authData.birthday,
+            // birthday: this.authData.birthday,
             discountType: this.authData.discountType,
-            discountStatus: this.authData.discountStatus
+            discountStatus: this.authData.discountStatus,
+            verified: this.authData.verified,
         };
         this.authService.updateUserProfile(updatedData).subscribe(response => {
             console.log('User profile updated!', response);
-            this.snackBar.open((response as any).message, 'Close', { duration: 3000 });
+            this.snackBar.open((response as any).message, 'Close', { duration: 3000, horizontalPosition: this.horizontalPosition});
 
         }, error => {
             console.error('Error updating profile:', error);
-            this.snackBar.open((error as any).message, 'Close', { duration: 3000, panelClass: ['mat-toolbar', 'mat-warn'] });
+            this.snackBar.open((error as any).message, 'Close', { duration: 3000, panelClass: ['mat-toolbar', 'mat-warn'], horizontalPosition: this.horizontalPosition});
         });
+    }
 
+    showConfirmation() {
+        this.showConfirmButtons = true;
+    }
+
+    hideConfirmation() {
+        this.showConfirmButtons = false;
     }
 
     ngOnDestroy(){

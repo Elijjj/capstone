@@ -60,6 +60,7 @@ export class AuthService {
 
 getUserProfileDiscount(userId: string) {
   return this.http.get<{
+    verified: boolean;
     id: string;
     email: string,
     password: string,
@@ -73,7 +74,7 @@ getUserProfileDiscount(userId: string) {
     postalcode: string,
     role: string,
     imagePath: string,
-    birthday: Date,
+    // birthday: Date,
     discountType: string,
     discountStatus: string;
 
@@ -95,9 +96,10 @@ getUserProfileDiscount(userId: string) {
     postalcode: string,
     role: string,
     imagePath: string,
-    birthday: Date,
+    // birthday: Date,
     discountType: string,
-    discountStatus: string
+    discountStatus: string,
+    verified: boolean,
   ) {
     const authData: AuthData = {
       email: email,
@@ -112,9 +114,10 @@ getUserProfileDiscount(userId: string) {
       postalcode: postalcode,
       role: 'Customer',
       imagePath: imagePath,
-      birthday: birthday,
+      // birthday: birthday,
       discountType: discountType,
-      discountStatus: discountStatus
+      discountStatus: discountStatus,
+      verified: false
     };
     this.http.post(BACKEND_URL + '/signup', authData).subscribe({
       next: () => {
@@ -126,6 +129,21 @@ getUserProfileDiscount(userId: string) {
     });
   }
   
+
+  requestResetPassword(email: string) {
+    const payload = { email: email };
+    this.http.post('BACKEND_URL/reset-password', payload).subscribe(
+      response => {
+        console.log(response);
+        // Handle response
+      },
+      error => {
+        console.error(error);
+        // Handle error
+      }
+    );
+  }
+
   login(
     id: string,
     email: string,
@@ -140,9 +158,10 @@ getUserProfileDiscount(userId: string) {
     postalcode: string,
     role: string,
     imagePath: string,
-    birthday: Date,
+    // birthday: Date,
     discountType: string,
     discountStatus: string,
+    verified: boolean,
   ) {
     const authData: AuthData = {
       id: id,
@@ -158,9 +177,10 @@ getUserProfileDiscount(userId: string) {
       postalcode: postalcode,
       role: role,
       imagePath: imagePath,
-      birthday: birthday,
+      // birthday: birthday,
       discountType: discountType,
       discountStatus: discountStatus,
+      verified: verified,
     };
   
     this.http
@@ -291,9 +311,10 @@ getUserProfileDiscount(userId: string) {
     postalcode: string, 
     role: string, 
     image: File, 
-    birthday: Date | string, 
+    // birthday: Date | string, 
     discountType: string,
-    discountStatus: string
+    discountStatus: string,
+    
   ) {
       let authData: AuthData | FormData;
       
@@ -314,13 +335,13 @@ getUserProfileDiscount(userId: string) {
           authData.append("image", image, firstname);
           
           // Check if birthday is an instance of Date and convert to string for FormData
-          if (birthday instanceof Date) {
-              authData.append("birthday", birthday.toDateString());
-          } else if (typeof birthday === "string") {
-              authData.append("birthday", birthday);
-          } else {
-              console.error("birthday is neither a string nor a Date object:", birthday);
-          }
+          // if (birthday instanceof Date) {
+          //     authData.append("birthday", birthday.toDateString());
+          // } else if (typeof birthday === "string") {
+          //     authData.append("birthday", birthday);
+          // } else {
+          //     console.error("birthday is neither a string nor a Date object:", birthday);
+          // }
   
           authData.append("discountType", discountType);
           authData.append("discountStatus", discountStatus);

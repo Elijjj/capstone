@@ -12,7 +12,7 @@ export interface Accounts{
     postalcode: string;
     imagePath: string;
     role: string;
-    birthday: Date | string;
+    // birthday: Date | string;
     discountType: string;
     discountStatus: string;
 }

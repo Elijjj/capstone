@@ -1,8 +1,10 @@
 @media screen and (min-width:844px) {
-hr{
-    border-color: #c05938;
-    margin-right: 2%;
-}
+    hr{
+        border-color: #c05938;
+        background-color: #c05938;
+        height: 5px;
+        opacity: 1;
+      }
 
 h1{
     font-size: 44px;
@@ -74,10 +76,13 @@ div{
 @media screen and (max-width:844px) {
     hr{
         border-color: #c05938;
-    }
+        background-color: #c05938;
+        height: 3px;
+        opacity: 1;
+      }
     
     h1{
-        font-size: 28px;
+        font-size: 24px;
         color:#c05938;
         margin-top: 5%;
         margin-bottom: 5%;

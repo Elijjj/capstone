@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="min-vh-100 container-fluid">
   <div class="row">
     <!-- Sidebar Column Starts here -->
     <div class="col-md-3" style="background-color: #c05938; margin:0; padding: 0;">
@@ -116,7 +116,7 @@
                       <td>{{ item.quantity }}</td>
                       <td>
                         <a
-                          class="btn btn-colour-1 me-2"
+                          class="btn btn-colour-1 me-2 my-2"
                           color="primary"
                           [routerLink]="['/admin/inventory/edit', item.id]"
                           >EDIT&nbsp;<i class="bi bi-pencil-square"></i></a
@@ -125,7 +125,7 @@
                           color="warn"
                           (click)="onDelete(item.id)"
                         >
-                          DELETE&nbsp;<i class="bi bi-trash"></i>
+                          DELETE&nbsp;
                         </button>
                       </td>
                     </tr>

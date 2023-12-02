@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcapstone_fedici=self.webpackChunkcapstone_fedici||[]).push([[8],{7008:(c,a,n)=>{n.r(a),n.d(a,{AdminModule:()=>M});var u=n(6814),o=n(95),E=n(2319),m=n(4207),d=n(5879);let M=(()=>{var _;class l{}return(_=l).\u0275fac=function(t){return new(t||_)},_.\u0275mod=d.oAB({type:_}),_.\u0275inj=d.cJS({imports:[u.ez,o.u5,o.UX,E.h,m.c]}),l})()}}]);

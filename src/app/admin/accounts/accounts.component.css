@@ -1,3 +1,4 @@
+@media screen and (min-width:844px) {
 #theader1,   #theader,   #theader5{
     text-align: center;
     background-color: #d67ab1;
@@ -85,3 +86,96 @@
 td, th {
     vertical-align: middle;
 }
+}
+
+@media screen and (max-width:844px) {
+  #theader1,   #theader,   #theader5{
+      text-align: center;
+      background-color: #d67ab1;
+      color: white;
+    }
+  
+    #theader1{
+      border-top-left-radius: 10px;    
+    }
+  
+    #theader5{
+      border-top-right-radius: 10px;    
+    }
+  
+    
+    table{
+      text-align: center;
+      font-size: 12px;
+    }
+  
+    .dataTables_wrapper .dataTables_paginate {
+      text-align: center;
+      
+    }
+  
+    .dataTables_length{
+      display: none;
+    }
+  
+    .imgID{
+      max-height: 100%;
+    }
+  
+    mat-spinner{
+      margin: auto;
+    }
+  
+    #example_info {
+      display: none;
+    }
+  
+    .btn-colour-1 {
+      color: #fff;
+      background-color: #d67ab1;
+      border-color: #d67ab1;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      border-radius: 4;
+      font-size: 14px;
+      width: 100%;
+    }
+    
+    .btn-colour-1:hover,
+    .btn-colour-1:active,
+    .btn-colour-1:focus,
+    .btn-colour-1.active {
+      /* let's darken #004E64 a bit for hover effect */
+      background: white;
+      color: #d67ab1;
+      border-color: white;
+      font-weight: bold;
+    }
+    
+    .btn-colour-2 {
+      color: #fff;
+      background-color: red;
+      border-color: red;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      border-radius: 4;
+      font-size: 14px;
+      width: 100%;
+    }
+    
+    .btn-colour-2:hover,
+    .btn-colour-2:active,
+    .btn-colour-2:focus,
+    .btn-colour-2.active {
+      /* let's darken #004E64 a bit for hover effect */
+      background: #ffffff;
+      color: red;
+      border-color: #ffffff;
+      font-weight: bold;
+    }
+  
+  td, th {
+      vertical-align: middle;
+  }
+  }
+  

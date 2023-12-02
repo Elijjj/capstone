@@ -14,17 +14,19 @@ import { MenuProductComponent } from "./menu/menu-product/menu-product.component
 import { MenuComponent } from "./menu/menu.component";
 import { ProfileDiscountComponent } from "./profile/profile-discount/profile-discount.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { VerifyComponent } from "./verify/verify.component";
 // import { AdminGuard } from "./admin/admin.guard";
 
 const routes: Routes = [
     { path: "", component: HomepageComponent },
     { path: "menu", component: MenuComponent },
-    { path: "menu/view/:productId", component: MenuProductComponent },
+    { path: "menu/view/:productId", component: MenuProductComponent, canActivate: [AuthGuard] },
     { path: "byoc", component: ByocComponent },
-    { path: "byoc/view/:productId", component: ByocProductComponent },
+    { path: "byoc/view/:productId", component: ByocProductComponent, canActivate: [AuthGuard] },
     { path: "aboutus", component: AboutUsComponent},
     { path: "profile", component: ProfileComponent, canActivate: [AuthGuard]},
     { path: "profile/discount/:userId", component: ProfileDiscountComponent, canActivate: [AuthGuard]},
+    { path: "verify/:userId", component: VerifyComponent},
     { path: "cart", component: CartComponent, canActivate: [AuthGuard]},
     { path: "cart/checkout/:userId", component: CheckoutComponent, canActivate: [AuthGuard]},
     { path: "admin", loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AdminGuard]},

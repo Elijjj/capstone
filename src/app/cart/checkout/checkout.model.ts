@@ -44,7 +44,7 @@ export interface AuthData {
   postalcode: string;
   role?: string;
   imagePath: string;
-  birthday: Date;
+  // birthday: Date;
   discountType: string;
   discountStatus: string;
 }

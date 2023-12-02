@@ -11,6 +11,11 @@ input[type=password]{
     font-size: 18px;
 }
 
+input[type=text]{
+  margin: 0 2rem 1rem 2rem;
+  width:70%;
+  font-size: 18px;
+}
 
 mat-spinner{
     display: flex;
@@ -19,12 +24,6 @@ mat-spinner{
 
 mat-card{
     height:100%;
-}
-
-button{
-    margin: 1rem;
-    width: 70%;
-    font-size: 18px;
 }
 
 h1{
@@ -47,7 +46,7 @@ h1{
 
 .inputLabels{
     color:#c05938;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .btn-colour-1 {
@@ -57,6 +56,9 @@ h1{
     font-weight: 500;
     letter-spacing: 0.05em;
     border-radius: 4;
+    margin: 1rem;
+    width: 60%;
+    font-size: 18px;
   }
   
   .btn-colour-1:hover,
@@ -82,19 +84,51 @@ h1{
   .innerLogin{
     height: 100vh;
   }
+  
+  
+  .position-relative {
+    position: relative;
+    display: inline-block; /* Makes the container fit the content */
+  }
+  
+  .password-input {
+    width: calc(100% - 40px); /* Adjust the width to leave space for the button */
+    padding-right: 30px; /* Padding to avoid text overlapping with the button */
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 50px; /* Adjust this to position the button closer to the input field edge */
+    top: 12%;
+    border: none;
+    background: none;
+    cursor: pointer;
+    z-index: 11;
+  }
+
+  .input-group{
+    max-width: 70%;
+  }
+  
 }
 
 @media screen and (max-width:844px) {
     input[type=email]{
         margin: 0 2rem 1rem 2rem;
         width:70%;
-        font-size: 18px;
+        font-size: 16px;
     }
     
     input[type=password]{
         margin: 0 2rem 1rem 2rem;
         width:70%;
-        font-size: 18px;
+        font-size: 16px;
+    }
+
+    input[type=text]{
+      margin: 0 2rem 1rem 2rem;
+      width:70%;
+      font-size: 16px;
     }
     
     
@@ -110,7 +144,7 @@ h1{
     button{
         margin: 1rem;
         width: 70%;
-        font-size: 20px;
+        font-size: 16px;
     }
     
     h1{
@@ -135,7 +169,7 @@ h1{
     
     .inputLabels{
         color:#c05938;
-        font-size: 18px;
+        font-size: 16px;
     }
     
     .btn-colour-1 {
@@ -163,13 +197,33 @@ h1{
       }
     
       .registerLabel{
-        font-size: 18px;
+        font-size: 16px;
         color: #c05938;
-        margin-bottom: 24%;
+        margin-bottom: 30%;
       }
 
       .innerLogin{
         height: 50vh;
+      }
+
+      .position-relative {
+        position: relative;
+        display: inline-block; /* Makes the container fit the content */
+      }
+      
+      .password-input {
+        width: calc(100% - 40px); /* Adjust the width to leave space for the button */
+        padding-right: 30px; /* Padding to avoid text overlapping with the button */
+      }
+      
+      .toggle-password {
+        position: absolute;
+        left: 50%; /* Adjust this to position the button closer to the input field edge */
+        transform: translateY(-40%);
+        border: none;
+        background: none;
+        cursor: pointer;
+        z-index: 11;
       }
     }
     

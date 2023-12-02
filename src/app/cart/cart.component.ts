@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import {
   BehaviorSubject,
@@ -31,6 +31,7 @@ export class CartComponent implements OnInit {
   userIsAuthenticated = false;
   userId: string;
   mode = 'view';
+  horizontalPosition: MatSnackBarHorizontalPosition = "right";
 
   products = new BehaviorSubject(null);
 
@@ -62,14 +63,14 @@ export class CartComponent implements OnInit {
       (response) => {
         this.getCarts();
         this.snackBar.open((response as any).message, 'Close', {
-          duration: 3000,
+          duration: 3000, horizontalPosition: this.horizontalPosition
         });
       },
       (error) => {
         console.error('Error removing item from cart:', error);
         this.snackBar.open((error as any).message, 'Close', {
           duration: 3000,
-          panelClass: ['mat-toolbar', 'mat-warn'],
+          panelClass: ['mat-toolbar', 'mat-warn'], horizontalPosition: this.horizontalPosition
         });
         this.isLoading = false; // Set isLoading to false in case of error
       }
@@ -90,39 +91,6 @@ export class CartComponent implements OnInit {
       return 0;
     }
     return totalPrice;
-  }
-
-  updatePrice(item: Cart) {
-    item.selectedQuantity = Math.max(1, Math.floor(item.selectedQuantity));
-    if (item.selectedQuantity > item.quantity) {
-      item.selectedQuantity = item.quantity;
-      this.snackBar.open(
-        'Selected quantity exceeds available quantity. Adjusted to maximum available.',
-        'Close',
-        { duration: 3000, panelClass: ['mat-toolbar', 'mat-warn'] }
-      );
-
-      return;
-    }
-    item.price = item.selectedQuantity * item.originalPrice;
-    this.cartService
-      .updateCartItem(
-        item.userId,
-        item.productId,
-        item.selectedQuantity,
-        item.quantity,
-        item.originalPrice,
-        item.price,
-        item.imagePath,
-        item.size,
-        item.productDescription,
-        item.productName,
-        item.productType,
-        item.toppings,
-        item.crust,
-        item.flowers
-      )
-      .subscribe();
   }
 
   showNoCartMsg(): boolean {
@@ -163,5 +131,47 @@ export class CartComponent implements OnInit {
         );
       })
     );
+  }
+
+  updatePrice(item: Cart) {
+    // Ensure the selected quantity is at least 1 and is an integer
+    const containerQuantity = item.selectedQuantity;
+    item.selectedQuantity = Math.max(1, Math.floor(item.selectedQuantity));
+    // Check if the selected quantity exceeds the available stock
+    if (item.selectedQuantity > item.quantity) {
+      this.snackBar.open(
+        'Selected quantity exceeds available quantity. Adjusted to maximum available.',
+        'Close',
+        { duration: 3000, panelClass: ['mat-toolbar', 'mat-warn'], horizontalPosition: this.horizontalPosition }
+      );
+    }
+    item.price = containerQuantity * item.originalPrice;
+    // Recalculate the total price based on the updated quantity
+  
+    this.cartService.updateCartItem(
+      item.userId,
+      item.productId,
+      item.selectedQuantity,
+      item.quantity,
+      item.originalPrice,
+      item.price,
+      item.imagePath,
+      item.size,
+      item.productDescription,
+      item.productName,
+      item.productType,
+      item.toppings,
+      item.crust,
+      item.flowers
+    ).subscribe({
+      next: (response) => {
+        // Handle successful update
+        item.price = item.selectedQuantity * item.originalPrice;
+      },
+      error: (error) => {
+        // Handle error
+        console.error('Error updating item:', error);
+      }
+    });
   }
 }

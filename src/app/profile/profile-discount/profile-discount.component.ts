@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Subscription } from 'rxjs';
 import { ProductsService } from "src/app/admin/products/products.service";
-import { ActivatedRoute, ParamMap } from "@angular/router";
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { CartService } from "src/app/cart/cart.service";
 import { mimeType } from "src/app/admin/products/products-update/mime-type.validator";
 import { AuthService } from "src/app/auth/auth.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarHorizontalPosition } from "@angular/material/snack-bar";
 import { AuthData } from "src/app/auth/auth-data.model";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
@@ -39,7 +39,9 @@ export class ProfileDiscountComponent implements OnInit, OnDestroy {
 
     startDate = new Date(2000, 0, 1);
 
-    constructor(public route: ActivatedRoute, private authService: AuthService, private snackBar: MatSnackBar) {}
+    horizontalPosition: MatSnackBarHorizontalPosition = "right";
+
+    constructor(public route: ActivatedRoute, private authService: AuthService, private snackBar: MatSnackBar, public router: Router) {}
 
     ngOnInit() {
         this.isLoading=true;
@@ -50,7 +52,7 @@ export class ProfileDiscountComponent implements OnInit, OnDestroy {
         });
     this.form = new FormGroup({
         image: new FormControl(null, {validators: [Validators.required], asyncValidators: [mimeType]}),
-        birthday: new FormControl(null, {validators: [Validators.required]}),
+        // birthday: new FormControl(null, {validators: [Validators.required]}),
         discountType: new FormControl(null, {validators: [Validators.required]}),
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -67,6 +69,7 @@ export class ProfileDiscountComponent implements OnInit, OnDestroy {
         this.postalcode = paramMap.get('postalcode');
         this.role = paramMap.get('role');
         this.discountStatus = paramMap.get('discountStatus');
+        this
         this.authService
           .getUserProfileDiscount(this.userId)
           .subscribe((userData) => {
@@ -85,21 +88,24 @@ export class ProfileDiscountComponent implements OnInit, OnDestroy {
               postalcode: userData.postalcode,
               role: userData.role,
               imagePath: userData.imagePath,
-              birthday: userData.birthday,
+              // birthday: userData.birthday,
               discountType: userData.discountType,
-              discountStatus: userData.discountStatus
+              discountStatus: userData.discountStatus,
+              verified: userData.verified,
             };
             this.form.setValue({
                 image: this.authData.imagePath,
-                birthday: this.authData.birthday,
+                // birthday: this.authData.birthday,
                 discountType: this.authData.discountType,
               });
           });
     });
+    console.log()
     }
 
     onUploadDiscount() {
         if (this.form.invalid) {
+          this.snackBar.open('Applying for Discount Unsuccessful! Please provide all the necessary details!', 'Close', { duration: 3000, panelClass: ['mat-toolbar', 'mat-warn'], horizontalPosition: this.horizontalPosition});
           return;
         }
           this.authService.updateDiscount(
@@ -116,12 +122,14 @@ export class ProfileDiscountComponent implements OnInit, OnDestroy {
             this.postalcode,
             this.role,
             this.form.value.image,
-            this.form.value.birthday,
+            // this.form.value.birthday,
             this.form.value.discountType,
             this.discountStatus,
           );
         this.form.reset();
         this.isLoading = true;
+        this.snackBar.open('Apply for discount successful! Please wait at least 24 hours to process your application!', 'Close', { duration: 3000, horizontalPosition: this.horizontalPosition});
+        this.router.navigate(['/profile']);
       }
 
     onImagePicked(event: Event) {
@@ -135,6 +143,12 @@ export class ProfileDiscountComponent implements OnInit, OnDestroy {
         reader.readAsDataURL(file);
         console.log(file);
       }
+
+      getMaxClaimDate(): Date {
+        const currentDate = new Date();
+        // Return the current date as the maximum allowed date
+        return new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    }
       
     ngOnDestroy() {
             this.authStatusSub.unsubscribe();

@@ -1,5 +1,5 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<div class="container-fluid">
+<div class="min-vh-100 container-fluid">
   <div class="row">
     <!-- Sidebar Column Starts here -->
     <div
@@ -78,7 +78,7 @@
       </div>
     </div>
     <!-- Sidebar ends here-->
-    <div class="col-md-9">
+    <div class="col-md-9 mt-5">
       <div class="d-flex justify-content-between align-items-center">
         <h2><i class="bi bi-bag-check"></i> Orders</h2>
 
@@ -89,10 +89,12 @@
 
       <!-- Centered buttons with desired colors and extra space -->
       <div class="row mb-3">
-        <div class="col-md-3">
-          <select
+        <div class="col-md-4">
+          <div class="form-floating">
+            <select
             class="form-select"
             aria-label="Default select example"
+            id="floatingSelect"
             (change)="onMonthChange($event.target.value)"
           >
             <option value="1">January</option>
@@ -106,8 +108,44 @@
             <option value="8">September</option>
             <option value="10">October</option>
             <option value="11">November</option>
-            <option value="12">December</option>
+            <option value="12" selected="selected">December</option>
           </select>
+          <label for="floatingSelect">Month</label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <select
+            class="form-select"
+            aria-label="Default select example"
+            id="floatingSelect"
+            (change)="onYearChange($event.target.value)"
+          >
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023" selected="selected">2023</option>
+            <option value="2024">2024</option>
+          </select>
+          <label for="floatingSelect">Year</label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <select
+            class="form-select"
+            aria-label="Default select example"
+            id="floatingSelect"
+            (change)="onStatusChange($event.target.value)"
+            [(ngModel)]="selectedStatus"
+          >
+            <option value="ALL" selected="selected">All</option>
+            <option value="CONFIRMED">Confirmed</option>
+            <option value="FAILED">Failed</option>
+            <option value="COMPLETED">Completed</option>
+          </select>
+          <label for="floatingSelect">Order Status</label>
+          </div>
         </div>
       </div>
 
@@ -120,37 +158,55 @@
             <table class="table mb-0 table-striped">
               <thead>
                 <tr class="text-nowrap">
-                  <th scope="col">Order Id</th>
-                  <th scope="col">Customer Name</th>
+                  <th scope="col">#</th>
+                  <th scope="col">Actions</th>
+                  <th scope="col">Update Delivery</th>
+                  <!-- <th scope="col">Order ID</th> -->
+                  <th scope="col">Customer</th>
                   <th scope="col">Order Type</th>
                   <th scope="col">Order Status</th>
                   <th scope="col">Pick-Up/Delivery Date</th>
-                  <th scope="col">Items</th>
-                  <th scope="col">Item Customization (For BYOC only)</th>
-                  <th scope="col">Item Price</th>
+                  <th scope="col">Delivery Status</th>
+                  <th scope="col">Product/s</th>
+                  <th scope="col">BYOC</th>
+                  <th scope="col">Price</th>
                   <th scope="col">Quantity</th>
-                  <th scope="col">Total Price</th>
+                  <!-- <th scope="col">Total Price</th> -->
                   <th scope="col">Discount</th>
-                  <th scope="col">Checkout Amount</th>
+                  <th scope="col">Total Amount</th>
                   <th scope="col">Payment Status</th>
                   <th scope="col">Checkout Date</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="text-nowrap" *ngFor="let order of orders">
-                  <td>{{ order.orderProperties._id }}</td>
+                <tr class="text-wrap" *ngFor="let order of orders; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>
+                    <button class="btn btn-danger my-1" (click)="onDeleteOrder(order.orderProperties._id)">Delete</button>
+                    <button class="btn btn-success my-1" (click)="onCompleteOrder(order.orderProperties._id)"
+                    [disabled]="order.orderProperties.orderStatus !== 'CONFIRMED' || order.orderProperties.deliveryStatus === 'PREPARING'
+                    || order.orderProperties.deliveryStatus === 'ON THE WAY'">Complete</button>
+                  </td>
+                  <td>
+                    <button class="btn btn-warning my-1" (click)="onUpdateDeliveryStatus(order.orderProperties._id, 'ON THE WAY')"
+                    [disabled]="!(order.orderProperties.orderType === 'Delivery' && order.orderProperties.deliveryStatus === 'PREPARING')">On the way</button>
+                    <button class="btn btn-primary my-1" (click)="onUpdateDeliveryStatus(order.orderProperties._id, 'DELIVERED')" 
+                    [disabled]="!(order.orderProperties.orderType === 'Delivery' && order.orderProperties.deliveryStatus === 'ON THE WAY')">Delivered</button>
+                  </td>
+                  <!-- <td>{{ order.orderProperties._id }}</td> -->
                   <td>{{ order.orderProperties.userName }}</td>
                   <td>{{ order.orderProperties.orderType }}</td>
                   <td>{{ order.orderProperties.orderStatus }}</td>
                   <td class="date-data">
                     {{ getFormattedDate(order.orderProperties?.claimDate) }}
                   </td>
+                  <td>{{ order.orderProperties.deliveryStatus }}</td>
                   <td>
                     <ng-container
                       *ngFor="let item of order.orderProperties.cartItems"
                     >
                       <div class="item text-bold">
-                        {{ item.name }} ({{ item.size }})
+                        {{ item.name }} <span *ngIf="item.size !== ' '">({{ item.size }})</span>
                       </div>
                     </ng-container>
                   </td>
@@ -175,7 +231,7 @@
                       <div class="item text-bold">{{ item.quantity }}</div>
                     </ng-container>
                   </td>
-                  <td>{{ order.orderProperties.totalPrice }}</td>
+                  <!-- <td>{{ order.orderProperties.totalPrice }}</td> -->
                   <td>{{ order.orderProperties.discount }}</td>
                   <td>{{ order.orderProperties.checkoutAmount }}</td>
                   <td>{{ order.orderProperties.paymentStatus }}</td>

@@ -15,10 +15,11 @@ export class AccountsComponent implements OnInit, OnDestroy {
   accounts: Accounts[] = [];
   isLoading = false;
   private token: string;
-  totalAccounts = 10;
-  accountsPerPage = 10;
+  totalAccounts = 8;
+  accountsPerPage = 8;
   currentPage = 1;
-  pageSizeOptions = [1, 2, 5, 10];
+  pageSizeOptions = [1, 2, 5, 8];
+  selectedStatus = "";
   userId: string;
   userIsAuthenticated = false;
   private accountsSub: Subscription;
@@ -57,14 +58,23 @@ export class AccountsComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.currentPage = pageData.pageIndex + 1;
     this.accountsPerPage = pageData.pageSize;
-    this.accountsService.getAccounts(this.accountsPerPage, this.currentPage);
+    this.accountsService.getAccounts(this.accountsPerPage, this.currentPage, this.selectedStatus);
+}
+
+  onStatusSelected(discountStatus: string) {
+    this.isLoading = true;
+    this.selectedStatus = discountStatus;
+    this.currentPage = 1;
+    this.accountsService.getAccounts(this.accountsPerPage, this.currentPage, this.selectedStatus);
+}
+
+  ngOnDestroy() {
+    this.accountsSub.unsubscribe();
   }
 
   toggleMenu() {
     this.isMenuCollapsed = !this.isMenuCollapsed;
   }
-
-  ngOnDestroy() {}
 
   onLogout() {
     this.authService.logout();

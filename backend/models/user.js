@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
     password: { type: String, required: true },
     firstname: { type: String, required: true },
     lastname: { type: String, required: true },
-    contactnumber: { type: String, required: true, default:'09991119999' },
+    contactnumber: { type: String, required: true },
     city: { type: String },
     province: { type: String },
     bls: { type: String },
@@ -14,9 +14,10 @@ const userSchema = mongoose.Schema({
     postalcode: { type: String },
     role: { type: String },
     imagePath: {type: String, default: ''},
-    birthday: {type: Date, default: Date.now},
+    // birthday: {type: Date, default: Date.now},
     discountType: {type: String, default: 'N/A'},
-    discountStatus: {type: String, default: 'None'}
+    discountStatus: {type: String, default: 'None'},
+    verified: { type: Boolean, default: false },
 });
 
 userSchema.plugin(uniqueValidator);

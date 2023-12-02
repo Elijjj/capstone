@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="min-vh-100 container-fluid">
   <div class="row">
     <!-- Sidebar Column Starts here -->
     <div class="col-md-3" style="background-color: #c05938; margin:0; padding: 0;">
@@ -68,7 +68,7 @@
       </div>
     </div>
     <!-- Sidebar ends here-->
-    <div class="col-md-9 m-auto">
+    <div class="col-md-9 m-auto col-12">
       <div class="d-flex justify-content-between align-items-center">
         <h2><i class="material-symbols-outlined">cake</i> Products</h2>
 
@@ -78,23 +78,29 @@
       <p class="separator-black"></p>
 
       <!-- Centered buttons with desired colors and extra space -->
-      <div class="text-center">
-        <div class="d-flex align-items-center flex-nowrap my-2">
+      <div class="row mb-3 align-items-center">
+        <!-- <div class="d-flex align-items-center flex-nowrap my-2"> -->
+          <div class="col-md-3 col-6">
             <h4 style="font-style: italic" class="me-4 align-self-center">View Products</h4>
+          </div>
+          <div class="col-md-3 col-6">
             <a routerLink="/admin/products/create" class="align-self-center">
-                <button id="addProductButton" class="btn btn-colour-top me-4">Add Product</button>
-            </a>
-            <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="me-3">
-                <div class="d-flex align-items-center">
-                    <input formControlName="searchTerm" class="form-control" style="width: 100%;" placeholder="Product Name">
-                    <button type="submit" class="btn btn-colour-search ms-4"><i class="bi bi-search"></i> Search</button>
-                </div>
+              <button id="addProductButton" class="btn btn-colour-top me-4">Add Product</button>
+          </a>
+          </div>
+          <div class="col-md-6 col-12">
+            <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+              <div class="d-flex">
+                <input formControlName="searchTerm" class="form-control searchTxt" placeholder="Product Name">
+              <button type="submit" class="btn btn-colour-search ms-4"><i class="bi bi-search"></i></button>
+              </div>
             </form>
-        </div>  
+          </div>
+        <!-- </div>   -->
     </div>
       <div class="row cols-cols-1">
         <div class="table-responsive">
-          <table id="example" class="table table-hover" style="width: 100%; font-size:16px;">
+          <table id="example" class="table table-hover" style="width: 100%;">
             <thead>
               <tr>
                 <th id="theader1" style="color: white; width: 15%">
@@ -137,22 +143,20 @@
                   {{sizePrice.size}}
                 </div>
               </td> -->
-              <td>P {{product.price}}</td>
+              <td>P{{product.price}}</td>
               <td>{{product.size}}</td>
                 <td>{{product.quantity}}</td>
                 <td>
                   <a
-                    class="btn btn-colour-1 my-1"
+                    class="btn btn-colour-1 my-2"
                     color="primary"
                     [routerLink]="['/admin/products/edit', product._id]"
-                    >EDIT&nbsp;<i class="bi bi-pencil-square"></i></a
-                  ><button
-                    class="btn btn-colour-2 my-1"
-                    color="warn"
-                    (click)="onDelete(product._id)"
-                  >
-                    DELETE&nbsp;<i class="bi bi-trash"></i>
-                  </button>
+                    *ngIf="!confirmationActive[product._id]">EDIT&nbsp;<i class="bi bi-pencil-square"></i></a
+                  ><button *ngIf="!confirmationActive[product._id]" class="btn btn-colour-2 my-1" (click)="onDelete(product._id)">DELETE</button>
+                  <div *ngIf="confirmationActive[product._id]">
+                    <button class="btn btn-success btn-confirms my-2" (click)="confirmDelete(product._id)" style="font-size: 14px;">CONFIRM&nbsp;<i class="bi bi-check-circle-fill"></i></button>
+                    <button class="btn btn-danger btn-confirms my-1" (click)="cancelDelete(product._id)" style="font-size: 14px;">CANCEL&nbsp;<i class="bi bi-x-circle-fill"></i></button>
+                </div>
                 </td>
               </tr>
             </tbody>

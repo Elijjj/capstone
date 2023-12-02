@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Products } from 'src/app/admin/products/products.model';
@@ -23,6 +23,7 @@ export class ByocProductComponent implements OnInit, OnDestroy {
   private mode = 'view';
   private productId: string;
   private productsSub: Subscription;
+  horizontalPosition: MatSnackBarHorizontalPosition = "right";
 
   constructor(
     private snackBar: MatSnackBar,
@@ -96,7 +97,7 @@ export class ByocProductComponent implements OnInit, OnDestroy {
           this.snackBar.open(
             'You exceed the maximum quantity of the product in your cart.',
             'Close',
-            { duration: 3000 }
+            { duration: 3000, horizontalPosition: this.horizontalPosition }
           );
         } else {
           this.cartService
@@ -118,7 +119,7 @@ export class ByocProductComponent implements OnInit, OnDestroy {
             )
             .subscribe(() => {
               this.router.navigate(['/cart']);
-              this.snackBar.open('Cart Updated!', 'Close', { duration: 3000 });
+              this.snackBar.open('Cart Updated!', 'Close', { duration: 3000, horizontalPosition:this.horizontalPosition });
             });
         }
       } else {
@@ -143,12 +144,12 @@ export class ByocProductComponent implements OnInit, OnDestroy {
             this.router.navigate(['/cart']);
           });
       }
-      this.snackBar.open('Cart Updated!', 'Close', { duration: 3000 });
+      this.snackBar.open('Cart Updated!', 'Close', { duration: 3000, horizontalPosition: this.horizontalPosition});
     } else {
       this.snackBar.open(
         'You need to be logged in to add products to cart.',
         'Close',
-        { duration: 3000, panelClass: ['mat-toolbar', 'mat-warn'] }
+        { duration: 3000, panelClass: ['mat-toolbar', 'mat-warn'], horizontalPosition: this.horizontalPosition }
       );
     }
   }

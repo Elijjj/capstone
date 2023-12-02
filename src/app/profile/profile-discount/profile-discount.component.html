@@ -14,13 +14,12 @@
       </div>
       
       <div class="row">
-        <mat-spinner *ngIf="isLoading"></mat-spinner>
         <div class="col-md-12 col-12" *ngIf="authData">
           <div class="row">
             <div class="d-flex align-items-center">
-              <h1>Hi, {{authData.firstname}} {{authData.lastname}}!   </h1>
+              <h1 class="nameText">Hi, {{authData.firstname}} {{authData.lastname}}!   </h1>
         <a routerLink="/profile">
-          <button class="btn btn-colour-2 p-2 mx-5" type="button">Return to Profile Page</button>
+          <button class="btn btn-colour-2 p-3 ms-5" type="button">Return to Profile Page</button>
         </a>
           </div>
           </div>
@@ -28,28 +27,6 @@
           <br>
           <form [formGroup]="form" (submit)="onUploadDiscount()" *ngIf="!isLoading">
           <div class="row">
-            <div class="col-md-6 col-12">
-                <label for="discountType">Discount Type:</label>
-                <select
-                class="form-select mb-3"
-                id="discountType"
-                formControlName="discountType"
-                name="discountType"
-                required
-              >
-                <option value="Senior Citizen">Senior Citizen</option>
-                <option value="PWD">PWD</option>
-              </select>
-              <label for="birthday">Birthdate:</label>
-              <mat-form-field>
-                <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="birthday" formControlName="birthday" name="birthday" required>
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="birthday"></mat-datepicker-toggle>
-                <mat-datepicker #birthday></mat-datepicker>
-              </mat-form-field>
-              <br>              
-            </div>
             <div class="col-md-6 col-12">
                 <h3>Photo of Senior Citizen/PWD ID Card:</h3>
                 <button
@@ -60,6 +37,7 @@
                 Pick Image &nbsp;<i class="bi bi-image"></i>
               </button>
               <input type="file" #filePicker (change)="onImagePicked($event)" />
+              <p class="mt-3" style="color: #c05938;">Please upload '.png', '.jpg', or '.jpeg' file types only.</p>
               <div
                 class="image-preview"
                 *ngIf="
@@ -68,11 +46,31 @@
               >
                 <img [src]="imagePreview" [alt]="form.value.title" class="img-fluid"/>
               </div></div>
+              <div class="col-md-6 col-12">
+                <h3>Discount Type:</h3>
+                  <select
+                  class="form-select mb-3"
+                  id="discountType"
+                  formControlName="discountType"
+                  name="discountType"
+                  required
+                >
+                  <option value="Senior Citizen">Senior Citizen</option>
+                  <option value="PWD">PWD</option>
+                </select>
+                <!-- <label for="birthday">Birthdate:</label> -->
+                <!-- <mat-form-field>
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput [matDatepicker]="birthday" formControlName="birthday" name="birthday" required [max]="getMaxClaimDate()">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle matIconSuffix [for]="birthday"></mat-datepicker-toggle>
+                  <mat-datepicker #birthday></mat-datepicker>
+                </mat-form-field> -->
+                <br>              
+              </div>
           </div>
-          <div class="row">
-            <div class="col-md-6 col-6">
-              <button type="submit" class="btn btn-colour-1 my-3">Submit Application</button>
-            </div>
+          <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-colour-3 my-3">Submit Application</button>
           </div>
         </form>
         </div>
@@ -83,6 +81,7 @@
         
     </div>
     </div>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
     </div>
 </div>
     

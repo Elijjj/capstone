@@ -1,5 +1,4 @@
 <div class="min-vh-100">
-<mat-spinner *ngIf="isLoading"></mat-spinner>
   <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
     <div class="container-fluid" style="overflow: hidden">
       <div class="row">
@@ -7,56 +6,70 @@
           <div class="grow-1 innerLogin"></div>
         </div>
         <div class="loginForms col-md-5 col-12">
-          <h1>LOGIN</h1>
+          <h1>LOG IN</h1>
           <div class="d-flex justify-content-center">
-            <label for="formControlEmail" class="inputLabels form-label"
+            <label for="formControlEmail" class="inputLabels form-label mb-3"
               ><b>Email Address:</b></label
             >
           </div>
           <div class="d-flex justify-content-center">
-            <input
+            <div class="input-group">
+              <input
               type="email"
               name="email"
               ngModel
               placeholder="juandelacruz@gmail.com"
               #emailInput="ngModel"
               required
-              email
+              tabindex="1"
               class="form-control"
               id="formControlEmail"
             />
+            </div>
           </div>
 
           <div class="d-flex justify-content-center">
-            <label for="formControlEmail" class="inputLabels form-label"
-              ><b>Password:</b></label
-            >
+            <label for="formControlEmail" class="inputLabels form-label mb-3">
+              <b>Password:</b>
+            </label>
           </div>
-          <div class="d-flex justify-content-center">
-            <input
-              type="password"
-              name="password"
-              ngModel
-              placeholder="Password"
-              #passwordInput="ngModel"
-              class="form-control"
-              id="formControlPassword"
-              required
-            />
+          <div class="d-flex justify-content-center position-relative">
+            <div class="input-group">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                name="password"
+                ngModel
+                placeholder="********"
+                #passwordInput="ngModel"
+                class="form-control password-input"
+                required
+                tabindex="2"
+                id="formControlPassword"
+              />
+              <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+                <i [class]="showPassword ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+              </button>
+            </div>
           </div>
+          <!-- <div class="d-flex justify-content-center">
+            <p class="registerLabel">
+              <a routerLink="">Forgot Password?</a>
+            </p>
+          </div> -->
           <div class="d-flex justify-content-center">
-            <button class="btn btn-colour-1" type="submit" *ngIf="!isLoading">
-              Log-In
+            <button class="btn btn-colour-1" type="submit" *ngIf="!isLoading" tabindex="3">
+              Log In
             </button>
           </div>
           <div class="d-flex justify-content-center">
             <p class="registerLabel">
               Don't Have an Account?
-              <a routerLink="/auth/signup">Register Here!</a>
+              <a routerLink="/auth/signup">Sign Up Here!</a>
             </p>
           </div>
         </div>
       </div>
     </div>
   </form>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
 </div>

@@ -1,47 +1,100 @@
+<div class="min-vh-100">
 <div class="container-fluid">
-  <div class="row align-items-center">
-      <div class="col-md-2 col-5">
-          <h1>Menu</h1>
-      </div>
-      <div class="col-md-10 col-7">
-          <div class="flex-grow-1 hrr">
-              <hr class="border border-danger border-2 opacity-75" />
-          </div>
-      </div>
-  </div>
-  <div class="row">
-    <div class="col-md-2 mb-4">
-        <h3><i class="bi bi-funnel-fill"></i> Filter Here:</h3>
-        <div *ngFor="let cat of categories" class="d-flex">
-            <input type="checkbox" [(ngModel)]="cat.selected" class="form-check-input" name="filter">
-            <label for="filter">&nbsp;{{ cat.name }}</label>
+    <div class="row align-items-center">
+        <div class="col-md-2 col-4">
+            <h1>Menu</h1>
+        </div>
+        <div class="col-md-10 col-8">
+            <div class="flex-grow-1 hrr">
+                <hr/>
+            </div>
         </div>
     </div>
-      <div class="col-md-10" style="min-height: 100vh;">
-          <ng-container *ngFor="let category of categorizedProducts">
-            <div *ngIf="isCategorySelected(category.category)">
-              <h2 class="mt-2">{{ category.category }}</h2>
-              <div class="row">
-                  <div class="col-md-3 col-6" *ngFor="let product of category.products; let i = index">
-                      <div class="card my-3" style="width: 100%;">
-                          <img [src]="product.imagePath" [alt]="product.productName" class="productImage card-img-top">
-                          <div class="card-body">
-                            <div *ngFor="let sizePrice of products.sizesAndPrices">
-                                {{sizePrice.size}}
-                              </div>
-                              <h5 class="card-title" style="color: #c05938; text-align: center;">{{ product.productName }}</h5>
-                              <h6 class="card-subtitle" style="color: #c05938; text-align: center;"><b>{{product.size}}</b></h6>
-                              <p class="card-text" style="color: #c05938; text-align: center;"><i>P {{ product.price }}</i></p>
-                              <div class="d-flex justify-content-center">
-                                  <a class="btn btn-colour-1" [routerLink]="['/menu/view', product.id]">View Product</a>
-                              </div>
-                          </div>
+  </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <label for="searchText" class="searchLabel" *ngIf="!isLoading">Search products:</label>
+          <div class="filter-container my-2 align-items-start">
+            <input type="text" class="form-control mb-3" placeholder="Cup O' Berry Cheesecake" [(ngModel)]="searchQuery" (input)="applyFilters()" *ngIf="!isLoading" name="searchText">
+            <div class="mx-auto">
+              <h3 *ngIf="!isLoading">Size:</h3>
+              <div *ngFor="let siz of sizes">
+                <div *ngIf="siz.name.trim() !== ''">
+                    <input type="checkbox" [(ngModel)]="siz.selected" (change)="onFilterChange()" class="form-check-input sizeCheck" name="filter">
+                    <label for="filter">&nbsp;{{ siz.name }}</label>
+                </div>
+            </div>
+            </div>
+            <div class="mx-auto">
+              <h3 *ngIf="!isLoading">Products:</h3>
+              <div *ngFor="let cat of categories">
+                <div *ngIf="cat.name !== 'Build-Your-Own'">
+                    <input type="checkbox" [(ngModel)]="cat.selected" (change)="onFilterChange()" class="form-check-input categoryCheck" name="filter">
+                    <label for="filter">&nbsp;{{ cat.name }}</label>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <!-- <div class="col-md-12">
+          <div class="row align-items-center">
+              <div class="filter-container">
+                  <h3 *ngIf="!isLoading">Products:</h3>
+                  <div *ngFor="let cat of categories">
+                      <div *ngIf="cat.name !== 'Build-Your-Own'">
+                          <input type="checkbox" [(ngModel)]="cat.selected" (change)="onFilterChange()" class="form-check-input categoryCheck" name="filter">
+                          <label for="filter">&nbsp;{{ cat.name }}</label>
                       </div>
                   </div>
               </div>
-            </div>
-          </ng-container>
-          <mat-spinner *ngIf="isLoading"></mat-spinner>
+          </div>
+      </div> -->
+      <!-- <div class="col-md-12">
+          <div class="row align-items-center">
+              <div class="filter-container my-2">
+                  <h3 *ngIf="!isLoading">Size:</h3>
+                  <div *ngFor="let siz of sizes">
+                      <div *ngIf="siz.name.trim() !== ''">
+                          <input type="checkbox" [(ngModel)]="siz.selected" (change)="onFilterChange()" class="form-check-input sizeCheck" name="filter">
+                          <label for="filter">&nbsp;{{ siz.name }}</label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div> -->
       </div>
+      <hr class="hrProduct mb-3" *ngIf="!isLoading"/>
+        <ng-container *ngFor="let category of categorizedProducts">
+          <div *ngIf="category.products.length > 0">
+            <h2 class="mt-4 mb-3">{{ category.category }}</h2>
+            <div class="row">
+                <div class="col-md-3 col-6" *ngFor="let product of category.products">
+                      <a class="btn h-100 w-100" [routerLink]="['/menu/view', product.id]">
+                      <div class="card menu-hover mb-3 mt-3">
+                          <div class="imageContainer">
+                              <img [src]="product.imagePath" [alt]="product.productName" class="productImage card-img-top">
+                          </div>
+                          <div class="card-body">
+                              <h5 class="card-title" style="color: #c05938; text-align: center;">{{ product.productName }}</h5>
+                              <h6 class="card-subtitle" style="color: #c05938; text-align: center;"><b>{{product.size}}</b></h6>
+                              <p class="card-text" style="color: #c05938; text-align: center;">Available: {{product.quantity}}</p>
+                              <p class="card-subtext" style="color: #c05938; text-align: center;"><i>P {{ product.price }}</i></p>
+                          </div>
+                      </div>
+                  </a>
+                </div>
+            </div>
+          </div>
+        </ng-container>
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </div>
+    <div class="col-md-12 d-flex justify-content-center mt-3">
+      <img src="/assets/logo3.png" class="logoBottom my-3" alt="fedici.ph logo" *ngIf="!isLoading"/>
+    </div>
   </div>
 </div>
+</div>
+  
